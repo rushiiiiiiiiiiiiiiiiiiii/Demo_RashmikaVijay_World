@@ -1,0 +1,83 @@
+{
+  "loveQuiz": [
+    {
+      "id": "q1",
+      "question": "What's your favorite thing about me?",
+      "options": [
+        "Your smile",
+        "Your sense of humor",
+        "Your kindness",
+        "Everything!"
+      ]
+    },
+    {
+      "id": "q2",
+      "question": "What's our perfect date?",
+      "options": [
+        "Cozy movie night at home",
+        "Adventure outdoors",
+        "Romantic dinner",
+        "Exploring new places"
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "How do you like receiving love?",
+      "options": [
+        "Words of affirmation",
+        "Quality time together",
+        "Physical touch",
+        "Thoughtful gifts"
+      ]
+    }
+  ],
+  "compatibilityGame": [
+    {
+      "id": "c1",
+      "question": "I prefer...",
+      "options": [
+        "Beach vacations",
+        "Mountain getaways",
+        "City adventures",
+        "Staying home"
+      ]
+    },
+    {
+      "id": "c2",
+      "question": "My ideal weekend is...",
+      "options": [
+        "Relaxing and recharging",
+        "Out and exploring",
+        "Trying new restaurants",
+        "Quality time with loved ones"
+      ]
+    }
+  ],
+  "wheelOptions": [
+    "Send you a voice message right now",
+    "Share my favorite memory of us",
+    "Tell you why you're amazing",
+    "Promise you a special date",
+    "Sing you a song",
+    "Write you a poem on the spot",
+    "Plan our next adventure",
+    "Give you 10 compliments"
+  ],
+  "compliments": [
+    "Your smile could light up the darkest room",
+    "You're the most beautiful person I've ever known",
+    "Your laugh is my favorite sound in the world",
+    "You make me want to be better every day",
+    "Your kindness touches everyone around you",
+    "You're incredibly intelligent and inspiring",
+    "I love how passionate you are about things",
+    "You have the most beautiful soul",
+    "Your strength amazes me constantly",
+    "You're my favorite person to talk to",
+    "Your eyes are absolutely mesmerizing",
+    "You make even ordinary moments magical",
+    "I'm so lucky to have you in my life",
+    "You're perfect just the way you are",
+    "Your dreams and ambitions are beautiful"
+  ]
+}

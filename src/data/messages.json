@@ -1,0 +1,46 @@
+[
+  {
+    "id": "msg1",
+    "date": "2024-01-01",
+    "title": "Good Morning, Beautiful",
+    "message": "Hey love, I hope you slept well. I made this little space just for you. Every day I'll have something special waiting here. Today, I just want to remind you how much you mean to me. Your smile is the first thing I think about when I wake up. ❤️",
+    "image": "/assets/images/morning.jpg",
+    "voiceNote": "/assets/voices/morning.mp3",
+    "emoji": "🌅"
+  },
+  {
+    "id": "msg2",
+    "date": "2024-01-02",
+    "title": "You Make Everything Better",
+    "message": "I was thinking about how lucky I am to have you in my life. You turn ordinary days into extraordinary memories. Thank you for being you, for your kindness, your laughter, and the way you make my heart skip a beat.",
+    "image": "/assets/images/together.jpg",
+    "voiceNote": "/assets/voices/grateful.mp3",
+    "emoji": "💕"
+  },
+  {
+    "id": "msg3",
+    "date": "2024-01-03",
+    "title": "Missing You",
+    "message": "Even when we're apart, you're always on my mind. I keep replaying our conversations, your laugh, the way your eyes light up when you smile. Can't wait to see you again soon. 🥰",
+    "image": "/assets/images/missing.jpg",
+    "voiceNote": "/assets/voices/missing.mp3",
+    "emoji": "🌙"
+  },
+  {
+    "id": "msg4",
+    "date": "2024-01-04",
+    "title": "Random Compliment",
+    "message": "Did I mention how beautiful you look today? Even if I haven't seen you yet, I know you're stunning. You always are. Your beauty comes from within and radiates outward. Never forget how special you are.",
+    "image": "/assets/images/beautiful.jpg",
+    "emoji": "✨"
+  },
+  {
+    "id": "msg5",
+    "date": "2024-01-05",
+    "title": "Our Future Together",
+    "message": "I keep dreaming about all the adventures we'll have together. All the places we'll visit, the memories we'll create, the life we'll build. Every day with you is a gift, and I can't wait for all our tomorrows.",
+    "image": "/assets/images/future.jpg",
+    "voiceNote": "/assets/voices/future.mp3",
+    "emoji": "🌈"
+  }
+]

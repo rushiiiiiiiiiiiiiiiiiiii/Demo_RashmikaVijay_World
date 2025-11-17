@@ -1,0 +1,50 @@
+[
+  {
+    "id": "photo1",
+    "title": "Our First Photo Together",
+    "date": "2023-06-15",
+    "file": "/assets/photos/first-photo.jpg",
+    "caption": "The beginning of something beautiful",
+    "favorite": true
+  },
+  {
+    "id": "photo2",
+    "title": "That Sunset",
+    "date": "2023-07-20",
+    "file": "/assets/photos/sunset.jpg",
+    "caption": "When we watched the sunset together",
+    "favorite": true
+  },
+  {
+    "id": "photo3",
+    "title": "Your Beautiful Smile",
+    "date": "2023-08-10",
+    "file": "/assets/photos/her-smile.jpg",
+    "caption": "My favorite sight in the world",
+    "favorite": true
+  },
+  {
+    "id": "photo4",
+    "title": "Adventure Day",
+    "date": "2023-09-05",
+    "file": "/assets/photos/adventure.jpg",
+    "caption": "One of our fun adventures together",
+    "favorite": false
+  },
+  {
+    "id": "photo5",
+    "title": "Cozy Evening",
+    "date": "2023-10-12",
+    "file": "/assets/photos/cozy.jpg",
+    "caption": "Perfect evening together",
+    "favorite": false
+  },
+  {
+    "id": "photo6",
+    "title": "Making Memories",
+    "date": "2023-11-18",
+    "file": "/assets/photos/memories.jpg",
+    "caption": "Every moment with you is precious",
+    "favorite": true
+  }
+]

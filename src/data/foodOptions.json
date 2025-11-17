@@ -1,0 +1,66 @@
+[
+  {
+    "id": "food1",
+    "name": "Panipuri",
+    "emoji": "🥟",
+    "description": "Crispy, tangy, and full of flavors!",
+    "occasion": "When you want something spicy and fun",
+    "image": "/assets/food/panipuri.jpg"
+  },
+  {
+    "id": "food2",
+    "name": "Falooda",
+    "emoji": "🍨",
+    "description": "Sweet, creamy, and absolutely delightful",
+    "occasion": "Perfect for hot days or sweet cravings",
+    "image": "/assets/food/falooda.jpg"
+  },
+  {
+    "id": "food3",
+    "name": "Cake",
+    "emoji": "🎂",
+    "description": "Because every day is worth celebrating",
+    "occasion": "When we want to make a moment special",
+    "image": "/assets/food/cake.jpg"
+  },
+  {
+    "id": "food4",
+    "name": "Pastries",
+    "emoji": "🥐",
+    "description": "Flaky, buttery, and delicious",
+    "occasion": "Perfect with coffee or tea",
+    "image": "/assets/food/pastries.jpg"
+  },
+  {
+    "id": "food5",
+    "name": "Pizza",
+    "emoji": "🍕",
+    "description": "Classic comfort food that never disappoints",
+    "occasion": "Movie nights and chill days",
+    "image": "/assets/food/pizza.jpg"
+  },
+  {
+    "id": "food6",
+    "name": "Ice Cream",
+    "emoji": "🍦",
+    "description": "Sweet, cold, and always a good idea",
+    "occasion": "Any time is ice cream time!",
+    "image": "/assets/food/icecream.jpg"
+  },
+  {
+    "id": "food7",
+    "name": "Momos",
+    "emoji": "🥟",
+    "description": "Steaming hot and full of flavor",
+    "occasion": "Rainy days and cozy evenings",
+    "image": "/assets/food/momos.jpg"
+  },
+  {
+    "id": "food8",
+    "name": "Biryani",
+    "emoji": "🍛",
+    "description": "Aromatic, flavorful, and satisfying",
+    "occasion": "When we're really hungry",
+    "image": "/assets/food/biryani.jpg"
+  }
+]
