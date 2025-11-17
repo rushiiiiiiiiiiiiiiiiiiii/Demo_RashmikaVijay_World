@@ -1,0 +1,42 @@
+[
+  {
+    "id": "prop1",
+    "title": "Sunset Beach Proposal",
+    "description": "Walk on the beach as the sun sets, write 'Will you be mine?' in the sand with rose petals leading to it",
+    "mood": "romantic",
+    "difficulty": "medium",
+    "image": "/assets/proposals/beach.jpg"
+  },
+  {
+    "id": "prop2",
+    "title": "Starlit Rooftop",
+    "description": "Set up fairy lights and candles on a rooftop, play your favorite song, and ask under the stars",
+    "mood": "magical",
+    "difficulty": "medium",
+    "image": "/assets/proposals/rooftop.jpg"
+  },
+  {
+    "id": "prop3",
+    "title": "Photo Memory Lane",
+    "description": "Create a path with photos of your favorite memories together, ending with 'One more memory to make?'",
+    "mood": "nostalgic",
+    "difficulty": "easy",
+    "image": "/assets/proposals/photos.jpg"
+  },
+  {
+    "id": "prop4",
+    "title": "Scavenger Hunt",
+    "description": "Create clues leading to special places, each with a reason why you love her, final clue leads to you with flowers",
+    "mood": "fun",
+    "difficulty": "hard",
+    "image": "/assets/proposals/hunt.jpg"
+  },
+  {
+    "id": "prop5",
+    "title": "Candlelit Home Dinner",
+    "description": "Cook her favorite meal, set up candles and roses, play soft music, and ask over dessert",
+    "mood": "intimate",
+    "difficulty": "medium",
+    "image": "/assets/proposals/dinner.jpg"
+  }
+]

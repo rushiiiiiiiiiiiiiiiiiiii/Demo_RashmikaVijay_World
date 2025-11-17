@@ -1,0 +1,42 @@
+[
+  {
+    "id": "moment1",
+    "date": "Our First Hello",
+    "title": "The Day We Met",
+    "description": "I still remember that day like it was yesterday. Your smile caught my attention, and I knew right then that you were special.",
+    "image": "/assets/photos/first-meet.jpg",
+    "emoji": "👋"
+  },
+  {
+    "id": "moment2",
+    "date": "First Conversation",
+    "title": "When We First Talked",
+    "description": "We talked for hours and it felt like minutes. I could listen to you forever. That's when I realized I wanted you in my life.",
+    "image": "/assets/photos/first-talk.jpg",
+    "emoji": "💬"
+  },
+  {
+    "id": "moment3",
+    "date": "A Special Day",
+    "title": "Our First Date",
+    "description": "Everything was perfect. Your laugh, your stories, the way you looked at me. I fell a little more in love with you that day.",
+    "image": "/assets/photos/first-date.jpg",
+    "emoji": "🌹"
+  },
+  {
+    "id": "moment4",
+    "date": "Growing Closer",
+    "title": "Getting to Know You",
+    "description": "Every day I learned something new about you, and every day I fell deeper. You became my favorite person to talk to, to laugh with, to be with.",
+    "image": "/assets/photos/together.jpg",
+    "emoji": "💕"
+  },
+  {
+    "id": "moment5",
+    "date": "Today & Forever",
+    "title": "Here and Now",
+    "description": "And here we are. Every moment has led to this, and I wouldn't change a thing. I love you more each day, and I can't wait to create more memories with you.",
+    "image": "/assets/photos/us-now.jpg",
+    "emoji": "❤️"
+  }
+]

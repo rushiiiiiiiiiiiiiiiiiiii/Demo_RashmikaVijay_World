@@ -1,0 +1,56 @@
+[
+  {
+    "id": "voice1",
+    "title": "Good Morning Message",
+    "date": "2024-01-01",
+    "duration": "0:45",
+    "file": "/assets/voices/morning-message.mp3",
+    "description": "A sweet morning greeting just for you",
+    "category": "daily"
+  },
+  {
+    "id": "voice2",
+    "title": "Why I Love You",
+    "date": "2024-01-02",
+    "duration": "2:30",
+    "file": "/assets/voices/why-i-love-you.mp3",
+    "description": "All the reasons you're special to me",
+    "category": "romantic"
+  },
+  {
+    "id": "voice3",
+    "title": "Missing You",
+    "date": "2024-01-03",
+    "duration": "1:15",
+    "file": "/assets/voices/missing-you.mp3",
+    "description": "For when we're apart",
+    "category": "emotional"
+  },
+  {
+    "id": "voice4",
+    "title": "Goodnight Sweet Dreams",
+    "date": "2024-01-04",
+    "duration": "1:00",
+    "file": "/assets/voices/goodnight.mp3",
+    "description": "A calming message before bed",
+    "category": "daily"
+  },
+  {
+    "id": "voice5",
+    "title": "You Make Me Happy",
+    "date": "2024-01-05",
+    "duration": "1:45",
+    "file": "/assets/voices/happy.mp3",
+    "description": "How you brighten my days",
+    "category": "romantic"
+  },
+  {
+    "id": "voice6",
+    "title": "Encouragement",
+    "date": "2024-01-06",
+    "duration": "2:00",
+    "file": "/assets/voices/encouragement.mp3",
+    "description": "For when you need motivation",
+    "category": "supportive"
+  }
+]

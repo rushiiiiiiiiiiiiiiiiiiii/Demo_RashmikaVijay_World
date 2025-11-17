@@ -1,0 +1,35 @@
+[
+  {
+    "id": "event1",
+    "title": "First Date Anniversary",
+    "date": "2024-02-14",
+    "type": "anniversary",
+    "description": "The day that started it all",
+    "reminder": true
+  },
+  {
+    "id": "event2",
+    "title": "Her Birthday",
+    "date": "2024-03-15",
+    "type": "birthday",
+    "description": "The most special day of the year",
+    "reminder": true
+  },
+  {
+    "id": "event3",
+    "title": "Our Trip Together",
+    "date": "2024-04-20",
+    "type": "trip",
+    "description": "Beach vacation we planned",
+    "reminder": true
+  },
+  {
+    "id": "event4",
+    "title": "Monthly Date Night",
+    "date": "2024-01-15",
+    "type": "date",
+    "description": "Our special monthly tradition",
+    "recurring": "monthly",
+    "reminder": true
+  }
+]

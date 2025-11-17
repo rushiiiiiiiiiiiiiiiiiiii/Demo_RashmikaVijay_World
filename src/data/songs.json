@@ -1,0 +1,38 @@
+[
+  {
+    "id": "song1",
+    "title": "Our Song",
+    "artist": "Rushi",
+    "file": "/assets/songs/our-song.mp3",
+    "cover": "/assets/images/song1.jpg",
+    "dedication": "This reminds me of the first time we met",
+    "category": "romantic"
+  },
+  {
+    "id": "song2",
+    "title": "Thinking of You",
+    "artist": "Rushi's Playlist",
+    "file": "/assets/songs/thinking-of-you.mp3",
+    "cover": "/assets/images/song2.jpg",
+    "dedication": "I listen to this every time I miss you",
+    "category": "emotional"
+  },
+  {
+    "id": "song3",
+    "title": "Happy Together",
+    "artist": "For Us",
+    "file": "/assets/songs/happy-together.mp3",
+    "cover": "/assets/images/song3.jpg",
+    "dedication": "Our happy song for good days",
+    "category": "upbeat"
+  },
+  {
+    "id": "song4",
+    "title": "Forever Yours",
+    "artist": "Rushi",
+    "file": "/assets/songs/forever-yours.mp3",
+    "cover": "/assets/images/song4.jpg",
+    "dedication": "This is how I feel about us",
+    "category": "romantic"
+  }
+]

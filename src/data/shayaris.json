@@ -1,0 +1,29 @@
+[
+  {
+    "id": "shayari1",
+    "text": "तेरी हंसी में छुपा है मेरा जहां,\nतेरे बिना अधूरी है हर दास्तां,\nहर पल तेरे संग गुज़ारने की चाहत है,\nक्योंकि तू ही है मेरी ज़िंदगी की राहत है। ❤️",
+    "translation": "My world is hidden in your smile, Every story is incomplete without you, I wish to spend every moment with you, Because you are the comfort of my life.",
+    "voice": "/assets/shayariVoice/shayari1.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "shayari2",
+    "text": "तेरी बातों में खो जाना अच्छा लगता है,\nतेरे साथ वक़्त बिताना अच्छा लगता है,\nदूर रहकर भी पास होने का एहसास,\nबस यही तेरे प्यार का असर अच्छा लगता है। 💕",
+    "translation": "I love getting lost in your conversations, I love spending time with you, The feeling of being close even when far, This is what I love about your love.",
+    "voice": "/assets/shayariVoice/shayari2.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "shayari3",
+    "text": "चाँद से चेहरा, सितारों सी मुस्कान,\nतेरी अदाओं पे है मेरी जान कुर्बान,\nहर लम्हा तुझसे मोहब्बत करूं मैं,\nक्योंकि तू है मेरी धड़कनों की पहचान। 🌙",
+    "translation": "Face like the moon, smile like the stars, I am devoted to your charm, I love you every moment, Because you are the identity of my heartbeat.",
+    "voice": "/assets/shayariVoice/shayari3.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "shayari4",
+    "text": "तेरे बिना ये दिल है सूना सा,\nतेरे संग हर पल है ख़ूबसूरत सा,\nतू ही है मेरी खुशी का राज़,\nक्योंकि तू ही है मेरी ज़िंदगी का अंदाज़। ✨",
+    "translation": "Without you, this heart feels empty, Every moment with you is beautiful, You are the secret of my happiness, Because you are the style of my life.",
+    "category": "sweet"
+  }
+]

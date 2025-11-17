@@ -1,0 +1,57 @@
+[
+  {
+    "id": "mood1",
+    "name": "Happy",
+    "emoji": "😊",
+    "color": "rose",
+    "message": "I love seeing you happy! Your smile is contagious and it makes my day brighter. Keep shining, beautiful!",
+    "memory": "Remember that day we laughed so much our stomachs hurt? That's one of my favorite memories.",
+    "image": "/assets/moods/happy.jpg",
+    "voice": "/assets/moods/happy.mp3",
+    "activity": "Let's celebrate! How about some ice cream or your favorite treat?"
+  },
+  {
+    "id": "mood2",
+    "name": "Sad",
+    "emoji": "😔",
+    "color": "lavender",
+    "message": "Hey love, I know things are tough right now, but I'm here for you. You're stronger than you think, and this feeling will pass. I believe in you.",
+    "memory": "Remember how we got through that tough time together? We can get through anything as long as we have each other.",
+    "image": "/assets/moods/comfort.jpg",
+    "voice": "/assets/moods/comfort.mp3",
+    "activity": "Want to talk about it? Or we could watch your favorite movie together?"
+  },
+  {
+    "id": "mood3",
+    "name": "Stressed",
+    "emoji": "😰",
+    "color": "peach",
+    "message": "Take a deep breath. You've got this! You're capable of handling whatever comes your way. Take it one step at a time, and remember I'm always here to support you.",
+    "memory": "You've overcome so many challenges before. You're a fighter, and I admire your strength.",
+    "image": "/assets/moods/calm.jpg",
+    "voice": "/assets/moods/calm.mp3",
+    "activity": "Let's take a break together. How about some calming music or a short walk?"
+  },
+  {
+    "id": "mood4",
+    "name": "Excited",
+    "emoji": "🤩",
+    "color": "gold",
+    "message": "Your energy is amazing! I love seeing you excited about things. Your enthusiasm is one of the things I adore about you!",
+    "memory": "Your excitement when you shared your dreams with me - that's when I knew how special you are.",
+    "image": "/assets/moods/excited.jpg",
+    "voice": "/assets/moods/excited.mp3",
+    "activity": "Let's do something fun together! What are you excited about?"
+  },
+  {
+    "id": "mood5",
+    "name": "Loved",
+    "emoji": "🥰",
+    "color": "rose",
+    "message": "You ARE loved. So deeply, so completely. Every single day, in every single way. You're my everything.",
+    "memory": "Every moment with you is a moment I treasure. You make me feel complete.",
+    "image": "/assets/moods/love.jpg",
+    "voice": "/assets/moods/love.mp3",
+    "activity": "Let me show you how much I love you. Want to hear more reasons why you're amazing?"
+  }
+]
