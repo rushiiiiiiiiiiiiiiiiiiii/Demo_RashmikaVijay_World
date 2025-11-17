@@ -12,8 +12,18 @@ import DailyMessage from "./pages/DailyMessage";
 import Timeline from "./pages/Timeline";
 import JarOfHearts from "./pages/JarOfHearts";
 import Settings from "./pages/Settings";
-import Placeholder from "./pages/Placeholder";
 import NotFound from "./pages/NotFound";
+import VoiceNotes from "./pages/VoiceNotes";
+import Moods from "./pages/Moods";
+import Affirmations from "./pages/Affirmations";
+import Songs from "./pages/Songs";
+import Shayaris from "./pages/Shayaris";
+import Photos from "./pages/Photos";
+import Calendar from "./pages/Calendar";
+import FunZone from "./pages/FunZone";
+import SpecialEvents from "./pages/SpecialEvents";
+import FoodPicker from "./pages/FoodPicker";
+import Proposals from "./pages/Proposals";
 
 const queryClient = new QueryClient();
 
@@ -52,18 +62,18 @@ const App = () => {
             <Route path="/jar" element={<ProtectedRoute><JarOfHearts /></ProtectedRoute>} />
             <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
             
-            {/* Placeholder routes for other features */}
-            <Route path="/voice-notes" element={<ProtectedRoute><Placeholder title="Voice Notes" description="My voice messages for you" emoji="🎤" /></ProtectedRoute>} />
-            <Route path="/moods" element={<ProtectedRoute><Placeholder title="How Are You Feeling?" description="Share your mood with me" emoji="😊" /></ProtectedRoute>} />
-            <Route path="/affirmations" element={<ProtectedRoute><Placeholder title="Daily Affirmations" description="Words of love & encouragement" emoji="✨" /></ProtectedRoute>} />
-            <Route path="/songs" element={<ProtectedRoute><Placeholder title="My Songs For You" description="Music that reminds me of you" emoji="🎵" /></ProtectedRoute>} />
-            <Route path="/shayaris" element={<ProtectedRoute><Placeholder title="My Shayaris" description="Poetry from my heart" emoji="📖" /></ProtectedRoute>} />
-            <Route path="/photos" element={<ProtectedRoute><Placeholder title="Our Memories" description="Photos of us together" emoji="📸" /></ProtectedRoute>} />
-            <Route path="/calendar" element={<ProtectedRoute><Placeholder title="Love Calendar" description="Special dates & countdowns" emoji="📅" /></ProtectedRoute>} />
-            <Route path="/fun-zone" element={<ProtectedRoute><Placeholder title="Fun Zone" description="Games & activities for us" emoji="🎮" /></ProtectedRoute>} />
-            <Route path="/special-events" element={<ProtectedRoute><Placeholder title="Special Events" description="Birthdays & celebrations" emoji="🎉" /></ProtectedRoute>} />
-            <Route path="/food-picker" element={<ProtectedRoute><Placeholder title="What Should We Eat?" description="Food choices & surprises" emoji="🍕" /></ProtectedRoute>} />
-            <Route path="/proposals" element={<ProtectedRoute><Placeholder title="Proposal Ideas" description="Future plans & dreams" emoji="💍" /></ProtectedRoute>} />
+            {/* All feature routes */}
+            <Route path="/voice-notes" element={<ProtectedRoute><VoiceNotes /></ProtectedRoute>} />
+            <Route path="/moods" element={<ProtectedRoute><Moods /></ProtectedRoute>} />
+            <Route path="/affirmations" element={<ProtectedRoute><Affirmations /></ProtectedRoute>} />
+            <Route path="/songs" element={<ProtectedRoute><Songs /></ProtectedRoute>} />
+            <Route path="/shayaris" element={<ProtectedRoute><Shayaris /></ProtectedRoute>} />
+            <Route path="/photos" element={<ProtectedRoute><Photos /></ProtectedRoute>} />
+            <Route path="/calendar" element={<ProtectedRoute><Calendar /></ProtectedRoute>} />
+            <Route path="/fun-zone" element={<ProtectedRoute><FunZone /></ProtectedRoute>} />
+            <Route path="/special-events" element={<ProtectedRoute><SpecialEvents /></ProtectedRoute>} />
+            <Route path="/food-picker" element={<ProtectedRoute><FoodPicker /></ProtectedRoute>} />
+            <Route path="/proposals" element={<ProtectedRoute><Proposals /></ProtectedRoute>} />
             
             <Route path="*" element={<NotFound />} />
           </Routes>

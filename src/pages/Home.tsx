@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { storage } from "@/lib/storage";
 import { HeartAnimation } from "@/components/HeartAnimation";
+import { BackgroundText } from "@/components/BackgroundText";
 import {
   Heart,
   MessageCircleHeart,
@@ -140,6 +141,7 @@ export default function Home() {
   return (
     <div className="min-h-screen romantic-gradient relative">
       <HeartAnimation />
+      <BackgroundText />
       
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-6xl">
         <div className="text-center mb-12 animate-fade-in">
