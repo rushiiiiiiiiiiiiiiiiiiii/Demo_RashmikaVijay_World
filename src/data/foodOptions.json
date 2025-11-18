@@ -5,7 +5,7 @@
     "emoji": "🥟",
     "description": "Crispy, tangy, and full of flavors!",
     "occasion": "When you want something spicy and fun",
-    "image": "/assets/food/panipuri.jpg"
+    "image": "https://images.pexels.com/photos/1600718/pexels-photo-1600718.jpeg"
   },
   {
     "id": "food2",
@@ -13,7 +13,7 @@
     "emoji": "🍨",
     "description": "Sweet, creamy, and absolutely delightful",
     "occasion": "Perfect for hot days or sweet cravings",
-    "image": "/assets/food/falooda.jpg"
+    "image": "https://images.pexels.com/photos/7414021/pexels-photo-7414021.jpeg"
   },
   {
     "id": "food3",
@@ -21,7 +21,7 @@
     "emoji": "🎂",
     "description": "Because every day is worth celebrating",
     "occasion": "When we want to make a moment special",
-    "image": "/assets/food/cake.jpg"
+    "image": "https://images.pexels.com/photos/1026121/pexels-photo-1026121.jpeg"
   },
   {
     "id": "food4",
@@ -29,7 +29,7 @@
     "emoji": "🥐",
     "description": "Flaky, buttery, and delicious",
     "occasion": "Perfect with coffee or tea",
-    "image": "/assets/food/pastries.jpg"
+    "image": "https://images.pexels.com/photos/3026804/pexels-photo-3026804.jpeg"
   },
   {
     "id": "food5",
@@ -37,7 +37,7 @@
     "emoji": "🍕",
     "description": "Classic comfort food that never disappoints",
     "occasion": "Movie nights and chill days",
-    "image": "/assets/food/pizza.jpg"
+    "image": "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg"
   },
   {
     "id": "food6",
@@ -45,7 +45,7 @@
     "emoji": "🍦",
     "description": "Sweet, cold, and always a good idea",
     "occasion": "Any time is ice cream time!",
-    "image": "/assets/food/icecream.jpg"
+    "image": "https://images.pexels.com/photos/1352290/pexels-photo-1352290.jpeg"
   },
   {
     "id": "food7",
@@ -53,7 +53,7 @@
     "emoji": "🥟",
     "description": "Steaming hot and full of flavor",
     "occasion": "Rainy days and cozy evenings",
-    "image": "/assets/food/momos.jpg"
+    "image": "https://images.pexels.com/photos/9609850/pexels-photo-9609850.jpeg"
   },
   {
     "id": "food8",
@@ -61,6 +61,168 @@
     "emoji": "🍛",
     "description": "Aromatic, flavorful, and satisfying",
     "occasion": "When we're really hungry",
-    "image": "/assets/food/biryani.jpg"
+    "image": "https://images.pexels.com/photos/674574/pexels-photo-674574.jpeg"
+  }
+,
+  {
+    "id": "food9",
+    "name": "Waffles",
+    "emoji": "🧇",
+    "description": "Crispy outside, soft inside—just like perfect hugs.",
+    "occasion": "Lazy morning breakfast dates",
+    "image": "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg"
+  },
+  {
+    "id": "food10",
+    "name": "Fries",
+    "emoji": "🍟",
+    "description": "Crispy, salty, and impossible to resist.",
+    "occasion": "When you want something quick and delicious",
+    "image": "https://images.pexels.com/photos/1583884/pexels-photo-1583884.jpeg"
+  },
+  {
+    "id": "food11",
+    "name": "Burger",
+    "emoji": "🍔",
+    "description": "Juicy and satisfying—always a classic.",
+    "occasion": "When hunger hits hard",
+    "image": "https://images.pexels.com/photos/1639562/pexels-photo-1639562.jpeg"
+  },
+  {
+    "id": "food12",
+    "name": "Dosa",
+    "emoji": "🥞",
+    "description": "Crispy dosa with soft masala inside—pure comfort.",
+    "occasion": "South Indian cravings",
+    "image": "https://images.pexels.com/photos/1435895/pexels-photo-1435895.jpeg"
+  },
+  {
+    "id": "food13",
+    "name": "Pasta",
+    "emoji": "🍝",
+    "description": "Creamy, cheesy, and heartwarming.",
+    "occasion": "Romantic candlelight dinners",
+    "image": "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg"
+  },
+  {
+    "id": "food14",
+    "name": "Sandwich",
+    "emoji": "🥪",
+    "description": "Simple but always satisfying.",
+    "occasion": "Quick bites together",
+    "image": "https://images.pexels.com/photos/1600711/pexels-photo-1600711.jpeg"
+  },
+  {
+    "id": "food15",
+    "name": "Chocolate",
+    "emoji": "🍫",
+    "description": "Sweet therapy in every bite.",
+    "occasion": "Mood lifting moments",
+    "image": "https://images.pexels.com/photos/207983/pexels-photo-207983.jpeg"
+  },
+  {
+    "id": "food16",
+    "name": "Gulab Jamun",
+    "emoji": "🍯",
+    "description": "Soft, warm, and melts in the mouth.",
+    "occasion": "Perfect after dinner",
+    "image": "https://images.pexels.com/photos/1841095/pexels-photo-1841095.jpeg"
+  },
+  {
+    "id": "food17",
+    "name": "Sushi",
+    "emoji": "🍣",
+    "description": "Delicate, exciting, and a little fancy.",
+    "occasion": "Trying something new together",
+    "image": "https://images.pexels.com/photos/3298181/pexels-photo-3298181.jpeg"
+  },
+  {
+    "id": "food18",
+    "name": "Hot Chocolate",
+    "emoji": "☕",
+    "description": "Warm, cozy, and comforting like a tight hug.",
+    "occasion": "Cold evenings or cuddle moods",
+    "image": "https://images.pexels.com/photos/3026807/pexels-photo-3026807.jpeg"
+  },
+  {
+    "id": "food19",
+    "name": "Milkshake",
+    "emoji": "🥤",
+    "description": "Creamy, cold, and super refreshing.",
+    "occasion": "Perfect summer treat",
+    "image": "https://images.pexels.com/photos/2471179/pexels-photo-2471179.jpeg"
+  },
+  {
+    "id": "food20",
+    "name": "French Toast",
+    "emoji": "🍞",
+    "description": "Sweet and fluffy morning perfection.",
+    "occasion": "Breakfast dates together",
+    "image": "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg"
+  },
+  {
+    "id": "food21",
+    "name": "Tacos",
+    "emoji": "🌮",
+    "description": "Messy but worth every bite.",
+    "occasion": "Fun, adventurous meals",
+    "image": "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg"
+  },
+  {
+    "id": "food22",
+    "name": "Noodles",
+    "emoji": "🍜",
+    "description": "Slurpy and satisfying comfort food.",
+    "occasion": "Rainy day perfect meal",
+    "image": "https://images.pexels.com/photos/3894699/pexels-photo-3894699.jpeg"
+  },
+  {
+    "id": "food23",
+    "name": "Samosa",
+    "emoji": "🥟",
+    "description": "Crispy outside, spicy inside.",
+    "occasion": "Chai + gossip moments",
+    "image": "https://images.pexels.com/photos/161887/bhajias-samosas-food-india-161887.jpeg"
+  },
+  {
+    "id": "food24",
+    "name": "Cold Coffee",
+    "emoji": "🧋",
+    "description": "Strong, sweet, and energizing.",
+    "occasion": "Whenever we need a boost",
+    "image": "https://images.pexels.com/photos/6249233/pexels-photo-6249233.jpeg"
+  },
+  {
+    "id": "food25",
+    "name": "Maggi",
+    "emoji": "🍲",
+    "description": "2 minutes of pure happiness.",
+    "occasion": "Late-night cravings",
+    "image": "https://images.pexels.com/photos/5409021/pexels-photo-5409021.jpeg"
+  },
+  {
+    "id": "food26",
+    "name": "Cheesecake",
+    "emoji": "🍰",
+    "description": "Smooth, creamy, happiness in a slice.",
+    "occasion": "Dessert dates",
+    "image": "https://images.pexels.com/photos/704569/pexels-photo-704569.jpeg"
+  },
+  {
+    "id": "food27",
+    "name": "Brownies",
+    "emoji": "🍫",
+    "description": "Warm, fudgy, irresistible.",
+    "occasion": "When she deserves something sweet",
+    "image": "https://images.pexels.com/photos/227432/pexels-photo-227432.jpeg"
+  },
+  {
+    "id": "food28",
+    "name": "Fruit Bowl",
+    "emoji": "🍓",
+    "description": "Healthy, colorful, refreshing.",
+    "occasion": "Light and fresh cravings",
+    "image": "https://images.pexels.com/photos/1435895/pexels-photo-1435895.jpeg"
   }
 ]
+

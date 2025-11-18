@@ -3,48 +3,208 @@
     "id": "photo1",
     "title": "Our First Photo Together",
     "date": "2023-06-15",
-    "file": "/assets/photos/first-photo.jpg",
+    "file": "/assets/first.jpeg",
     "caption": "The beginning of something beautiful",
     "favorite": true
   },
   {
     "id": "photo2",
-    "title": "That Sunset",
+    "title": "That Ranibaug Trip",
     "date": "2023-07-20",
-    "file": "/assets/photos/sunset.jpg",
-    "caption": "When we watched the sunset together",
+    "file": "/assets/WhatsApp Image 2025-11-17 at 8.57.34 PM.jpeg",
+    "caption": "The day we laughed, wandered and forgot the world",
     "favorite": true
   },
   {
     "id": "photo3",
-    "title": "Your Beautiful Smile",
+    "title": "Our First Lunch Together",
     "date": "2023-08-10",
-    "file": "/assets/photos/her-smile.jpg",
+    "file": "/assets/lunch.jpeg",
     "caption": "My favorite sight in the world",
     "favorite": true
   },
   {
     "id": "photo4",
-    "title": "Adventure Day",
+    "title": "Daily Meetings & Fun",
     "date": "2023-09-05",
-    "file": "/assets/photos/adventure.jpg",
-    "caption": "One of our fun adventures together",
+    "file": "/assets/fourth.jpeg",
+    "caption": "The fun we had together still makes me smile",
     "favorite": false
   },
   {
     "id": "photo5",
-    "title": "Cozy Evening",
+    "title": "That Flower Plug Day",
     "date": "2023-10-12",
-    "file": "/assets/photos/cozy.jpg",
-    "caption": "Perfect evening together",
+    "file": "/assets/thirtythree.jpeg",
+    "caption": "A quiet, warm, beautiful afternoon",
     "favorite": false
   },
   {
     "id": "photo6",
-    "title": "Making Memories",
+    "title": "Your Birthday",
     "date": "2023-11-18",
-    "file": "/assets/photos/memories.jpg",
-    "caption": "Every moment with you is precious",
+    "file": "/assets/third.jpeg",
+    "caption": "Celebrating you felt like celebrating happiness itself",
+    "favorite": true
+  },
+  {
+    "id": "photo7",
+    "title": "Fallen Moment",
+    "date": "2023-11-18",
+    "file": "/assets/best.jpeg",
+    "caption": "That eye contact… I still feel it",
+    "favorite": true
+  },
+  {
+    "id": "photo8",
+    "title": "Loved Together",
+    "date": "2023-11-18",
+    "file": "/videos/fav.mp4",
+    "caption": "A moment I keep replaying in my heart",
+    "favorite": true
+  },
+  {
+    "id": "photo9",
+    "title": "Temple Meet",
+    "date": "2023-11-18",
+    "file": "/assets/other.jpeg",
+    "caption": "You looked so pure in the dress my mom gifted you",
+    "favorite": true
+  },
+  {
+    "id": "photo10",
+    "title": "Lovely Moment",
+    "date": "2023-11-18",
+    "file": "/assets/get.jpeg",
+    "caption": "These little moments stay with me forever",
+    "favorite": true
+  },
+  {
+    "id": "photo11",
+    "title": "Sweet Time Together",
+    "date": "2023-11-18",
+    "file": "/assets/fifty.jpeg",
+    "caption": "Everything felt perfect with you",
+    "favorite": true
+  },
+  {
+    "id": "photo12",
+    "title": "Our First Dance",
+    "date": "2023-11-18",
+    "file": "/assets/v1.mp4",
+    "caption": "Our first dance… still my favorite memory",
+    "favorite": true
+  },
+  {
+    "id": "photo13",
+    "title": "Laughing Together",
+    "date": "2023-11-18",
+    "file": "/assets/v2.mp4",
+    "caption": "Your laugh makes every day feel lighter",
+    "favorite": true
+  },
+  {
+    "id": "photo14",
+    "title": "Smiling Together",
+    "date": "2023-11-18",
+    "file": "/assets/s1.jpeg",
+    "caption": "Your smile here still melts me",
+    "favorite": true
+  },
+  {
+    "id": "photo15",
+    "title": "Temple Dance Video",
+    "date": "2023-11-18",
+    "file": "/videos/temple.mp4",
+    "caption": "A moment full of joy, laughter and closeness",
+    "favorite": true
+  },
+  {
+    "id": "photo16",
+    "title": "Pani Puri Fun",
+    "date": "2023-11-18",
+    "file": "/videos/panipuri1.mp4",
+    "caption": "The way we enjoy even simple things together",
+    "favorite": true
+  },
+  {
+    "id": "photo17",
+    "title": "Sweet Moments",
+    "date": "2023-11-18",
+    "file": "/assets/s2.jpeg",
+    "caption": "A soft, sweet memory with you",
+    "favorite": true
+  },
+  {
+    "id": "photo18",
+    "title": "Laughing Again",
+    "date": "2023-11-18",
+    "file": "/videos/pikesh.mp4",
+    "caption": "This laughter still echoes in my heart",
+    "favorite": true
+  },
+  {
+    "id": "photo19",
+    "title": "Ice Cream Joy",
+    "date": "2023-11-18",
+    "file": "/videos/icecream.mp4",
+    "caption": "A tiny moment, but full of happiness",
+    "favorite": true
+  },
+  {
+    "id": "photo20",
+    "title": "Random Sky Clip",
+    "date": "2023-11-18",
+    "file": "/videos/randomsky.mp4",
+    "caption": "A random moment that became meaningful",
+    "favorite": true
+  },
+  {
+    "id": "photo21",
+    "title": "Matching Together",
+    "date": "2023-11-18",
+    "file": "/assets/s3.jpeg",
+    "caption": "Matching outfits, matching vibes",
+    "favorite": true
+  },
+  {
+    "id": "photo22",
+    "title": "Fun Moment",
+    "date": "2023-11-18",
+    "file": "/videos/fun.mp4",
+    "caption": "Just us, being silly and happy",
+    "favorite": true
+  },
+  {
+    "id": "photo23",
+    "title": "Our First Selfie",
+    "date": "2023-11-18",
+    "file": "/assets/s4.jpeg",
+    "caption": "Our first selfie together… unforgettable",
+    "favorite": true
+  },
+  {
+    "id": "photo24",
+    "title": "Fit Check Moment",
+    "date": "2023-11-18",
+    "file": "/videos/fitcheck.mp4",
+    "caption": "You looked adorable here",
+    "favorite": true
+  },
+  {
+    "id": "photo25",
+    "title": "First Hug",
+    "date": "2023-11-18",
+    "file": "/assets/s5.jpeg",
+    "caption": "That first warm hug… still the best feeling",
+    "favorite": true
+  },
+  {
+    "id": "photo27",
+    "title": "Ranibaug Selfie Video",
+    "date": "2023-11-18",
+    "file": "/videos/v3ranibaugselfivideo.mp4",
+    "caption": "A simple moment that became special",
     "favorite": true
   }
 ]

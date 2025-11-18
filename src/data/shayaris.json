@@ -1,29 +1,452 @@
 [
   {
-    "id": "shayari1",
-    "text": "तेरी हंसी में छुपा है मेरा जहां,\nतेरे बिना अधूरी है हर दास्तां,\nहर पल तेरे संग गुज़ारने की चाहत है,\nक्योंकि तू ही है मेरी ज़िंदगी की राहत है। ❤️",
-    "translation": "My world is hidden in your smile, Every story is incomplete without you, I wish to spend every moment with you, Because you are the comfort of my life.",
-    "voice": "/assets/shayariVoice/shayari1.mp3",
+    "id": "hindi1",
+    "text": "तेरी मुस्कान में एक अजीब सा सुकून है,\nजैसे दिनभर की थकान पल में उतर जाती है,\nसच कहूँ तो… तू हँस दे,\nतो मुझे अपनी ज़िंदगी आसान लगने लगती है। ❤️",
+    "translation": "There is a strange peace in your smile; when you smile, even my hardest day feels easy.",
+    "voice": "/assets/shayariVoice/hindi1.mp3",
     "category": "romantic"
   },
   {
-    "id": "shayari2",
-    "text": "तेरी बातों में खो जाना अच्छा लगता है,\nतेरे साथ वक़्त बिताना अच्छा लगता है,\nदूर रहकर भी पास होने का एहसास,\nबस यही तेरे प्यार का असर अच्छा लगता है। 💕",
-    "translation": "I love getting lost in your conversations, I love spending time with you, The feeling of being close even when far, This is what I love about your love.",
-    "voice": "/assets/shayariVoice/shayari2.mp3",
+    "id": "hindi2",
+    "text": "तेरे नाम का असर कुछ ऐसा है,\nदिल बिना वजह खुश हो जाता है,\nतू पास हो या दूर… फर्क नहीं पड़ता,\nतेरी याद ही काफी है मुझे मुस्कुराने के लिए। 💕",
+    "translation": "Your name itself is enough to make my heart happy, whether you're close or far.",
+    "voice": "/assets/shayariVoice/hindi2.mp3",
     "category": "emotional"
   },
   {
-    "id": "shayari3",
-    "text": "चाँद से चेहरा, सितारों सी मुस्कान,\nतेरी अदाओं पे है मेरी जान कुर्बान,\nहर लम्हा तुझसे मोहब्बत करूं मैं,\nक्योंकि तू है मेरी धड़कनों की पहचान। 🌙",
-    "translation": "Face like the moon, smile like the stars, I am devoted to your charm, I love you every moment, Because you are the identity of my heartbeat.",
-    "voice": "/assets/shayariVoice/shayari3.mp3",
+    "id": "hindi3",
+    "text": "तू साथ चल रही हो, बस इतना काफी है,\nरास्ते अपने-आप आसान लगने लगते हैं,\nदुनिया कैसी भी हो… पर तू हो ना,\nतो हर चीज़ में एक खूबसूरती नज़र आती है। 🌙",
+    "translation": "When you walk with me, every path feels easier and more beautiful.",
+    "voice": "/assets/shayariVoice/hindi3.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "hindi4",
+    "text": "तेरी यादें भी कितनी अजीब हैं,\nग़ैर मौजूद होते हुए भी… सबसे ज़्यादा पास रहती हैं,\nकभी दिल को सुकून देती हैं,\nकभी तुझे और भी याद करने पर मजबूर करती हैं। 💖",
+    "translation": "Your memories feel closer than anything else, giving comfort and longing at the same time.",
+    "voice": "/assets/shayariVoice/hindi4.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "hindi5",
+    "text": "तू सामने हो तो दिल शांत रहता है,\nजैसे सब ठीक हो जाएगा,\nसच में… तेरी मौजूदगी मेरे लिए\nसबसे खूबसूरत एहसास है। ❤️",
+    "translation": "When you're around, my heart feels calm, like everything will be okay.",
+    "voice": "/assets/shayariVoice/hindi5.mp3",
     "category": "romantic"
   },
   {
-    "id": "shayari4",
-    "text": "तेरे बिना ये दिल है सूना सा,\nतेरे संग हर पल है ख़ूबसूरत सा,\nतू ही है मेरी खुशी का राज़,\nक्योंकि तू ही है मेरी ज़िंदगी का अंदाज़। ✨",
-    "translation": "Without you, this heart feels empty, Every moment with you is beautiful, You are the secret of my happiness, Because you are the style of my life.",
+    "id": "hindi6",
+    "text": "तुझसे बातें करना… दिन का सबसे अच्छा हिस्सा बन गया है,\nतू सुने या न सुने,\nपर तेरे साथ होना ही मेरे लिए खुश होने की वजह है। ✨",
+    "translation": "Talking to you has become the best part of my day; being with you is enough for my happiness.",
+    "voice": "/assets/shayariVoice/hindi6.mp3",
     "category": "sweet"
+  },
+  {
+    "id": "hindi7",
+    "text": "तेरे बिना सब पूरा होते हुए भी\nअधूरा लगता है,\nतेरा साथ मिले तो छोटी-सी बात भी\nखास बन जाती है। 💕",
+    "translation": "Without you everything feels incomplete, but with you even small moments feel special.",
+    "voice": "/assets/shayariVoice/hindi7.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "hindi8",
+    "text": "तेरी आवाज़ में एक जादू है,\nजैसे दिल को समझाने का हुनर सिर्फ तुझे आता है,\nकभी-कभी लगता है…\nतू आई ही मेरी ज़िंदगी सँवारने के लिए है। ❤️",
+    "translation": "Your voice carries a magic that calms my heart; it feels like you came just to make my life better.",
+    "voice": "/assets/shayariVoice/hindi8.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "hindi9",
+    "text": "तेरा हाथ पकड़ना… किसी वादे जैसा लगता है,\nजैसे हर मुश्किल साथ में आसान हो जाएगी,\nऔर हर खुशी दोगुनी महसूस होगी। 💖",
+    "translation": "Holding your hand feels like a promise that everything will be easier and every happiness doubled.",
+    "voice": "/assets/shayariVoice/hindi9.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "hindi10",
+    "text": "तू हँसती है, तो दुनिया सच में अच्छी लगती है,\nतेरी आँखों में जो चमक है ना…\nवही मेरी रोज़ की खुशी बन गई है। ✨",
+    "translation": "Your smile makes the world feel beautiful; the sparkle in your eyes is my everyday happiness.",
+    "voice": "/assets/shayariVoice/hindi10.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "marathi1",
+    "text": "तुझं हसू म्हणजे माझ्यासाठी शांती आहे,\nतू हसलीस की मन एकदम हलकं होतं,\nजसं काही दिवसातील साऱ्या थकव्याला\nतुझ्या स्मिताने औषध मिळतं. ❤️",
+    "translation": "Your smile feels like peace; it takes away all my tiredness.",
+    "voice": "/assets/shayariVoice/marathi1.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi2",
+    "text": "तुझी आठवण आली की मन शांत होतं,\nतू जवळ नसलीस तरी… जवळ असल्यासारखं वाटतं,\nहेच खरं प्रेम असावं बहुतेक. 💕",
+    "translation": "Your memory calms me; even when you're far, it feels like you're close.",
+    "voice": "/assets/shayariVoice/marathi2.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "marathi3",
+    "text": "तुझ्या सहवासात प्रत्येक क्षण खास वाटतो,\nजग साधंसुधं असलं तरी\nतू असलीस की ते सुंदर होतं. ✨",
+    "translation": "Every moment with you feels special; your presence makes the world beautiful.",
+    "voice": "/assets/shayariVoice/marathi3.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "marathi4",
+    "text": "तुझ्याशी बोललं की मनाला वेगळीच उब मिळते,\nजणू काही सगळं नीट होईल असं आश्वासनच,\nतू आहेस म्हणूनच आयुष्य छान वाटतं. ❤️",
+    "translation": "Talking to you gives warmth and reassurance; life feels good because you're in it.",
+    "voice": "/assets/shayariVoice/marathi4.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi5",
+    "text": "तुझ्या हसण्यात काहीतरी खास आहे,\nज्यामुळे मन पुन्हा पुन्हा तुझ्याकडे ओढलं जातं,\nतू दिसलीस की सगळं सुंदर वाटू लागतं. 💕",
+    "translation": "There's something special in your smile that pulls my heart toward you.",
+    "voice": "/assets/shayariVoice/marathi5.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "marathi6",
+    "text": "तू बोललीस की मनाला वेगळाच आनंद होतो,\nतुझ्या आवाजात एक शांतपणा आहे,\nज्यामुळे सारं काही हलकं वाटतं. ✨",
+    "translation": "Your voice carries a calmness that makes everything feel lighter.",
+    "voice": "/assets/shayariVoice/marathi6.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi7",
+    "text": "तुझी साथ म्हणजे माझ्यासाठी आधार आहे,\nजग अवघड नसतं,\nजेंव्हा तुझा हात हातात असतो. 💖",
+    "translation": "Your presence is my support; nothing feels difficult when I hold your hand.",
+    "voice": "/assets/shayariVoice/marathi7.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "marathi8",
+    "text": "तुझ्याकडे बघितलं की मन शांत होतं,\nजणू काही माझं सगळं उत्तर तुझ्यातच आहे,\nतू आहेस… इतकंच पुरेसं आहे. 🌙",
+    "translation": "Looking at you calms me; it feels like all my answers are in you.",
+    "voice": "/assets/shayariVoice/marathi8.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi9",
+    "text": "तुझ्या नजरेत एक वेगळाच प्रेम आहे,\nज्यामुळे स्वतःलाही आवडायला लागतं,\nतू आहेस म्हणून मला मीच अधिक प्रिय वाटतो. 💕",
+    "translation": "Your eyes hold a love that makes me love myself more.",
+    "voice": "/assets/shayariVoice/marathi9.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "marathi10",
+    "text": "तुझ्यासोबत असलं की\nजगण्याला एक वेगळंच कारण मिळतं,\nतू नसलीस तर दिवस अपूर्ण,\nतू असलीस तर मन पूर्ण. ❤️",
+    "translation": "Your presence gives meaning to my days; without you they feel incomplete.",
+    "voice": "/assets/shayariVoice/marathi10.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi1",
+    "text": "तुझं हसू म्हणजे माझ्यासाठी शांती आहे,\nतू हसलीस की मन एकदम हलकं होतं,\nजसं काही दिवसातील साऱ्या थकव्याला\nतुझ्या स्मिताने औषध मिळतं. ❤️",
+    "translation": "Your smile feels like peace; it takes away all my tiredness.",
+    "voice": "/assets/shayariVoice/marathi1.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi2",
+    "text": "तुझी आठवण आली की मन शांत होतं,\nतू जवळ नसलीस तरी… जवळ असल्यासारखं वाटतं,\nहेच खरं प्रेम असावं बहुतेक. 💕",
+    "translation": "Your memory calms me; even when you're far, it feels like you're close.",
+    "voice": "/assets/shayariVoice/marathi2.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "marathi3",
+    "text": "तुझ्या सहवासात प्रत्येक क्षण खास वाटतो,\nजग साधंसुधं असलं तरी\nतू असलीस की ते सुंदर होतं. ✨",
+    "translation": "Every moment with you feels special; your presence makes the world beautiful.",
+    "voice": "/assets/shayariVoice/marathi3.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "marathi4",
+    "text": "तुझ्याशी बोललं की मनाला वेगळीच उब मिळते,\nजणू काही सगळं नीट होईल असं आश्वासनच,\nतू आहेस म्हणूनच आयुष्य छान वाटतं. ❤️",
+    "translation": "Talking to you gives warmth and reassurance; life feels good because you're in it.",
+    "voice": "/assets/shayariVoice/marathi4.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi5",
+    "text": "तुझ्या हसण्यात काहीतरी खास आहे,\nज्यामुळे मन पुन्हा पुन्हा तुझ्याकडे ओढलं जातं,\nतू दिसलीस की सगळं सुंदर वाटू लागतं. 💕",
+    "translation": "There's something special in your smile that pulls my heart toward you.",
+    "voice": "/assets/shayariVoice/marathi5.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "marathi6",
+    "text": "तू बोललीस की मनाला वेगळाच आनंद होतो,\nतुझ्या आवाजात एक शांतपणा आहे,\nज्यामुळे सारं काही हलकं वाटतं. ✨",
+    "translation": "Your voice carries a calmness that makes everything feel lighter.",
+    "voice": "/assets/shayariVoice/marathi6.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi7",
+    "text": "तुझी साथ म्हणजे माझ्यासाठी आधार आहे,\nजग अवघड नसतं,\nजेंव्हा तुझा हात हातात असतो. 💖",
+    "translation": "Your presence is my support; nothing feels difficult when I hold your hand.",
+    "voice": "/assets/shayariVoice/marathi7.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "marathi8",
+    "text": "तुझ्याकडे बघितलं की मन शांत होतं,\nजणू काही माझं सगळं उत्तर तुझ्यातच आहे,\nतू आहेस… इतकंच पुरेसं आहे. 🌙",
+    "translation": "Looking at you calms me; it feels like all my answers are in you.",
+    "voice": "/assets/shayariVoice/marathi8.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi9",
+    "text": "तुझ्या नजरेत एक वेगळाच प्रेम आहे,\nज्यामुळे स्वतःलाही आवडायला लागतं,\nतू आहेस म्हणून मला मीच अधिक प्रिय वाटतो. 💕",
+    "translation": "Your eyes hold a love that makes me love myself more.",
+    "voice": "/assets/shayariVoice/marathi9.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "marathi10",
+    "text": "तुझ्यासोबत असलं की\nजगण्याला एक वेगळंच कारण मिळतं,\nतू नसलीस तर दिवस अपूर्ण,\nतू असलीस तर मन पूर्ण. ❤️",
+    "translation": "Your presence gives meaning to my days; without you they feel incomplete.",
+    "voice": "/assets/shayariVoice/marathi10.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "english1",
+    "text": "There’s something about you…\nThe way you smile, the way you talk,\nIt makes my heart feel warm\nin a way nothing else can. ❤️",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english1.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "english2",
+    "text": "You make even the smallest moments feel special,\nlike sitting together, talking, or just laughing,\nEverything feels right when it's with you. ✨",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english2.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "english3",
+    "text": "Your presence feels like comfort,\nlike finally finding the place where I belong,\nAnd no matter what happens,\nmy heart always chooses you. 💕",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english3.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "english4",
+    "text": "Sometimes I just look at you\nand wonder how someone can be\nso soft, so pure, and so perfect\nall at the same time. 🌙",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english4.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "english5",
+    "text": "You bring a calmness to my life\nthat I didn’t even know I needed,\nYour love feels like peace,\nlike home. ❤️",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english5.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "english6",
+    "text": "The way you speak,\nthe way you look at me,\nIt all makes my heart feel\nsoft in the sweetest way. 💖",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english6.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "english7",
+    "text": "Every day I find a new reason\nto fall for you again,\nYou don’t even try…\nYou just are. ✨",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english7.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "english8",
+    "text": "You’re the kind of person\nwho makes everything feel lighter,\neasier… better,\nJust by being there. ❤️",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english8.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "english9",
+    "text": "Your love has a softness\nthat heals things inside me\nI didn’t even talk about,\nYou make me whole in silence. 💕",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english9.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "english10",
+    "text": "You are the warmest part of my day,\nthe calmest part of my mind,\nand the sweetest part of my heart. 🌼",
+    "translation": "Same (English original).",
+    "voice": "/assets/shayariVoice/english10.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "hindi11",
+    "text": "तेरी आँखों में जब भी देखता हूँ,\nऐसा लगता है जैसे मैं अपना घर ढूँढ लिया हो,\nजहाँ सुकून भी है… और मोहब्बत भी। ❤️",
+    "translation": "Your eyes feel like home — full of peace and love.",
+    "voice": "/assets/shayariVoice/hindi11.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "hindi12",
+    "text": "हर बात दिल से कह दूँ… ऐसा नहीं है,\nपर तू समझ जाती है बिना कहे,\nयही तो है तेरी सबसे प्यारी बात। 💕",
+    "translation": "You understand me even when I don’t say anything — that’s the most beautiful thing about you.",
+    "voice": "/assets/shayariVoice/hindi12.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "hindi13",
+    "text": "कभी सोचता हूँ… तेरे बिना कैसा होता?\nफिर डर जाता हूँ,\nक्योंकि तू नहीं… तो कुछ भी नहीं। 🌙",
+    "translation": "I’m afraid to imagine a life without you, because without you, nothing makes sense.",
+    "voice": "/assets/shayariVoice/hindi13.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "hindi14",
+    "text": "तेरी खामोशी भी कभी-कभी\nहजारों बातें कर जाती है,\nऔर मैं हर बार बस तुझमें खो जाता हूँ। ✨",
+    "translation": "Your silence speaks thousands of words, and I get lost in you every time.",
+    "voice": "/assets/shayariVoice/hindi14.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "hindi15",
+    "text": "तू पास हो या दूर… फर्क नहीं पड़ता,\nमेरा दिल तो हर वक़्त\nबस तुझे ही महसूस करता है। ❤️",
+    "translation": "Near or far doesn’t matter; my heart feels you always.",
+    "voice": "/assets/shayariVoice/hindi15.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "hindi16",
+    "text": "तेरे बिना सब फीका लगता है,\nजैसे चाँद बिना रात,\nऔर दिल बिना सांस… 💖",
+    "translation": "Without you everything feels pale — like a night without moonlight.",
+    "voice": "/assets/shayariVoice/hindi16.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "hindi17",
+    "text": "तेरी बातें सुनकर ऐसा लगता है,\nजैसे दुनिया थोड़ी आसान हो गई हो,\nथोड़ी प्यारी… थोड़ी मेरी। ✨",
+    "translation": "Your words make the world feel softer, sweeter, and a little more mine.",
+    "voice": "/assets/shayariVoice/hindi17.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "hindi18",
+    "text": "तेरा हाथ थामने में जो सुकून है,\nवो किसी दवा, किसी दुआ में नहीं। ❤️",
+    "translation": "The peace I feel holding your hand exists nowhere else.",
+    "voice": "/assets/shayariVoice/hindi18.mp3",
+    "category": "romantic"
+  },
+
+  {
+    "id": "marathi11",
+    "text": "तुझ्याशी बोललं की मन अगदी शांत होतं,\nजणू काही आयुष्यातील सगळं व्यवस्थित आहे,\nतू आहेस… हेच सर्वात मोठं समाधान. ❤️",
+    "translation": "Talking to you calms me; your presence is my biggest peace.",
+    "voice": "/assets/shayariVoice/marathi11.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi12",
+    "text": "तू हसलीस की वेळ थांबावी असं वाटतं,\nकारण तुझं हसू म्हणजे माझ्यासाठी\nशुद्ध आनंद आहे. 💕",
+    "translation": "When you smile, I wish time would stop — your smile is pure joy.",
+    "voice": "/assets/shayariVoice/marathi12.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "marathi13",
+    "text": "तुझं अस्तित्वच खूप आहे,\nजग अवघड नाही वाटत,\nकारण तू आहेस ना… एवढंच पुरेसं आहे. ✨",
+    "translation": "Your existence is enough — the world feels easier because you’re in it.",
+    "voice": "/assets/shayariVoice/marathi13.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi14",
+    "text": "कधी कधी वाटतं,\nतू माझ्या आयुष्यात आलीस हे स्वप्न तर नाही ना?\nइतकी सुंदर गोष्ट खरी असू शकते का? ❤️",
+    "translation": "Sometimes I wonder if you are a dream — can something this beautiful be real?",
+    "voice": "/assets/shayariVoice/marathi14.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "marathi15",
+    "text": "तुझ्यासोबतच्या छोट्याशा क्षणातही\nमोठा आनंद असतो,\nहे प्रेम आहे… कळतंय मला. 💖",
+    "translation": "Even tiny moments with you hold big happiness — that’s love.",
+    "voice": "/assets/shayariVoice/marathi15.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "marathi16",
+    "text": "तुझा आवाज ऐकला की\nमनातलं सगळं शांत होतं,\nजणू काही तूच माझी शांतता आहेस. 🌙",
+    "translation": "Your voice brings a peace nothing else can.",
+    "voice": "/assets/shayariVoice/marathi16.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "marathi17",
+    "text": "तुझं माझ्यासोबत असणं म्हणजे\nएक वेगळाच आधार आहे,\nभीतीही कमी वाटते… आणि जगही छान. ✨",
+    "translation": "Your presence gives me strength and comfort; the world feels better with you.",
+    "voice": "/assets/shayariVoice/marathi17.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "marathi18",
+    "text": "तू जवळ असलीस की बाकी काही नकोसं वाटतं,\nतूच माझ्या जगण्याचं उत्तर आहेस. ❤️",
+    "translation": "When you're near, I need nothing else — you are my answer to everything.",
+    "voice": "/assets/shayariVoice/marathi18.mp3",
+    "category": "romantic"
+  },
+
+  {
+    "id": "eng11",
+    "text": "You feel like a soft place to fall,\na safe space to breathe,\nand the most comforting part of my life. ❤️",
+    "translation": "Same (English original)",
+    "voice": "/assets/shayariVoice/eng11.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "eng12",
+    "text": "There’s a calmness in you\nthat touches even the loudest parts of me,\nand quiets them… beautifully. ✨",
+    "translation": "Same (English original)",
+    "voice": "/assets/shayariVoice/eng12.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "eng13",
+    "text": "You make ordinary days feel special,\njust by being yourself.\nThat’s your magic. 💕",
+    "translation": "Same (English original)",
+    "voice": "/assets/shayariVoice/eng13.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "eng14",
+    "text": "Loving you feels effortless,\nlike my heart already knew\nwhere it belonged. 🌙",
+    "translation": "Same (English original)",
+    "voice": "/assets/shayariVoice/eng14.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "eng15",
+    "text": "Your presence softens everything in me\nthat life tried to make hard.\nYou are healing. ❤️",
+    "translation": "Same (English original)",
+    "voice": "/assets/shayariVoice/eng15.mp3",
+    "category": "emotional"
+  },
+  {
+    "id": "eng16",
+    "text": "I admire the way your heart loves,\nthe way your soul shines,\nand the way your smile feels like peace. ✨",
+    "translation": "Same (English original)",
+    "voice": "/assets/shayariVoice/eng16.mp3",
+    "category": "sweet"
+  },
+  {
+    "id": "eng17",
+    "text": "Being with you feels like\nfinally understanding the meaning\nof the word ‘home’. ❤️",
+    "translation": "Same (English original)",
+    "voice": "/assets/shayariVoice/eng17.mp3",
+    "category": "romantic"
+  },
+  {
+    "id": "eng18",
+    "text": "You are the softest thought\nat the end of every hard day,\nand the warmest feeling in my heart. 💖",
+    "translation": "Same (English original)",
+    "voice": "/assets/shayariVoice/eng18.mp3",
+    "category": "emotional"
   }
 ]

@@ -3,37 +3,72 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
-import { ArrowLeft, Calendar as CalendarIcon, Heart, PartyPopper, Cake } from "lucide-react";
+
+import {
+  ArrowLeft,
+  Calendar as CalendarIcon,
+  Heart,
+  PartyPopper,
+  Cake,
+} from "lucide-react";
+
 import { Link } from "react-router-dom";
 import calendarData from "@/data/calendar.json";
+import dayjs from "dayjs";
+import { MiniLoveCalendar } from "@/components/MiniLoveCalendar";
 
 export default function Calendar() {
   const getEventIcon = (type: string) => {
     switch (type) {
       case "birthday":
-        return <Cake className="w-5 h-5" />;
+        return <Cake className="w-6 h-6 text-rose" />;
       case "anniversary":
-        return <Heart className="w-5 h-5" />;
+        return <Heart className="w-6 h-6 text-rose" />;
       case "special":
-        return <PartyPopper className="w-5 h-5" />;
+        return <PartyPopper className="w-6 h-6 text-primary" />;
       default:
-        return <CalendarIcon className="w-5 h-5" />;
+        return <CalendarIcon className="w-6 h-6 text-primary" />;
     }
   };
 
+  const daysLeft = (date: string) => {
+    const now = dayjs();
+    const eventDate = dayjs(date);
+    return eventDate.diff(now, "day");
+  };
+
+  const countdownEvents = ["birthday", "anniversary"];
+
+  const sortedEvents = [...calendarData].sort((a, b) => {
+    // 1. Sort by custom order if exists
+    if (a.sortOrder && b.sortOrder) {
+      if (a.sortOrder !== b.sortOrder) {
+        return a.sortOrder - b.sortOrder;
+      }
+    }
+
+    // 2. Otherwise sort by date
+    return dayjs(a.date).diff(dayjs(b.date));
+  });
+
+  const nextEvent = sortedEvents.find((e) => daysLeft(e.date) >= 0);
+
   const typeColors: Record<string, string> = {
-    birthday: "bg-gold/20 text-gold border-gold/30",
-    anniversary: "bg-rose/20 text-rose border-rose/30",
-    special: "bg-primary/20 text-primary border-primary/30",
-    date: "bg-lavender/20 text-lavender border-lavender/30",
+    birthday: "bg-rose/20 text-rose border-rose/40",
+    anniversary: "bg-primary/20 text-primary border-primary/40",
+    special: "bg-gold/20 text-gold border-gold/40",
+    date: "bg-lavender/20 text-lavender border-lavender/40",
+    trip: "bg-peach/20 text-peach border-peach/40",
+    temple: "bg-rose/20 text-rose border-rose/40",
   };
 
   return (
     <div className="min-h-screen romantic-gradient relative">
       <HeartAnimation />
       <BackgroundText />
-      
+
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-4xl">
+        {/* BACK BUTTON */}
         <Link to="/home">
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -41,61 +76,133 @@ export default function Calendar() {
           </Button>
         </Link>
 
-        <div className="text-center mb-12 animate-fade-in">
-          <div className="text-6xl mb-4">📅</div>
-          <h1 className="text-4xl md:text-5xl font-handwriting text-foreground mb-3">
+        {/* HEADER */}
+        <div className="text-center mb-8 animate-fade-in">
+          <div className="text-6xl mb-4">💖</div>
+          <h1 className="text-4xl md:text-5xl font-handwriting text-foreground drop-shadow mb-3">
             Our Love Calendar
           </h1>
           <p className="text-muted-foreground text-lg">
-            Special dates and moments we'll never forget
+            Beautiful moments & special days we'll celebrate together ✨
           </p>
         </div>
 
-        <div className="space-y-6">
-          {calendarData.map((event, index) => (
-            <Card
-              key={event.id}
-              className="p-6 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 bg-card/95 backdrop-blur animate-fade-in group"
-              style={{ animationDelay: `${index * 0.05}s` }}
-            >
-              <div className="flex items-start gap-4">
-                <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-rose group-hover:scale-110 transition-transform duration-300">
-                  {getEventIcon(event.type)}
-                </div>
-                
-                <div className="flex-1">
-                  <div className="flex items-start justify-between mb-2">
-                    <div>
-                      <h3 className="font-semibold text-foreground text-lg mb-1">
-                        {event.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">
-                        {event.date}
-                      </p>
+        {/* NEXT UPCOMING EVENT */}
+        {nextEvent && (
+          <div className="text-center mb-10 animate-fade-in">
+            <p className="text-lg text-primary font-medium">
+              Next Special Day in{" "}
+              <span className="font-bold text-rose">
+                {daysLeft(nextEvent.date)} days ❤️
+              </span>
+            </p>
+          </div>
+        )}
+
+        {/* DIVIDER */}
+        <div className="text-center my-12">
+          <p className="text-xl font-handwriting text-rose/90">
+            — Our Most Beautiful Moments 💞 —
+          </p>
+        </div>
+
+        {/* EVENTS LIST */}
+        <div className="space-y-8">
+          {sortedEvents.map((event, index) => {
+            const remaining = daysLeft(event.date);
+
+            return (
+              <Card
+                key={event.id}
+                className="overflow-hidden rounded-2xl bg-card/90 backdrop-blur-lg shadow-[var(--shadow-romantic)] animate-fade-in"
+                style={{ animationDelay: `${index * 0.07}s` }}
+              >
+                {/* IMAGE */}
+                <div className="relative h-48 w-full overflow-hidden">
+                  <img
+                    src={event.image}
+                    alt={event.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+
+                  {/* COUNTDOWN */}
+                  {countdownEvents.includes(event.type) && remaining >= 0 && (
+                    <div className="absolute bottom-3 left-3 bg-rose/70 backdrop-blur px-4 py-1 rounded-full text-sm font-semibold text-white shadow">
+                      ❤️ {remaining} days remaining
                     </div>
+                  )}
+
+                  {/* CUSTOM TAGS */}
+                  {event.type === "date" && (
+                    <div className="absolute bottom-3 left-3 bg-white/30 backdrop-blur px-4 py-1 rounded-full text-sm text-white shadow">
+                      🎬 Any day is perfect for a date with you 💕
+                    </div>
+                  )}
+
+                  {event.type === "trip" && (
+                    <div className="absolute bottom-3 left-3 bg-white/30 backdrop-blur px-4 py-1 rounded-full text-sm text-white shadow">
+                      🌴 Any day… let's go together ❤️
+                    </div>
+                  )}
+
+                  {event.type === "temple" && (
+                    <div className="absolute bottom-3 left-3 bg-white/30 backdrop-blur px-4 py-1 rounded-full text-sm text-white shadow">
+                      🛕 Any day is perfect for a temple visit with you ❤️
+                    </div>
+                  )}
+                </div>
+
+                {/* CONTENT */}
+                <div className="p-6">
+                  {/* MINI CALENDAR FOR BDAY & ANNIVERSARY */}
+                  {(event.type === "birthday" ||
+                    event.type === "anniversary") && (
+                    <MiniLoveCalendar event={event} />
+                  )}
+
+                  <div className="flex items-center justify-between mb-2">
+                    <h3 className="text-xl font-semibold text-foreground">
+                      {event.title}
+                    </h3>
+
                     <Badge className={typeColors[event.type]}>
                       {event.type}
                     </Badge>
                   </div>
-                  
-                  <p className="text-foreground/80">
-                    {event.description}
+
+                  <p className="text-muted-foreground text-sm mb-2">
+                    {dayjs(event.date).format("DD MMMM, YYYY")}
                   </p>
+
+                  <div className="flex items-center gap-2 mb-2">
+                    {getEventIcon(event.type)}
+                    <p className="text-foreground/90">{event.description}</p>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
 
-        <Card className="mt-8 p-8 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20 text-center">
-          <Heart className="w-12 h-12 mx-auto mb-4 text-rose fill-rose animate-pulse-soft" />
-          <p className="text-foreground/90 italic mb-2">
-            "Every date with you becomes a memory worth celebrating 💕"
+        {/* FULL LOVE CALENDAR */}
+        {/* <div className="mt-16">
+          <h2 className="text-3xl font-handwriting text-center mb-6 text-rose drop-shadow">
+            Love Calendar Overview 🗓️💖
+          </h2> */}
+
+        {/* pass full list */}
+        {/* <MiniLoveCalendar event={{ date: dayjs().format("YYYY-MM-01") }} /> */}
+        {/* </div> */}
+
+        {/* FOOTER */}
+        <div className="mt-16 text-center">
+          <Heart className="w-12 h-12 mx-auto text-rose animate-pulse mb-4" />
+          <p className="text-lg text-foreground/80 italic">
+            “More memories, more magic… our story is just beginning.” ✨
           </p>
-          <p className="text-sm text-muted-foreground">
-            More beautiful moments to come...
-          </p>
-        </Card>
+        </div>
       </div>
     </div>
   );

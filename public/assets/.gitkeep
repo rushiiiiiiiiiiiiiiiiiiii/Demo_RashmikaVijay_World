@@ -4,7 +4,7 @@ Create these folders and add your files:
 
 ## Folder Structure:
 ```
-/public/assets/
+/assets/
 ├── images/           # General images
 ├── photos/           # Your photo memories
 ├── songs/            # MP3 audio files for songs
@@ -17,14 +17,14 @@ Create these folders and add your files:
 
 ## How to add your files:
 1. Clone this project to your computer
-2. Create the folders listed above in `/public/assets/`
+2. Create the folders listed above in `/assets/`
 3. Add your audio files (.mp3) and images (.jpg, .png) to the appropriate folders
 4. The app will automatically load them based on the JSON data files
 
 ## Example file names (match these in your JSON files):
-- /public/assets/songs/our-song.mp3
-- /public/assets/photos/first-photo.jpg
-- /public/assets/voices/morning-message.mp3
-- /public/assets/images/morning.jpg
+- /assets/songs/our-song.mp3
+- /assets/photos/first-photo.jpg
+- /assets/voices/morning-message.mp3
+- /assets/images/morning.jpg
 
 All paths are already configured in the JSON data files in /src/data/

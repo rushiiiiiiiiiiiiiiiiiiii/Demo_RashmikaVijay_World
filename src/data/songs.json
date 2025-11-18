@@ -1,38 +1,42 @@
 [
   {
     "id": "song1",
-    "title": "Our Song",
-    "artist": "Rushi",
-    "file": "/assets/songs/our-song.mp3",
-    "cover": "/assets/images/song1.jpg",
-    "dedication": "This reminds me of the first time we met",
+    "title": "Aaj Se Teri",
+    "artist": "Arijit Singh (Cover)",
+    "file": "https://cdn.pixabay.com/audio/2023/10/02/audio_2671a2e934.mp3",
+    "dedication": "Aaj se teri saari galiyaan meri ho gayi ❤️",
     "category": "romantic"
   },
   {
     "id": "song2",
-    "title": "Thinking of You",
-    "artist": "Rushi's Playlist",
-    "file": "/assets/songs/thinking-of-you.mp3",
-    "cover": "/assets/images/song2.jpg",
-    "dedication": "I listen to this every time I miss you",
-    "category": "emotional"
+    "title": "Falak Tak Chal",
+    "artist": "Udit Narayan (Instrumental)",
+    "file": "https://soundcloud.com/spogmayyousafzai/falak-tak-chal-sath-mere-reprise-cover-2021?utm_source=clipboard&utm_medium=text&utm_campaign=social_sharing",
+    "dedication": "Falak tak chal saath mere 💫",
+    "category": "romantic"
   },
   {
     "id": "song3",
-    "title": "Happy Together",
-    "artist": "For Us",
-    "file": "/assets/songs/happy-together.mp3",
-    "cover": "/assets/images/song3.jpg",
-    "dedication": "Our happy song for good days",
-    "category": "upbeat"
+    "title": "Chaar Kadam",
+    "artist": "Shaan (Acoustic Cover)",
+    "file": "https://cdn.pixabay.com/audio/2024/03/06/audio_8555dd1e2f.mp3",
+    "dedication": "Chaar kadam bas chaar kadam… tum saath ho 🎵",
+    "category": "romantic"
   },
   {
     "id": "song4",
-    "title": "Forever Yours",
-    "artist": "Rushi",
-    "file": "/assets/songs/forever-yours.mp3",
-    "cover": "/assets/images/song4.jpg",
-    "dedication": "This is how I feel about us",
+    "title": "Perfect",
+    "artist": "Ed Sheeran (Cover)",
+    "file": "https://cdn.pixabay.com/audio/2022/03/15/audio_3b639a6a7e.mp3",
+    "dedication": "You are perfect to me ✨",
     "category": "romantic"
+  },
+  {
+    "id": "song5",
+    "title": "Abhi Na Jao Chhodkar",
+    "artist": "Mohammed Rafi (Instrumental)",
+    "file": "https://cdn.pixabay.com/audio/2023/05/18/audio_649dbeed52.mp3",
+    "dedication": "Abhi na jao chhodkar… dil abhi bhara nahi 💗",
+    "category": "classic"
   }
 ]

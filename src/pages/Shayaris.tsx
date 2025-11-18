@@ -2,14 +2,20 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
-import { ArrowLeft, BookHeart, Play, Heart, RefreshCw } from "lucide-react";
+import { ArrowLeft, BookHeart, RefreshCw } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import shayarisData from "@/data/shayaris.json";
 
 export default function Shayaris() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTranslation, setShowTranslation] = useState(false);
+
+  // random on open
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * shayarisData.length);
+    setCurrentIndex(randomIndex);
+  }, []);
 
   const nextShayari = () => {
     setCurrentIndex((prev) => (prev + 1) % shayarisData.length);
@@ -23,7 +29,8 @@ export default function Shayaris() {
   };
 
   const current = shayarisData[currentIndex];
-  const categoryColors: Record<string, string> = {
+
+  const categoryColors = {
     romantic: "from-rose to-primary",
     emotional: "from-lavender to-peach",
     sweet: "from-peach to-gold",
@@ -33,8 +40,48 @@ export default function Shayaris() {
     <div className="min-h-screen romantic-gradient relative">
       <HeartAnimation />
       <BackgroundText />
-      
+
+      {/* ✨ Extra Styles */}
+      <style>{`
+        .shayari-card {
+          background: rgba(255, 255, 255, 0.35);
+          backdrop-filter: blur(18px);
+          border-radius: 24px;
+          border: 1px solid rgba(255,255,255,0.5);
+          box-shadow: 0 10px 45px rgba(255,150,170,0.35);
+          animation: fadeSlide 0.9s ease;
+        }
+
+        @keyframes fadeSlide {
+          0% { opacity: 0; transform: translateY(30px) scale(0.96); }
+          100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .floating-heart {
+          position: absolute;
+          animation: floatUp 4s infinite ease-in-out;
+          opacity: 0.4;
+        }
+
+        @keyframes floatUp {
+          0% { transform: translateY(20px); opacity: 0.3; }
+          50% { opacity: 0.6; }
+          100% { transform: translateY(-20px); opacity: 0.3; }
+        }
+
+        .translation-box {
+          animation: fadeIn 0.7s ease;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(12px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
+
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-3xl">
+
+        {/* Header */}
         <Link to="/home">
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -42,86 +89,97 @@ export default function Shayaris() {
           </Button>
         </Link>
 
-        <div className="text-center mb-12 animate-fade-in">
-          <div className="text-6xl mb-4">📖</div>
-          <h1 className="text-4xl md:text-5xl font-handwriting text-foreground mb-3">
+        <div className="text-center mb-10 animate-fade-in">
+          <div className="text-6xl mb-3">📖</div>
+          <h1 className="text-5xl font-handwriting text-foreground mb-2">
             My Shayaris For You
           </h1>
           <p className="text-muted-foreground text-lg">
-            Poetry from my heart in Urdu
+            Beautiful words from my heart to yours 💕
           </p>
         </div>
 
-        <div className="space-y-6 animate-fade-in">
-          <Card className="p-8 md:p-12 bg-card/95 backdrop-blur shadow-[var(--shadow-romantic)]">
-            <div className={`h-1 w-20 mx-auto rounded-full bg-gradient-to-r ${categoryColors[current.category]} mb-8`} />
-            
-            <div className="mb-8">
-              <p className="text-2xl md:text-3xl text-foreground text-center leading-loose mb-6 font-serif">
-                {current.text}
+        {/* Main Card */}
+        <Card className="shayari-card p-10 relative overflow-hidden">
+
+          {/* floating soft hearts */}
+          {[...Array(6)].map((_, i) => (
+            <div
+              key={i}
+              className="floating-heart"
+              style={{
+                left: `${10 + Math.random() * 80}%`,
+                top: `${10 + Math.random() * 80}%`,
+                fontSize: `${20 + Math.random() * 20}px`,
+                animationDelay: `${i * 0.8}s`,
+              }}
+            >
+              ❤️
+            </div>
+          ))}
+
+          {/* divider */}
+          <div
+            className={`h-1 w-32 mx-auto rounded-full bg-gradient-to-r ${
+              categoryColors[current.category]
+            } mb-10 shadow-md`}
+          />
+
+          {/* Shayari text */}
+          <p className="text-2xl  md:text-4xl text-center text-foreground leading-relaxed mb-6 font-serif drop-shadow-sm">
+            “{current.text}”
+          </p>
+
+          <p className="text-center text-muted-foreground italic mb-6">
+            — Your Rushi ❤️
+          </p>
+
+          {/* Translation */}
+          {showTranslation && (
+            <div className="translation-box bg-white/40 p-6 rounded-lg border border-white/60 shadow-inner">
+              <p className="text-center text-foreground/80 italic leading-relaxed">
+                {current.translation}
               </p>
-              
-              {showTranslation && (
-                <div className="bg-background/50 rounded-lg p-6 border border-border/50 animate-fade-in">
-                  <p className="text-muted-foreground text-center italic">
-                    {current.translation}
-                  </p>
-                </div>
-              )}
             </div>
+          )}
 
-            {current.voice && (
-              <Card className="p-4 mb-6 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Listen in my voice</p>
-                  </div>
-                  <Button size="sm" className="rounded-full">
-                    <Play className="w-4 h-4 mr-2" />
-                    Play
-                  </Button>
-                </div>
-              </Card>
-            )}
+          {/* Buttons */}
+          <div className="flex flex-col items-center gap-3 mt-6">
+            <Button variant="outline" onClick={() => setShowTranslation(!showTranslation)}>
+              {showTranslation ? "Hide" : "Show"} Translation
+            </Button>
 
-            <div className="flex flex-col items-center gap-3">
-              <Button
-                onClick={() => setShowTranslation(!showTranslation)}
-                variant="outline"
-              >
-                {showTranslation ? "Hide" : "Show"} Translation
+            <div className="flex items-center gap-3">
+              <Button variant="outline" onClick={nextShayari}>
+                Next
               </Button>
-              
-              <div className="flex items-center gap-3">
-                <Button onClick={nextShayari} variant="outline">
-                  Next Shayari
-                </Button>
-                <Button onClick={randomShayari}>
-                  <RefreshCw className="w-4 h-4 mr-2" />
-                  Random
-                </Button>
-              </div>
+              <Button onClick={randomShayari}>
+                <RefreshCw className="w-4 h-4 mr-2" />
+                Random
+              </Button>
             </div>
+          </div>
 
-            <div className="flex items-center justify-center gap-2 mt-6">
-              {shayarisData.map((_, idx) => (
-                <div
-                  key={idx}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    idx === currentIndex ? "w-8 bg-primary" : "w-2 bg-muted"
-                  }`}
-                />
-              ))}
-            </div>
-          </Card>
+          {/* bullets */}
+          <div className="flex items-center justify-center gap-2 mt-8">
+            {shayarisData.map((_, idx) => (
+              <div
+                key={idx}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  idx === currentIndex ? "w-8 bg-primary shadow-lg" : "w-2 bg-muted"
+                }`}
+              />
+            ))}
+          </div>
+        </Card>
 
-          <Card className="p-6 bg-gradient-to-r from-lavender/10 to-rose/10 border-lavender/20 text-center">
-            <BookHeart className="w-8 h-8 mx-auto mb-3 text-lavender" />
-            <p className="text-foreground/90 italic">
-              "These words come straight from my heart to yours 💕"
-            </p>
-          </Card>
-        </div>
+        {/* Footer card */}
+        <Card className="p-6 bg-gradient-to-r from-rose/10 to-foreground/5 text-center mt-8">
+          <BookHeart className="w-10 h-10 mx-auto mb-3 text-rose-400" />
+          <p className="text-foreground/90 italic text-lg">
+            “Every word is written only for you, Shruti 💗”
+          </p>
+        </Card>
       </div>
     </div>
   );

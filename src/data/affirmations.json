@@ -1,52 +1,307 @@
 [
   {
     "id": "aff1",
-    "text": "You are loved beyond measure, and I'm here to remind you every single day.",
+    "text": "ok You are loved beyond measure, and I'm here to remind you every single day.",
     "category": "love"
   },
   {
     "id": "aff2",
-    "text": "Your presence in my life is a blessing I'm grateful for every moment.",
+    "text": "ok Your presence in my life is a blessing I'm grateful for every moment.",
     "category": "gratitude"
   },
   {
     "id": "aff3",
-    "text": "You are stronger than you think, and I believe in you completely.",
+    "text": "ok You are stronger than you think, and I believe in you completely.",
     "category": "strength"
   },
   {
     "id": "aff4",
-    "text": "Your dreams are valid and achievable. I'll be here supporting you all the way.",
+    "text": "ok Your dreams are valid and achievable. I'll be here supporting you all the way.",
     "category": "encouragement"
   },
   {
     "id": "aff5",
-    "text": "You deserve all the happiness in the world, and I want to give you that.",
+    "text": "ok You deserve all the happiness in the world, and I want to give you that.",
     "category": "love"
   },
   {
     "id": "aff6",
-    "text": "You are beautiful, intelligent, and absolutely amazing.",
+    "text": "ok You are beautiful, intelligent, and absolutely amazing.",
     "category": "confidence"
   },
   {
     "id": "aff7",
-    "text": "Every day with you is a gift I cherish with all my heart.",
+    "text": "ok Every day with you is a gift I cherish with all my heart.",
     "category": "gratitude"
   },
   {
     "id": "aff8",
-    "text": "You have the power to overcome any challenge that comes your way.",
+    "text": "ok You have the power to overcome any challenge that comes your way.",
     "category": "strength"
   },
   {
     "id": "aff9",
-    "text": "I admire your courage, your kindness, and your beautiful spirit.",
+    "text": "ok I admire your courage, your kindness, and your beautiful spirit.",
     "category": "appreciation"
   },
   {
     "id": "aff10",
-    "text": "You make the world a better place just by being in it.",
+    "text": "ok You make the world a better place just by being in it.",
+    "category": "love"
+  },
+
+  {
+    "id": "aff11",
+    "text": "ok You have a heart that shines brighter than anything I've ever known.",
+    "category": "love"
+  },
+  {
+    "id": "aff12",
+    "text": "ok Your smile has the power to lift my entire day.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff13",
+    "text": "ok I'm proud of the person you are and the person you're becoming.",
+    "category": "encouragement"
+  },
+  {
+    "id": "aff14",
+    "text": "ok You are capable of achieving everything you dream of.",
+    "category": "confidence"
+  },
+  {
+    "id": "aff15",
+    "text": "ok You bring light to every room you walk into.",
+    "category": "gratitude"
+  },
+  {
+    "id": "aff16",
+    "text": "ok I believe in your strength even when you're tired.",
+    "category": "strength"
+  },
+  {
+    "id": "aff17",
+    "text": "ok Your love makes me want to be the best version of myself.",
+    "category": "love"
+  },
+  {
+    "id": "aff18",
+    "text": "ok You deserve rest, peace, and all the softness the world can offer.",
+    "category": "encouragement"
+  },
+  {
+    "id": "aff19",
+    "text": "ok Your kindness is rare and precious.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff20",
+    "text": "ok I adore everything about you — from your mind to your heart.",
+    "category": "love"
+  },
+
+  {
+    "id": "aff21",
+    "text": "ok You have so much strength inside you, even on days you feel weak.",
+    "category": "strength"
+  },
+  {
+    "id": "aff22",
+    "text": "ok I'm always here cheering for you, quietly and loudly.",
+    "category": "encouragement"
+  },
+  {
+    "id": "aff23",
+    "text": "ok Every little effort you make inspires me.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff24",
+    "text": "ok You are enough — always have been, always will be.",
+    "category": "confidence"
+  },
+  {
+    "id": "aff25",
+    "text": "ok You make my world feel safe, warm, and beautiful.",
+    "category": "gratitude"
+  },
+  {
+    "id": "aff26",
+    "text": "ok Your heart is your superpower, never forget that.",
+    "category": "love"
+  },
+  {
+    "id": "aff27",
+    "text": "ok You’re stronger than the worries that try to break you.",
+    "category": "strength"
+  },
+  {
+    "id": "aff28",
+    "text": "ok Your voice, your thoughts, your dreams — they all matter to me.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff29",
+    "text": "ok I will always believe in you, even on the days you don’t.",
+    "category": "encouragement"
+  },
+  {
+    "id": "aff30",
+    "text": "ok You are a miracle walking on this earth.",
+    "category": "love"
+  },
+
+  {
+    "id": "aff31",
+    "text": "ok I'm grateful every day that life brought you to me.",
+    "category": "gratitude"
+  },
+  {
+    "id": "aff32",
+    "text": "ok No mountain is too high for you — you're unstoppable.",
+    "category": "strength"
+  },
+  {
+    "id": "aff33",
+    "text": "ok You bring happiness without even trying.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff34",
+    "text": "ok You are capable, talented, and wonderfully unique.",
+    "category": "confidence"
+  },
+  {
+    "id": "aff35",
+    "text": "ok Thank you for being you — it’s my favorite thing.",
+    "category": "gratitude"
+  },
+  {
+    "id": "aff36",
+    "text": "ok Your love feels like home to my heart.",
+    "category": "love"
+  },
+  {
+    "id": "aff37",
+    "text": "ok You can handle anything life throws your way.",
+    "category": "strength"
+  },
+  {
+    "id": "aff38",
+    "text": "ok You make my days brighter just by existing.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff39",
+    "text": "ok I’m always proud of you, even when you don’t realize it.",
+    "category": "encouragement"
+  },
+  {
+    "id": "aff40",
+    "text": "ok You are my favorite kind of magic.",
+    "category": "love"
+  },
+
+  {
+    "id": "aff41",
+    "text": "ok You bring peace to my heart and joy to my life.",
+    "category": "gratitude"
+  },
+  {
+    "id": "aff42",
+    "text": "ok You have a brave heart that keeps moving forward.",
+    "category": "strength"
+  },
+  {
+    "id": "aff43",
+    "text": "ok I cherish your thoughts, your dreams, and your softness.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff44",
+    "text": "ok You shine even on days you feel dim.",
+    "category": "encouragement"
+  },
+  {
+    "id": "aff45",
+    "text": "ok You deserve to be loved gently and endlessly — and I will.",
+    "category": "love"
+  },
+  {
+    "id": "aff46",
+    "text": "ok Your strength is quiet, steady, and inspiring.",
+    "category": "strength"
+  },
+  {
+    "id": "aff47",
+    "text": "ok You are worthy of every good thing coming your way.",
+    "category": "confidence"
+  },
+  {
+    "id": "aff48",
+    "text": "ok I admire your courage more than you know.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff49",
+    "text": "ok You are doing better than you think you are.",
+    "category": "encouragement"
+  },
+  {
+    "id": "aff50",
+    "text": "ok You make life sweeter simply by being part of mine.",
+    "category": "love"
+  },
+
+  {
+    "id": "aff51",
+    "text": "ok You deserve rest, comfort, and softness after everything you carry.",
+    "category": "encouragement"
+  },
+  {
+    "id": "aff52",
+    "text": "ok Your heart is gold, and your soul is gentle.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff53",
+    "text": "ok You have a beautiful future waiting for you.",
+    "category": "confidence"
+  },
+  {
+    "id": "aff54",
+    "text": "ok I admire the way you keep going even on tough days.",
+    "category": "strength"
+  },
+  {
+    "id": "aff55",
+    "text": "ok Everything about you feels like a blessing to me.",
+    "category": "gratitude"
+  },
+  {
+    "id": "aff56",
+    "text": "ok You are the love I never knew I needed.",
+    "category": "love"
+  },
+  {
+    "id": "aff57",
+    "text": "ok Your softness is not a weakness — it’s your power.",
+    "category": "confidence"
+  },
+  {
+    "id": "aff58",
+    "text": "ok You inspire me every single day.",
+    "category": "appreciation"
+  },
+  {
+    "id": "aff59",
+    "text": "ok I believe in your dreams just as much as you do.",
+    "category": "encouragement"
+  },
+  {
+    "id": "aff60",
+    "text": "ok Loving you feels like the easiest thing in the world.",
     "category": "love"
   }
 ]

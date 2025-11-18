@@ -2,104 +2,322 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
-import { ArrowLeft, Image as ImageIcon, Heart, Play } from "lucide-react";
+import {
+  ArrowLeft,
+  Play,
+  Pause,
+  ChevronLeft,
+  ChevronRight,
+  Heart,
+} from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import photosData from "@/data/photos.json";
+import { useGlobalMusic } from "@/hooks/useGlobalMusic";
 
 export default function Photos() {
-  const [selectedPhoto, setSelectedPhoto] = useState<number | null>(null);
+  const [selectedMedia, setSelectedMedia] = useState<number | null>(null);
   const [slideshowActive, setSlideshowActive] = useState(false);
+  const [slideIndex, setSlideIndex] = useState(0);
+
+  const [loadingStates, setLoadingStates] = useState(
+    Array(photosData.length).fill(true)
+  );
+
+  const slideshowInterval = useRef<NodeJS.Timeout | null>(null);
+
+  // GLOBAL MUSIC
+  const { pauseMusic, resumeMusic } = useGlobalMusic();
+
+  // PRELOAD ALL VIDEOS
+  useEffect(() => {
+    photosData
+      .filter((m) => m.file.endsWith(".mp4"))
+      .forEach((m) => {
+        const v = document.createElement("video");
+        v.src = m.file;
+        v.preload = "auto";
+        v.muted = true;
+        v.playsInline = true;
+        v.load();
+      });
+  }, []);
+
+  // SLIDESHOW AUTOPLAY
+  useEffect(() => {
+    if (slideshowActive) {
+      slideshowInterval.current = setInterval(() => {
+        setSlideIndex((prev) => (prev + 1) % photosData.length);
+      }, 4000);
+    }
+    return () => {
+      if (slideshowInterval.current) clearInterval(slideshowInterval.current);
+    };
+  }, [slideshowActive]);
+
+  const toggleSlideshow = () => {
+    if (slideshowActive) {
+      setSlideshowActive(false);
+      if (slideshowInterval.current) clearInterval(slideshowInterval.current);
+    } else {
+      setSelectedMedia(null);
+      setSlideIndex(0);
+      pauseMusic();
+      setSlideshowActive(true);
+    }
+  };
+
+  const nextSlide = () =>
+    setSlideIndex((prev) => (prev + 1) % photosData.length);
+
+  const prevSlide = () =>
+    setSlideIndex((prev) => (prev - 1 + photosData.length) % photosData.length);
+
+  const isVideo = (file: string) => file.endsWith(".mp4");
+
+  const closeFullscreen = () => {
+    if (selectedMedia !== null && isVideo(photosData[selectedMedia].file)) {
+      const vid = document.getElementById(
+        "fullscreen-video"
+      ) as HTMLVideoElement | null;
+      if (vid) vid.pause();
+    }
+
+    setSelectedMedia(null);
+    resumeMusic();
+  };
+
+  const handleLoaded = (index: number) => {
+    setLoadingStates((prev) => {
+      const updated = [...prev];
+      updated[index] = false;
+      return updated;
+    });
+  };
 
   return (
     <div className="min-h-screen romantic-gradient relative">
       <HeartAnimation />
       <BackgroundText />
-      
-      <div className="container mx-auto px-4 py-8 relative z-10 max-w-6xl">
+
+      <div className="container mx-auto px-4 py-8 max-w-6xl relative z-10">
         <Link to="/home">
           <Button variant="ghost" className="mb-6">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back Home
+            <ArrowLeft className="w-4 h-4 mr-2" /> Back Home
           </Button>
         </Link>
 
-        <div className="text-center mb-12 animate-fade-in">
-          <div className="text-6xl mb-4">📸</div>
-          <h1 className="text-4xl md:text-5xl font-handwriting text-foreground mb-3">
+        <div className="text-center mb-12">
+          <div className="text-6xl mb-4">💞📸</div>
+          <h1 className="text-4xl md:text-5xl font-handwriting mb-3">
             Our Memories Together
           </h1>
           <p className="text-muted-foreground text-lg mb-6">
-            Every picture tells our beautiful story
+            Every photo and video holds a moment of our love ❤️
           </p>
-          <Button onClick={() => setSlideshowActive(!slideshowActive)} size="lg">
-            <Play className="w-5 h-5 mr-2" />
-            Start Slideshow
+
+          <Button size="lg" onClick={toggleSlideshow}>
+            {slideshowActive ? (
+              <>
+                <Pause className="w-5 h-5 mr-2" /> Pause Slideshow
+              </>
+            ) : (
+              <>
+                <Play className="w-5 h-5 mr-2" /> Start Slideshow
+              </>
+            )}
           </Button>
         </div>
 
+        {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {photosData.map((photo, index) => (
+          {photosData.map((item, index) => (
             <Card
-              key={photo.id}
-              className="overflow-hidden hover:shadow-[var(--shadow-romantic)] transition-all duration-300 hover:scale-105 bg-card/95 backdrop-blur cursor-pointer group animate-fade-in"
-              style={{ animationDelay: `${index * 0.05}s` }}
-              onClick={() => setSelectedPhoto(index)}
+              key={item.id}
+              className="rounded-2xl overflow-hidden bg-card/95 backdrop-blur border border-rose-300/40 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(255,150,170,0.5)] transition-all cursor-pointer"
+              onClick={() => {
+                pauseMusic();
+                setSlideshowActive(false);
+                setSelectedMedia(index);
+              }}
             >
-              <div className="aspect-square bg-gradient-to-br from-primary/20 to-rose/20 relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <ImageIcon className="w-16 h-16 text-muted-foreground/30" />
+              <div className="p-3 bg-gradient-to-br from-rose-100/50 to-pink-50/40 rounded-2xl">
+                <div className="relative aspect-square rounded-xl overflow-hidden border-2 border-rose-300/50">
+                  {/* BLUR LOADER */}
+                  {loadingStates[index] && (
+                    <div className="absolute inset-0 bg-pink-200/20 backdrop-blur-md animate-pulse" />
+                  )}
+
+                  {isVideo(item.file) ? (
+                    <video
+                      src={item.file}
+                      muted
+                      autoPlay
+                      loop
+                      playsInline
+                      preload="auto"
+                      onLoadedData={() => handleLoaded(index)}
+                      className={`w-full h-full object-cover transition-all duration-500 ${
+                        loadingStates[index]
+                          ? "blur-md opacity-40"
+                          : "blur-0 opacity-100"
+                      }`}
+                    />
+                  ) : (
+                    <img
+                      src={item.file}
+                      onLoad={() => handleLoaded(index)}
+                      className={`w-full h-full object-cover transition-all duration-500 ${
+                        loadingStates[index]
+                          ? "blur-md opacity-40"
+                          : "blur-0 opacity-100"
+                      }`}
+                    />
+                  )}
                 </div>
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all duration-300" />
               </div>
+
               <div className="p-4">
-                <h3 className="font-handwriting text-lg text-foreground mb-1">
-                  {photo.title}
-                </h3>
-                <p className="text-sm text-muted-foreground mb-2">
-                  {photo.date}
-                </p>
-                <p className="text-sm text-foreground/80 italic">
-                  "{photo.caption}"
-                </p>
+                <h3 className="font-handwriting text-lg">{item.title}</h3>
+                <p className="text-sm text-muted-foreground">{item.date}</p>
+                <p className="text-sm italic opacity-80">"{item.caption}"</p>
               </div>
             </Card>
           ))}
         </div>
 
-        {selectedPhoto !== null && (
+        {/* SLIDESHOW VIEW */}
+        {slideshowActive && (
+          <div className="fixed inset-0 bg-black/90 backdrop-blur-xl z-50 flex flex-col items-center justify-center p-4 animate-fade-in">
+            <div className="max-w-3xl max-h-[70vh] rounded-2xl overflow-hidden border-4 border-rose-200/60 shadow-xl">
+              <div className="relative w-full h-full">
+                {isVideo(photosData[slideIndex].file) ? (
+                  <video
+                    src={photosData[slideIndex].file}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    onLoadedData={() => handleLoaded(slideIndex)}
+                    className={`w-full h-full object-cover transition-all duration-500 ${
+                      loadingStates[slideIndex]
+                        ? "blur-md opacity-40"
+                        : "blur-0 opacity-100"
+                    }`}
+                  />
+                ) : (
+                  <img
+                    src={photosData[slideIndex].file}
+                    onLoad={() => handleLoaded(slideIndex)}
+                    className={`w-full h-full object-cover transition-all duration-500 ${
+                      loadingStates[slideIndex]
+                        ? "blur-md opacity-40"
+                        : "blur-0 opacity-100"
+                    }`}
+                  />
+                )}
+              </div>
+            </div>
+
+            <div className="mt-6 bg-white/10 backdrop-blur-md px-6 py-4 rounded-xl text-white text-center border border-white/20 max-w-xl">
+              <h2 className="text-3xl font-handwriting">
+                {photosData[slideIndex].title}
+              </h2>
+              <p className="opacity-80">{photosData[slideIndex].date}</p>
+              <p className="italic opacity-90 mt-1">
+                "{photosData[slideIndex].caption}"
+              </p>
+            </div>
+
+            <div className="mt-8 flex items-center gap-4">
+              <Button variant="secondary" onClick={prevSlide}>
+                <ChevronLeft className="w-5 h-5 mr-2" /> Prev
+              </Button>
+
+              <Button variant="secondary" onClick={toggleSlideshow}>
+                <Pause className="w-4 h-4 mr-2" /> Pause
+              </Button>
+
+              <Button variant="secondary" onClick={nextSlide}>
+                Next <ChevronRight className="w-5 h-5 ml-2" />
+              </Button>
+            </div>
+          </div>
+        )}
+
+        {/* FULLSCREEN VIEW */}
+        {selectedMedia !== null && (
           <div
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedPhoto(null)}
+            onClick={closeFullscreen}
           >
-            <Card className="max-w-4xl w-full p-8 animate-fade-in">
-              <div className="aspect-video bg-gradient-to-br from-primary/20 to-rose/20 rounded-lg mb-6 relative overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <ImageIcon className="w-24 h-24 text-muted-foreground/30" />
-                </div>
+            <Card className="max-w-4xl w-full p-6 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl animate-fade-in">
+              <div className="relative rounded-xl overflow-hidden border-4 border-rose-200/60 shadow-xl max-h-[70vh]">
+                {isVideo(photosData[selectedMedia].file) ? (
+                  <video
+                    id="fullscreen-video"
+                    src={photosData[selectedMedia].file}
+                    autoPlay
+                    controls
+                    playsInline
+                    preload="auto"
+                    onLoadedData={() => handleLoaded(selectedMedia)}
+                    className={`w-full h-full object-cover transition-all duration-500 ${
+                      loadingStates[selectedMedia]
+                        ? "blur-md opacity-40"
+                        : "blur-0 opacity-100"
+                    }`}
+                  />
+                ) : (
+                  <img
+                    src={photosData[selectedMedia].file}
+                    onLoad={() => handleLoaded(selectedMedia)}
+                    className={`w-full h-full object-cover transition-all duration-500 ${
+                      loadingStates[selectedMedia]
+                        ? "blur-md opacity-40"
+                        : "blur-0 opacity-100"
+                    }`}
+                  />
+                )}
               </div>
-              <div className="text-center">
-                <h2 className="text-2xl font-handwriting text-foreground mb-2">
-                  {photosData[selectedPhoto].title}
+
+              <div className="text-center text-white mt-4">
+                <h2 className="text-3xl font-handwriting">
+                  {photosData[selectedMedia].title}
                 </h2>
-                <p className="text-muted-foreground mb-4">
-                  {photosData[selectedPhoto].date}
-                </p>
-                <p className="text-foreground/90 italic">
-                  "{photosData[selectedPhoto].caption}"
+                <p className="opacity-80">{photosData[selectedMedia].date}</p>
+                <p className="italic opacity-90 mt-2">
+                  "{photosData[selectedMedia].caption}"
                 </p>
               </div>
             </Card>
           </div>
         )}
 
-        <Card className="mt-8 p-8 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20 text-center">
-          <Heart className="w-12 h-12 mx-auto mb-4 text-rose fill-rose animate-pulse-soft" />
-          <p className="text-foreground/90 italic">
-            "Every moment with you is a memory I want to treasure forever 📷💕"
+        <Card className="mt-8 p-8 bg-gradient-to-r from-primary/10 to-rose/10 text-center border border-rose-300/30">
+          <Heart className="w-12 h-12 mx-auto mb-3 text-rose fill-rose animate-pulse-soft" />
+          <p className="italic text-foreground/90">
+            "Our memories are my favorite love story 📷💗"
           </p>
         </Card>
       </div>
+
+      <style>{`
+        @keyframes floatUp {
+          0% { transform: translateY(0); opacity: 0; }
+          25% { opacity: 1; }
+          100% { transform: translateY(-120vh); opacity: 0; }
+        }
+        .fade-slide {
+          opacity: 0;
+          transform: scale(0.95);
+          animation: fadeIn 1s forwards ease;
+        }
+        @keyframes fadeIn {
+          0% { opacity: 0; transform: scale(0.95); }
+          100% { opacity: 1; transform: scale(1); }
+        }
+      `}</style>
     </div>
   );
 }

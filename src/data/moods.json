@@ -48,10 +48,68 @@
     "name": "Loved",
     "emoji": "🥰",
     "color": "rose",
-    "message": "You ARE loved. So deeply, so completely. Every single day, in every single way. You're my everything.",
+    "message": "You are loved. So deeply, so completely. Every single day, in every single way. You're my everything.",
     "memory": "Every moment with you is a moment I treasure. You make me feel complete.",
     "image": "/assets/moods/love.jpg",
     "voice": "/assets/moods/love.mp3",
     "activity": "Let me show you how much I love you. Want to hear more reasons why you're amazing?"
-  }
+  },
+  {
+  "id": "mood6",
+  "name": "Lonely",
+  "emoji": "🥺",
+  "color": "sky",
+  "message": "You’re not alone, love… not even for a second. Even when I’m not physically there, my heart is always right beside yours.",
+  "memory": "The way you hold my hand tightly when you feel low… it makes me want to protect you forever.",
+  "image": "/assets/moods/lonely.jpg",
+  "voice": "/assets/moods/lonely.mp3",
+  "activity": "Let’s talk for a while. Tell me what’s on your mind, I’m here listening to you."
+},
+{
+  "id": "mood7",
+  "name": "Overthinking",
+  "emoji": "🤯",
+  "color": "indigo",
+  "message": "Hey… breathe. I know your mind runs fast, but you don’t have to carry it alone. I’m right here, holding your hand through every thought.",
+  "memory": "That night you told me all your fears and I hugged you until you felt lighter — I loved that trust.",
+  "image": "/assets/moods/overthinking.jpg",
+  "voice": "/assets/moods/overthinking.mp3",
+  "activity": "Let’s slow down together. Want me to reassure you or distract your mind with something cute?"
+}
+,
+{
+  "id": "mood8",
+  "name": "Missing me",
+  "emoji": "💞",
+  "color": "pink",
+  "message": "I miss you too… more than you know. But I’m always with you — in your heart, in your thoughts, in the love we share.",
+  "memory": "Every time we said goodbye, our hearts were still connected… that feeling is still the same.",
+  "image": "/assets/moods/missing.jpg",
+  "voice": "/assets/moods/missing.mp3",
+  "activity": "Want a cute voice message or a romantic text right now?"
+}
+,{
+  "id": "mood9",
+  "name": "Angry",
+  "emoji": "😡",
+  "color": "red",
+  "message": "It’s okay to be angry, love. Your feelings matter. I want to understand what hurt you — I’m here, not to fight, but to listen.",
+  "memory": "Even during our tough moments, we always found our way back with love. That’s what makes us strong.",
+  "image": "/assets/moods/angry.jpg",
+  "voice": "/assets/moods/angry.mp3",
+  "activity": "Tell me what upset you… or should I first calm you gently with something sweet?"
+}
+,
+{
+  "id": "mood10",
+  "name": "Insecure",
+  "emoji": "💗",
+  "color": "purple",
+  "message": "Come here, love… you are the most precious person to me. Nothing could ever change how deeply I love you. Your heart is safe with me.",
+  "memory": "Remember when you questioned if you were enough? I told you then, and I’ll tell you again — you are everything.",
+  "image": "/assets/moods/insecure.jpg",
+  "voice": "/assets/moods/insecure.mp3",
+  "activity": "Let me remind you how special you are… want a long comforting message?"
+}
+
 ]

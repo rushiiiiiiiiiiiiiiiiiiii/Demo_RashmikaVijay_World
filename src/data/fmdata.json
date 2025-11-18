@@ -1,0 +1,122 @@
+[
+  {
+    "id": "a1",
+    "title": "Rose Painting",
+    "image": "/assets/gallery/rose.png",
+    "audio": "/assets/audio/rose.mp3",
+    "message": "This rose bloomed for you the day I first saw your smile.",
+    "locked": false
+  },
+  {
+    "id": "a2",
+    "title": "Moon & Stars",
+    "image": "/assets/gallery/moon_stars.png",
+    "audio": "/assets/audio/moon.mp3",
+    "message": "When the world is quiet, I wish upon the same moon for you.",
+    "locked": false
+  },
+  {
+    "id": "a3",
+    "title": "Love Letter Art",
+    "image": "/assets/gallery/love_letter.png",
+    "audio": "/assets/audio/letter.mp3",
+    "message": "Words I saved in my pocket for the perfect midnight—this is one of them.",
+    "locked": false
+  },
+  {
+    "id": "a4",
+    "title": "Teddy Sketch",
+    "image": "/assets/gallery/teddy.png",
+    "audio": "/assets/audio/teddy.mp3",
+    "message": "A soft thing to hold when I can't be near — always yours.",
+    "locked": false
+  },
+  {
+    "id": "a5",
+    "title": "Sunset Couple",
+    "image": "/assets/gallery/sunset_couple.png",
+    "audio": "/assets/audio/sunset.mp3",
+    "message": "We watched the sun leave the sky and decided to stay.",
+    "locked": false
+  },
+  {
+    "id": "a6",
+    "title": "Heart Flame",
+    "image": "/assets/gallery/heart_flame.png",
+    "audio": "/assets/audio/flame.mp3",
+    "message": "A small flame, kept alive only by thinking of you.",
+    "locked": false
+  },
+  {
+    "id": "a7",
+    "title": "Sakura Petals",
+    "image": "/assets/gallery/sakura.png",
+    "audio": "/assets/audio/sakura.mp3",
+    "message": "Petals falling like quiet promises — every one for you.",
+    "locked": false
+  },
+  {
+    "id": "a8",
+    "title": "Glow Star",
+    "image": "/assets/gallery/glow_star.png",
+    "audio": "/assets/audio/star.mp3",
+    "message": "A small star to guide you back to me when night is long.",
+    "locked": false
+  },
+  {
+    "id": "a9",
+    "title": "Handwritten Poem",
+    "image": "/assets/gallery/poem_page.png",
+    "audio": "/assets/audio/poem.mp3",
+    "message": "Lines I wrote in the quiet — every line belongs to you.",
+    "locked": false
+  },
+  {
+    "id": "a10",
+    "title": "Minimal Line Art Face",
+    "image": "/assets/gallery/line_face.png",
+    "audio": "/assets/audio/line.mp3",
+    "message": "Simple lines — complex heart. I see you in every curve.",
+    "locked": false
+  },
+  {
+    "id": "a11",
+    "title": "Couple Silhouette",
+    "image": "/assets/gallery/couple.png",
+    "audio": "/assets/audio/couple.mp3",
+    "message": "Two silhouettes against the light — our small forever.",
+    "locked": true
+  },
+  {
+    "id": "a12",
+    "title": "Two Hands Touching",
+    "image": "/assets/gallery/two_hands.png",
+    "audio": "/assets/audio/hands.mp3",
+    "message": "When our fingers meet, all the noise fades away.",
+    "locked": false
+  },
+  {
+    "id": "a13",
+    "title": "Candlelight Mood",
+    "image": "/assets/gallery/candle.png",
+    "audio": "/assets/audio/candle.mp3",
+    "message": "A warm light for cold nights — my whisper beside you.",
+    "locked": false
+  },
+  {
+    "id": "a14",
+    "title": "Healed Heart",
+    "image": "/assets/gallery/healed_heart.png",
+    "audio": "/assets/audio/healed.mp3",
+    "message": "We broke and glued ourselves stronger — this heart is proof.",
+    "locked": false
+  },
+  {
+    "id": "a15",
+    "title": "Bow Ribbon Art",
+    "image": "/assets/gallery/bow.png",
+    "audio": "/assets/audio/bow.mp3",
+    "message": "Wrapped and waiting — a tiny token of my constant care.",
+    "locked": false
+  }
+]

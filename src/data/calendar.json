@@ -1,35 +1,59 @@
 [
   {
     "id": "event1",
-    "title": "First Date Anniversary",
-    "date": "2024-02-14",
+    "title": "Our Anniversary",
+    "date": "2026-01-17",
     "type": "anniversary",
-    "description": "The day that started it all",
-    "reminder": true
+    "description": "The day that started everything between us ❤️",
+    "reminder": true,
+    "image": "https://t3.ftcdn.net/jpg/08/56/78/72/360_F_856787276_Ob2YfLi48fCTNJYCqej0KzUm5pQzzm24.jpg"
   },
   {
     "id": "event2",
-    "title": "Her Birthday",
-    "date": "2024-03-15",
+    "title": "Your Birthday Shrutii",
+    "date": "2026-08-08",
     "type": "birthday",
-    "description": "The most special day of the year",
-    "reminder": true
+    "description": "The most special day because YOU were born 🥹💕",
+    "reminder": true,
+    "sortOrder": 2,
+    "image": "https://b3075642.smushcdn.com/3075642/wp-content/uploads/Birthday-Cake-1.png?lossy=1&strip=1&webp=1"
+  },
+  {
+    "id": "event-my-birthday",
+    "title": "My Birthday 🎉❤️",
+    "date": "2026-05-20",
+    "type": "birthday",
+    "sortOrder": 3,
+    "image": "https://images.stockcake.com/public/c/8/1/c81f7134-8fd5-4e26-896f-5a0cd18eff8e_large/joyful-birthday-celebration-stockcake.jpg",
+    "description": "It's my birthday… and I feel lucky I was born just to love you, Shrutii ❤️"
   },
   {
     "id": "event3",
     "title": "Our Trip Together",
-    "date": "2024-04-20",
+    "date": "2029-04-20",
     "type": "trip",
-    "description": "Beach vacation we planned",
-    "reminder": true
+    "description": "Our little adventure, our little escape 🌴✨",
+    "reminder": true,
+    "image": "https://travelvaidya.com/blog/wp-content/uploads/2025/07/Uttarakhand-Travel-Destinations-for-Couples.png.webp"
   },
   {
     "id": "event4",
-    "title": "Monthly Date Night",
-    "date": "2024-01-15",
+    "title": "Movie Date",
+    "date": "2029-01-15",
     "type": "date",
-    "description": "Our special monthly tradition",
+    "description": "A fantastic movie session togther, pocorn, me and you 🌙💕",
     "recurring": "monthly",
-    "reminder": true
+    "reminder": true,
+    "image": "https://t3.ftcdn.net/jpg/06/40/68/32/360_F_640683251_qQDBJZLrQbUNBgEPyDCfo9oCYywVkwon.jpg"
+  },
+  {
+    "id": "event5",
+    "title": "Temple Darshan",
+    "date": "2027-01-15",
+    "type": "temple",
+    "description": "Our peaceful tradition… just you and me, together in blessings 🕊️✨",
+    "recurring": "monthly",
+    "reminder": true,
+    "image": "https://images.unsplash.com/photo-1741201684366-9d2789c23f59?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3Dx"
   }
 ]

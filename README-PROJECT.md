@@ -29,7 +29,7 @@ A beautiful, romantic, frontend-only website created with love.
 ## 📁 Project Structure
 
 ```
-/public/assets/          # ADD YOUR MEDIA FILES HERE
+/assets/          # ADD YOUR MEDIA FILES HERE
 ├── images/              # General images
 ├── photos/              # Your photo memories
 ├── songs/               # MP3 audio files
@@ -66,11 +66,11 @@ npm run dev
 ```
 
 ### Step 2: Add Your Media Files
-1. Create folders in `/public/assets/` (see structure above)
+1. Create folders in `/assets/` (see structure above)
 2. Add your files:
-   - **Songs**: `.mp3` files in `/public/assets/songs/`
-   - **Voice Notes**: `.mp3` files in `/public/assets/voices/`
-   - **Photos**: `.jpg` or `.png` in `/public/assets/photos/`
+   - **Songs**: `.mp3` files in `/assets/songs/`
+   - **Voice Notes**: `.mp3` files in `/assets/voices/`
+   - **Photos**: `.jpg` or `.png` in `/assets/photos/`
    - **Other Images**: In appropriate folders
 
 ### Step 3: Customize Content
@@ -89,7 +89,7 @@ Edit the JSON files in `/src/data/` to match your story:
 ```
 
 ### Step 4: Update File Paths
-Make sure file paths in JSON match your actual file names in `/public/assets/`
+Make sure file paths in JSON match your actual file names in `/assets/`
 
 ## 🎨 Design Features
 

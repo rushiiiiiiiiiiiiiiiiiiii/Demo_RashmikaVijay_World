@@ -18,13 +18,20 @@ export default function Moods() {
     lavender: "from-lavender-light to-lavender",
     peach: "from-peach-light to-peach",
     gold: "from-gold to-peach",
+
+    // ⭐ NEW COLORS FOR YOUR NEW MOODS
+    sky: "from-sky-200 to-sky-500",
+    indigo: "from-indigo-200 to-indigo-500",
+    pink: "from-pink-200 to-pink-500",
+    red: "from-red-300 to-red-500",
+    purple: "from-purple-300 to-purple-500",
   };
 
   return (
     <div className="min-h-screen romantic-gradient relative">
       <HeartAnimation />
       <BackgroundText />
-      
+
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-4xl">
         <Link to="/home">
           <Button variant="ghost" className="mb-6">
@@ -58,7 +65,11 @@ export default function Moods() {
                   <h3 className="text-2xl font-handwriting text-foreground mb-2">
                     {mood.name}
                   </h3>
-                  <div className={`h-2 rounded-full bg-gradient-to-r ${moodColors[mood.color]} mt-4`} />
+                  <div
+                    className={`h-2 rounded-full bg-gradient-to-r ${
+                      moodColors[mood.color]
+                    } mt-4`}
+                  />
                 </div>
               </Card>
             ))}
@@ -72,7 +83,11 @@ export default function Moods() {
                   <h2 className="text-3xl font-handwriting text-foreground">
                     {selectedMood.name}
                   </h2>
-                  <div className={`h-2 rounded-full bg-gradient-to-r ${moodColors[selectedMood.color]} mt-2 w-32`} />
+                  <div
+                    className={`h-2 rounded-full bg-gradient-to-r ${
+                      moodColors[selectedMood.color]
+                    } mt-2 w-32`}
+                  />
                 </div>
               </div>
 
@@ -81,9 +96,11 @@ export default function Moods() {
                   <div className="flex items-start gap-3 mb-4">
                     <Heart className="w-6 h-6 text-rose fill-rose mt-1" />
                     <div>
-                      <h3 className="font-semibold text-foreground mb-2">My Message for You:</h3>
+                      <h3 className="font-semibold text-foreground mb-2">
+                        My Message for You:
+                      </h3>
                       <p className="text-foreground/90 leading-relaxed">
-                        {selectedMood.message.replace("love", name)}
+                        {selectedMood.message.replace("loved", name)}
                       </p>
                     </div>
                   </div>
@@ -93,7 +110,9 @@ export default function Moods() {
                   <div className="flex items-start gap-3 mb-4">
                     <Sparkles className="w-6 h-6 text-lavender mt-1" />
                     <div>
-                      <h3 className="font-semibold text-foreground mb-2">A Special Memory:</h3>
+                      <h3 className="font-semibold text-foreground mb-2">
+                        A Special Memory:
+                      </h3>
                       <p className="text-foreground/90 leading-relaxed italic">
                         {selectedMood.memory}
                       </p>
@@ -101,7 +120,7 @@ export default function Moods() {
                   </div>
                 </div>
 
-                {selectedMood.voice && (
+                {/* {selectedMood.voice && (
                   <Card className="p-6 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20">
                     <div className="flex items-center justify-between">
                       <div>
@@ -113,20 +132,24 @@ export default function Moods() {
                       </Button>
                     </div>
                   </Card>
-                )}
+                )} */}
 
                 <div className="bg-gradient-to-r from-peach/20 to-rose/20 rounded-lg p-6 border border-peach/30">
-                  <h3 className="font-semibold text-foreground mb-2">Let's Do This:</h3>
-                  <p className="text-foreground/90">
-                    {selectedMood.activity}
-                  </p>
+                  <h3 className="font-semibold text-foreground mb-2">
+                    Let's Do This:
+                  </h3>
+                  <p className="text-foreground/90">{selectedMood.activity}</p>
                 </div>
 
                 <div className="text-center pt-4">
                   <p className="text-muted-foreground mb-4">
-                    I'm always here for you, {name}. No matter what you're feeling. ❤️
+                    I'm always here for you, {name}. No matter what you're
+                    feeling. ❤️
                   </p>
-                  <Button onClick={() => setSelectedMood(null)} variant="outline">
+                  <Button
+                    onClick={() => setSelectedMood(null)}
+                    variant="outline"
+                  >
                     Change Mood
                   </Button>
                 </div>

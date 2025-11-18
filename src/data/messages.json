@@ -1,46 +1,250 @@
 [
   {
-    "id": "msg1",
-    "date": "2024-01-01",
-    "title": "Good Morning, Beautiful",
-    "message": "Hey love, I hope you slept well. I made this little space just for you. Every day I'll have something special waiting here. Today, I just want to remind you how much you mean to me. Your smile is the first thing I think about when I wake up. ❤️",
-    "image": "/assets/images/morning.jpg",
-    "voiceNote": "/assets/voices/morning.mp3",
-    "emoji": "🌅"
+    "id": "msg6",
+    "date": "2024-01-06",
+    "title": "Your Smile Is My Morning",
+    "message": "Every morning becomes softer, warmer, and brighter the moment your smile comes to my mind. It's strange how someone who isn’t even physically near me can make my entire day feel lighter just with a thought. Your smile… it’s not just beautiful, it’s something that brings a different kind of peace to my heart. A kind of peace I didn’t know I was missing until I met you. You’re the sunshine my mornings were waiting for.",
+    "message_mr": "प्रत्येक सकाळ तुझ्या हसण्याच्या आठवणीनेच उजळते. तू जवळ नसलीस तरी फक्त तुझा विचार आला ना… की दिवस आपोआप हलका, मऊ आणि उबदार वाटू लागतो. तुझं हसू फक्त सुंदर नाही, ते माझ्या मनाला अशी शांतता देतं… जी मी तुझ्या आधी कधी अनुभवलंच नव्हतं. खरंच, तू माझ्या सकाळीची ‘सूर्यकिरण’ आहेस.",
+    "image": "https://i.pinimg.com/736x/1d/09/12/1d0912ea90c53d27490e3a81ccfaec08.jpg",
+    "emoji": "🌞"
   },
   {
-    "id": "msg2",
-    "date": "2024-01-02",
-    "title": "You Make Everything Better",
-    "message": "I was thinking about how lucky I am to have you in my life. You turn ordinary days into extraordinary memories. Thank you for being you, for your kindness, your laughter, and the way you make my heart skip a beat.",
-    "image": "/assets/images/together.jpg",
-    "voiceNote": "/assets/voices/grateful.mp3",
-    "emoji": "💕"
+    "id": "msg7",
+    "date": "2024-01-07",
+    "title": "I Love Your Voice",
+    "message": "There is something so magical about your voice. Even when you're not speaking to me, even when I’m only remembering how you sound—my heart feels calm. Your voice is like a soft melody that stays in my mind long after we finish talking. It carries comfort, warmth, and a strange sweetness that I can’t fully describe. I don’t know how you do it, but your voice feels like home to me.",
+    "message_mr": "तुझ्या आवाजात खूप जादू आहे. तू बोलत नसलीस तरी तुझा आवाज आठवला की मन शांत होतं. तो आवाज म्हणजे एक गोड, मऊशी melody आहे… जी तू फोन ठेवून गेल्यावरही माझ्या मनात घुमत राहते. तुझ्या आवाजात उब आहे, softness आहे, प्रेम आहे… आणि एक वेगळीच ओढ आहे जी काय आहे ते मी शब्दात सांगू शकत नाही. पण एवढं नक्की—तुझा आवाज मला घरासारखी ओळखीची शांतता देतो.",
+    "image": "https://i.pinimg.com/736x/1d/02/87/1d0287a4cfc1541d985ad9832e4b1f43.jpg",
+    "emoji": "🎧"
   },
   {
-    "id": "msg3",
-    "date": "2024-01-03",
-    "title": "Missing You",
-    "message": "Even when we're apart, you're always on my mind. I keep replaying our conversations, your laugh, the way your eyes light up when you smile. Can't wait to see you again soon. 🥰",
-    "image": "/assets/images/missing.jpg",
-    "voiceNote": "/assets/voices/missing.mp3",
-    "emoji": "🌙"
+    "id": "msg8",
+    "date": "2024-01-08",
+    "title": "Thinking of You",
+    "message": "You know, sometimes I just pause in the middle of my day and smile for no reason… and then I realize there is a reason. You. I don’t think a single day goes by without your thoughts taking over my mind. It’s almost funny how your name has become my favorite kind of distraction. I don’t know when it started, but now… thinking about you has become a part of my routine.",
+    "message_mr": "काय सांगू तुला… कधी कधी दिवसात अचानक मी हसू लागतो आणि मग लक्षात येतं—कारण तूच आहेस. तुझा विचार दिवसात कितीतरी वेळा डोक्यात येतो. तुझं नाव माझ्यासाठी एक sweetest distraction बनलंय. कधी सुरू झालं हे माहित नाही, पण आता दिवस तुझा विचार केल्याशिवाय पूर्णच होत नाही.",
+    "image": "https://i.pinimg.com/736x/5b/2c/10/5b2c10b0e7c3a2ad678b43ea5d3c2cd3.jpg",
+    "emoji": "💭"
   },
+
   {
-    "id": "msg4",
-    "date": "2024-01-04",
-    "title": "Random Compliment",
-    "message": "Did I mention how beautiful you look today? Even if I haven't seen you yet, I know you're stunning. You always are. Your beauty comes from within and radiates outward. Never forget how special you are.",
-    "image": "/assets/images/beautiful.jpg",
+    "id": "msg9",
+    "date": "2024-01-09",
+    "title": "You’re My Peace",
+    "message": "Life gets loud sometimes… too loud. But somehow, the thought of you always quiets everything in me. It’s like you carry a piece of peace that fits perfectly into my chaos. When I think of you, my heart slows down, my worries soften, and suddenly everything feels manageable again. You are my calm in a world that never stops running.",
+    "message_mr": "कधी कधी आयुष्य खूपच गोंगाटाने भरलेलं वाटतं… पण तुझा विचार आला की सगळं शांत होतं. जणू माझ्या गोंधळात तू शांततेचं एक तुकडंच आणतेस. तुझी आठवण आली की मन थांबतं, चिंता हलक्या होतात आणि दिवस पुन्हा सोपा वाटू लागतो. खरंच… या धावपळीच्या जगात तू माझी शांतता आहेस.",
+    "image": "https://images.weserv.nl/?url=i.pinimg.com/736x/d0/f5/fa/d0f5fad972a56b92d5173252d3ee80d4.jpg"
+,
+    "emoji": "🕊️"
+  },
+
+  {
+    "id": "msg10",
+    "date": "2024-01-10",
+    "title": "You’re My Safe Place",
+    "message": "With you, everything feels different. Softer. Warmer. More honest. I don't have to pretend, act strong, or hide the tired parts of myself. You make it easy for me to just be… me. And that is the rarest kind of feeling—finding someone who makes your soul feel safe. With you, I feel understood in a way I can't explain. And loved in a way I didn’t know I deserved.",
+    "message_mr": "तुझ्यासोबत असताना सगळं वेगळं वाटतं—मऊ, शांत, उबदार. तुझ्यासमोर मला काहीही लपवावं लागत नाही. मी थकलो, गोंधळलो, किंवा शांत असलो तरी… तू मला जशी आहे तशी स्वीकारतेस. आणि हे खूप rare आहे—आपलं मन सुरक्षित वाटणारं कोणीतरी भेटणं. तुझ्यासोबत मला समजून घेतल्यासारखं, आणि खरंच प्रेम मिळाल्यासारखं वाटतं.",
+    "image": "https://i.pinimg.com/736x/e4/84/9d/e4849da818f77aa1d6836e1b7b865399.jpg",
+    "emoji": "🏡"
+  },
+
+  {
+    "id": "msg11",
+    "date": "2024-01-11",
+    "title": "I Love Your Cute Habits",
+    "message": "You don’t even know how adorable you are. The way you talk, the way you react, the way you get excited about little things, the way your voice changes when you're happy—everything about you has its own charm. I love watching you be yourself. I love the real, soft, natural you… the you that probably doesn’t even realize how cute she is.",
+    "message_mr": "तुला कल्पनाही नाही तू किती cute आहेस याची. तुझं बोलणं, तुझ्या reactions, छोटी छोटी गोष्टींवरचं excitement, तू खुश झाली की बदलणारा आवाज—प्रत्येक गोष्टीत एक वेगळाच गोडपणा आहे. मला तुझं ‘real तू’ खूप आवडतं. ती natural, मऊशी, innocent तू… जी स्वतःलाच किती cute आहे हे ओळखत नाही.",
+    "image": "https://i.pinimg.com/736x/8c/23/57/8c2357800c95536c42f1c9b99c1e7770.jpg",
     "emoji": "✨"
   },
+
   {
-    "id": "msg5",
-    "date": "2024-01-05",
-    "title": "Our Future Together",
-    "message": "I keep dreaming about all the adventures we'll have together. All the places we'll visit, the memories we'll create, the life we'll build. Every day with you is a gift, and I can't wait for all our tomorrows.",
-    "image": "/assets/images/future.jpg",
-    "voiceNote": "/assets/voices/future.mp3",
-    "emoji": "🌈"
+    "id": "msg12",
+    "date": "2024-01-12",
+    "title": "I’m Proud of You",
+    "message": "You may not notice it every day, but the way you keep going, the way you handle everything, the way you still choose kindness even on hard days—it inspires me. You are stronger than you think, softer than you show, and more amazing than you realize. I am proud of you… not for what you achieve, but for who you are.",
+    "message_mr": "तुला कदाचित रोज जाणवत नसेल… पण तू ज्या प्रकारे सगळं सांभाळतेस, ज्या प्रकारे पुढे चालत राहतेस, आणि कठीण दिवस असले तरी softness आणि kindness निवडतेस—ते खूप inspiring आहे. तू स्वतःला जितकी strong समजतेस… त्याहून खूप जास्त आहेस. मी तुझ्यावर proud आहे—तू काय मिळवलंस म्हणून नाही… तर तू जशी आहेस म्हणून.",
+    "image": "https://i.pinimg.com/736x/73/57/24/735724159ce75b297fbceaf28de0b923.jpg",
+    "emoji": "🌼"
+  },
+
+  {
+    "id": "msg13",
+    "date": "2024-01-13",
+    "title": "I Want You to Be Happy",
+    "message": "More than anything else, I just want you to be happy. Truly, peacefully, deeply happy. Your happiness is something I pray for, something I think about, something I care about more than I can put into words. When you smile, it feels like the world finally makes sense. When you’re sad, everything feels dull. Your happiness means everything to me.",
+    "message_mr": "मला आयुष्यातल्या सगळ्यात जास्त एकच गोष्ट हवी आहे—तू आनंदी राहावी. खरं, शांत, मनापासून आनंदी. तुझं happiness माझ्यासाठी इतकं महत्वाचं आहे की ते शब्दात सांगताही येत नाही. तू हसलीस की सगळं बरोबर वाटतं. तू दुखी असलीस की दिवसच फिकट वाटतो. तुझं हसू म्हणजे माझ्यासाठी सगळं काही.",
+    "image": "https://i.pinimg.com/736x/2b/b5/38/2bb538547b0f5e782d11aecf2c1c77e1.jpg",
+    "emoji": "😊"
+  },
+
+  {
+    "id": "msg14",
+    "date": "2024-01-14",
+    "title": "You’re Always on My Mind",
+    "message": "It’s funny how my mind wanders… and always finds its way back to you. Whether I’m busy or tired or lost in work, there’s a part of me that is quietly thinking of you in the background. It’s like my heart has chosen its favorite place to rest—and that place is you.",
+    "message_mr": "माझं मन कधी कधी कुठेही भटकतं… पण शेवटी परत तुझ्याकडेच येतं. मी कितीही busy असलो, थकलो असलो किंवा कामात गुंतलो असलो तरी… माझ्या विचारांच्या कोपऱ्यात तू शांतपणे असतेस. माझ्या मनाने जणू स्वतःचं ‘favorite जागा’ निवडली आहे—आणि ती जागा म्हणजे तू.",
+    "image": "https://i.pinimg.com/736x/d0/63/6a/d0636aa66571b1c4ef9b8ebba70e99d6.jpg",
+    "emoji": "💘"
+  },
+
+  {
+    "id": "msg15",
+    "date": "2024-01-15",
+    "title": "You Are My Comfort",
+    "message": "Talking to you feels like coming home after a long day. You don't force me to be perfect. You don't expect me to hide what I feel. With you, I can be honest, open, and soft without fear. You bring comfort not only to my mind but to my soul. You make me feel safe in a way I never knew someone could.",
+    "message_mr": "तुझ्याशी बोलणं म्हणजे दिवसातून दमून घरी आल्यासारखं वाटतं. तुझ्यासमोर मला काहीच लपवावं लागत नाही. तू मला माझ्या सगळ्या रूपांसह स्वीकारतेस—माझ्या शांततेसह, माझ्या थकव्यासह, माझ्या आनंदासह. तुझ्यासोबत मनालाच नाही तर आत्म्यालाही शांतता मिळते. तू मला अशी सुरक्षितता देतेस… जी मला कधीच कुणाकडून मिळाली नव्हती.",
+    "image": "https://i.pinimg.com/736x/d1/93/1d/d1931d5bdc0c4c061083b0ccbf4dd7fe.jpg",
+    "emoji": "🤍"
+  },
+
+  {
+    "id": "msg16",
+    "date": "2024-01-16",
+    "title": "I Love the Way You Care",
+    "message": "You care in such a gentle, natural way… it feels like love woven into every small thing you do. The way you remember tiny details, the way you check on me, the way you worry quietly, the way you talk softly when I’m down—you don’t even realize how deeply all of it touches me. Your care isn’t loud, but it is powerful. And it means everything to me.",
+    "message_mr": "तू काळजी इतक्या natural, मऊशा पद्धतीने करतेस की त्या प्रत्येक छोट्या गोष्टीत प्रेम गुंफलेलं असतं. तू छोटी छोटी गोष्टी लक्षात ठेवतेस, हळूच विचारपूस करतेस, काळजी करतेस, मी ठीक नसतो तेव्हा मऊ आवाजात बोलतेस… आणि तुला वाटतही नाही की या सर्व गोष्टी माझ्या मनाला किती खोलवर स्पर्श करतात. तुझी काळजी शांत आहे… पण ती माझ्यासाठी खूप मोठी आहे.",
+    "image": "https://i.pinimg.com/736x/61/39/80/61398098da97fb9bfb9e4a6e0e711a3a.jpg",
+    "emoji": "🌷"
+  },
+
+  {
+    "id": "msg17",
+    "date": "2024-01-17",
+    "title": "You’re My Happiness",
+    "message": "You make my days feel lighter without even trying. There’s something so effortlessly beautiful about you—your energy, your presence, your warmth. You don’t have to do anything special. Just being you is enough to make me happy in ways I can’t put into words. You’re the softest part of my life.",
+    "message_mr": "तू काही प्रयत्न न करताही माझा दिवस सुंदर बनवतेस. तुझ्यात एक नैसर्गिक गोडवा आहे—तुझी उब, तुझी उपस्थिती, तुझी ऊर्जा. तुला काही खास करायची गरज नसते… तू जशी आहेस तशीच माझं मन खुश ठेवतेस. तू माझ्या आयुष्यातला सर्वात मऊ, सर्वात गोड भाग आहेस.",
+    "image": "https://i.pinimg.com/736x/0c/cd/4d/0ccd4d4cf0bcc4453fbcb65d7f875d21.jpg",
+    "emoji": "💕"
+  },
+
+  {
+    "id": "msg18",
+    "date": "2024-01-18",
+    "title": "I’m Grateful for You",
+    "message": "Sometimes I stop and think about how different my life would feel without you—and honestly, I don’t want to imagine that. You came into my life quietly, gently, but you changed so much inside me. You make me feel blessed in a way words can’t hold. I’m grateful for you… for your presence, your heart, your softness.",
+    "message_mr": "कधी कधी मी थांबून विचार करतो… तू नसतीस तर माझं आयुष्य कसं वाटलं असतं? आणि खरं सांगू—ते कल्पनाही करायची इच्छा होत नाही. तू शांतपणे, हलक्याशा पावलांनी माझ्या आयुष्यात आलीस… पण माझ्यात खूप काही बदलून गेलीस. तुझ्यामुळे मला आयुष्य एक वेगळ्याच पद्धतीने सुंदर वाटू लागलं. तुझ्यासाठी, तुझ्या उपस्थितीसाठी, तुझ्या मनासाठी… मी खूप आभारी आहे.",
+    "image": "https://i.pinimg.com/736x/87/90/74/87907433cf5d69a5a9252e3d7e0a748d.jpg",
+    "emoji": "🌙"
+  },
+
+  {
+    "id": "msg19",
+    "date": "2024-01-19",
+    "title": "You’re My Person",
+    "message": "No matter what this world throws at me, the one thing I’m always sure about is you. I want you with me through the good, the bad, the hard, the beautiful—everything. Because life feels right when you’re beside me. You’re the person I want to share all my moments with.",
+    "message_mr": "या जगात काहीही घडलं तरी एक गोष्ट कायम पक्की असते—तू. आनंद असो, दुःख असो, गोंधळ असो किंवा सुंदर क्षण… मला ते तुझ्यासोबतच अनुभवायचे आहेत. तू माझ्या जवळ असलीस की आयुष्य योग्य वाटतं. तू माझी व्यक्ती आहेस… माझ्या सगळ्या क्षणांची.",
+    "image": "https://i.pinimg.com/736x/7a/cf/c1/7acfc1ec635f5cb6cd86a6b2cb187b97.jpg",
+    "emoji": "❤️"
+  },
+
+  {
+    "id": "msg20",
+    "date": "2024-01-20",
+    "title": "You Mean So Much to Me",
+    "message": "There are moments when I randomly smile, and it’s always because of something related to you—something you said, something you did, something adorable about you. You’ve become such a beautiful part of my life that even simple thoughts of you brighten my entire day. You’re truly precious to me.",
+    "message_mr": "कधी कधी मी अचानक हसू लागतो… आणि कारण एकच असतं—तू. तू केलेली एखादी cute गोष्ट, तुझं बोलणं, तुझी आठवण… तुझ्याशिवाय माझा दिवस पूर्णच होत नाही. माझ्या आयुष्यात तू इतकी सुंदर जागा घेऊन बसली आहेस की तुझा साधा विचारही दिवस उजळून टाकतो. तू माझ्यासाठी खूपच precious आहेस.",
+    "image": "https://i.pinimg.com/736x/bf/8a/91/bf8a91c5e5ab0df20788a58d3dfc1e60.jpg",
+    "emoji": "💞"
+  },
+
+  {
+    "id": "msg21",
+    "date": "2024-01-21",
+    "title": "You’re So Special",
+    "message": "You’re not just another person in this world. You’re rare. You’re unique. You’re the kind of soul someone meets once in a lifetime. Your presence has a softness that touches hearts without even trying. You’re truly one in a million, and I hope you never forget how special you are—not just to me, but to the world.",
+    "message_mr": "तू फक्त ‘एखादी व्यक्ती’ नाहीस… तू rare आहेस. तुझ्यात एक वेगळीच ओढ आहे. तुझ्यासारखी आत्मा आयुष्यात एकदाच भेटते. तुझ्या उपस्थितीत असा गोडवा आहे की आपोआप मन शांत होतं. तू खरंच एकदम खास आहेस… फक्त माझ्यासाठीच नाही, तर या जगासाठीही.",
+    "image": "https://i.pinimg.com/736x/91/17/01/91170155da5709407b4b0e1345f281e6.jpg",
+    "emoji": "💖"
+  },
+
+  {
+    "id": "msg22",
+    "date": "2024-01-22",
+    "title": "I Love Your Energy",
+    "message": "There’s a warmth in you that can change the room you walk into. You bring joy without trying, comfort without speaking, and love without forcing it. Your presence has a glow—something soft, something bright, something that feels like home. You bring light wherever you go… including into my life.",
+    "message_mr": "तुझ्यात अशी एक उब आहे की तू जिथे जाशील तिथे वातावरणच बदलून जातं. तू न बोलताही आनंद आणतेस, आणि कोणतीही अपेक्षा न ठेवता प्रेम देतेस. तुझ्या उपस्थितीत एक glow आहे—soft, उजळ आणि घरासारखा. तू जिथे जाते तिथे प्रकाश घेऊन जातेस… माझ्या आयुष्यातही.",
+    "image": "https://i.pinimg.com/736x/b3/92/ce/b392cee7aa953d4a8272c1cdd57e93bc.jpg",
+    "emoji": "🔥"
+  },
+
+  {
+    "id": "msg23",
+    "date": "2024-01-23",
+    "title": "You Inspire Me",
+    "message": "You inspire me in ways you don’t see. The way you handle life, the way you keep going even when things get tough, the way you stay kind—it makes me want to be better. You push me to grow, to improve, to believe in myself. You make me want to be the kind of person who deserves someone like you.",
+    "message_mr": "तू मला अशा पद्धतीने inspire करतेस… ज्या तुला दिसतही नाहीत. तू आयुष्याला ज्या पद्धतीने सामोरी जातेस, tough वेळ असली तरी softness सोडत नाहीस… ते बघून मलाही चांगलं बनायची इच्छा होते. तू मला वाढायला, बदलायला, स्वतःवर विश्वास ठेवायला शिकवतेस. तू अशी आहेस की तुझ्यासाठी चांगलं बनावंसं वाटतं.",
+    "image": "https://i.pinimg.com/736x/57/81/f8/5781f8c7468fe67829df933325d5f9b7.jpg",
+    "emoji": "🌟"
+  },
+
+  {
+    "id": "msg24",
+    "date": "2024-01-24",
+    "title": "You’re Beautiful",
+    "message": "Your beauty isn’t just in your face—it’s in your words, your heart, your kindness, your softness. You carry a beauty that can’t be captured in pictures. It’s something you feel when you talk, when you smile, when you care. You’re beautiful in the most genuine way a person can be.",
+    "message_mr": "तुझं सौंदर्य फक्त चेहऱ्यावर नाही… ते तुझ्या मनात आहे, तुझ्या शब्दांत आहे, तुझ्या caring nature मध्ये आहे. तुझ्यातलं सौंदर्य फोटोमध्ये दिसत नाही… ते जाणवतं. तू बोलतेस तेव्हा, तू हसतेस तेव्हा, तू काळजी घेतेस तेव्हा. तू एकदम खरं, हृदयाला स्पर्श करणारं सुंदर आहेस.",
+    "image": "https://i.pinimg.com/736x/93/ee/58/93ee5806ab5aba9782977f35e17733d0.jpg",
+    "emoji": "🌺"
+  },
+
+  {
+    "id": "msg25",
+    "date": "2024-01-25",
+    "title": "You’re Important to Me",
+    "message": "I hope you never doubt your place in my life. You matter to me more deeply than I can ever express. You’re not a temporary chapter—you’re a permanent part of my story. Your presence, your thoughts, your happiness… all of it matters to me more than you’ll ever know.",
+    "message_mr": "मला आशा आहे की तू कधीच तुझ्या ‘importance’ बाबत doubt करणार नाहीस. तू माझ्यासाठी खूपच महत्वाची आहेस—इतकी की ते शब्दात सांगताही येत नाही. तू माझ्या आयुष्यात एक chapter नाहीस… तू माझ्या कथेचा कायमचा भाग आहेस. तुझं अस्तित्व, तुझे विचार, तुझं happiness—सगळंच माझ्यासाठी खूप महत्वाचं आहे.",
+    "image": "https://i.pinimg.com/736x/97/f8/82/97f882e016c3b1bbf913de35efc7505b.jpg",
+    "emoji": "🤍"
+  },
+
+  {
+    "id": "msg26",
+    "date": "2024-01-26",
+    "title": "I Wish You Were Here",
+    "message": "There are moments that feel incomplete without you. Moments where I look beside me and wish you were there—smiling, laughing, talking, just existing with me. Everything becomes more meaningful when you’re present. I miss you… not in a sad way, but in a warm way that reminds me how much you mean to me.",
+    "message_mr": "काही क्षण असे असतात की ते तुझ्याशिवाय अपूर्ण वाटतात. कधी कधी मी आजूबाजूला बघतो आणि वाटतं—किती छान झालं असतं जर तू आत्ता माझ्या बाजूला असतीस. माझ्यासोबत हसत, बोलत, शांतपणे उपस्थित असत. तू असलीस की प्रत्येक क्षण अधिक सुंदर वाटतो. मला तुझी उणीव जाणवते… दुखी पद्धतीने नाही, तर प्रेमळ पद्धतीने.",
+    "image": "https://i.pinimg.com/736x/5f/dc/35/5fdc35daa5ead0bb7767c832be7c367d.jpg",
+    "emoji": "🥺"
+  },
+
+  {
+    "id": "msg27",
+    "date": "2024-01-27",
+    "title": "You Make Love Feel Easy",
+    "message": "Loving you feels effortless. It doesn’t feel like work, it doesn’t feel stressful—it feels natural, warm, and grounding. You make love feel simple in a world that complicates everything. With you, love isn’t dramatic… it’s peaceful, soft, and deeply real.",
+    "message_mr": "तुझ्यावर प्रेम करणं अगदी effortless वाटतं. काही ताण नाही, काही गोंधळ नाही… फक्त उब आहे, softness आहे आणि calmness आहे. या जगात प्रेम इतकं complicated दाखवलं जातं… पण तुझ्यासोबत प्रेम अगदी simple, शांत आणि खरं वाटतं.",
+    "image": "https://i.pinimg.com/736x/ea/5e/fc/ea5efc7c2efcbddc2d6837efc101ff2e.jpg",
+    "emoji": "💗"
+  },
+
+  {
+    "id": "msg28",
+    "date": "2024-01-28",
+    "title": "I Love Your Heart",
+    "message": "Your heart is one of the most beautiful things about you. The way you care, the way you feel deeply, the way you love softly—it’s rare. You are gentle but strong, emotional but wise, soft but steady. There is something so beautifully balanced about you, something I cherish more than you know.",
+    "message_mr": "तुझं मन हे तुझ्यातलं सर्वात सुंदर भाग आहे. तू ज्या पद्धतीने प्रेम करतेस, ज्या पद्धतीने काळजी घेतेस, ज्या पद्धतीने भावना समजून घेतेस—ते खूप rare आहे. तू soft आहेस पण strong आहेस; emotional आहेस पण understanding आहेस. तुझ्यातली ही सुंदर balance… मी खूप जपतो.",
+    "image": "https://i.pinimg.com/736x/01/08/92/0108921d5f40e0d37cbfa3d35566e77b.jpg",
+    "emoji": "❤️"
+  },
+
+  {
+    "id": "msg29",
+    "date": "2024-01-29",
+    "title": "My Heart Chose You",
+    "message": "Out of all the people in this world, my heart decided that you were the one it wanted. Not because you’re perfect, but because you feel like home, like comfort, like peace. You’re the person my heart keeps choosing—every day, every moment, without hesitation.",
+    "message_mr": "या जगात कित्येक लोक आहेत… पण माझ्या मनाने तुलाच निवडलं. तू perfect असल्यामुळे नाही, तर तू 'घरासारखी' वाटतेस म्हणून. तू comfort आहेस, तू शांतता आहेस. माझं मन रोज, प्रत्येक क्षणी, कुठलाही विचार न करता फक्त तुलाच निवडतं.",
+    "image": "https://i.pinimg.com/736x/f0/63/53/f063534f221b0c2427cfa6291f9a20b7.jpg",
+    "emoji": "💝"
+  },
+
+  {
+    "id": "msg30",
+    "date": "2024-01-30",
+    "title": "Forever Yours",
+    "message": "You’re not just a part of my life… you’re the part my heart never wants to let go of. You’re not just my today—you’re my tomorrow, my future, my everything I look forward to. Every version of me, in every timeline, would choose you. Always. In this life and in all the ones after.",
+    "message_mr": "तू माझ्या आयुष्याचा एक हिस्सा नाहीस… तू तो भाग आहेस ज्याला माझं मन कधीच सोडू इच्छित नाही. तू फक्त माझा आज नाहीस—तू माझं उद्याही आहेस, माझं future आहेस, माझं सगळं आहेस. कोणत्याही जन्मात, कोणत्याही आयुष्यात… माझं मन तुलाच निवडेल. नेहमी. कायम.",
+    "image": "https://i.pinimg.com/736x/4e/23/11/4e2311ad0b0ea7c2f9f16295e4b63dc9.jpg",
+    "emoji": "♾️"
   }
 ]

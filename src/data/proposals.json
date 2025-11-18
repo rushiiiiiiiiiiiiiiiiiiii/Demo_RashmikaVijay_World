@@ -1,42 +1,263 @@
 [
+  {"id":"m1","category":"Travel","title":"Sunset Beach Walk","description":"Walk hand-in-hand on a quiet beach at sunset, collect seashells and watch the sky change.","image":"https://images.pexels.com/photos/29917624/pexels-photo-29917624/free-photo-of-romantic-beach-walk-at-sunset.jpeg"},
   {
-    "id": "prop1",
-    "title": "Sunset Beach Proposal",
-    "description": "Walk on the beach as the sun sets, write 'Will you be mine?' in the sand with rose petals leading to it",
-    "mood": "romantic",
-    "difficulty": "medium",
-    "image": "/assets/proposals/beach.jpg"
+    "id": "m2",
+    "category": "Travel",
+    "title": "Starlit Rooftop Night",
+    "description": "Fairy lights, soft music, cozy blanket — stargaze and talk until late.",
+    "image": "https://thumbs.dreamstime.com/b/modern-rooftop-terrace-city-night-view-379207840.jpg"
   },
   {
-    "id": "prop2",
-    "title": "Starlit Rooftop",
-    "description": "Set up fairy lights and candles on a rooftop, play your favorite song, and ask under the stars",
-    "mood": "magical",
-    "difficulty": "medium",
-    "image": "/assets/proposals/rooftop.jpg"
-  },
-  {
-    "id": "prop3",
-    "title": "Photo Memory Lane",
-    "description": "Create a path with photos of your favorite memories together, ending with 'One more memory to make?'",
-    "mood": "nostalgic",
-    "difficulty": "easy",
-    "image": "/assets/proposals/photos.jpg"
-  },
-  {
-    "id": "prop4",
-    "title": "Scavenger Hunt",
-    "description": "Create clues leading to special places, each with a reason why you love her, final clue leads to you with flowers",
-    "mood": "fun",
-    "difficulty": "hard",
-    "image": "/assets/proposals/hunt.jpg"
-  },
-  {
-    "id": "prop5",
+    "id": "m3",
+    "category": "Home",
     "title": "Candlelit Home Dinner",
-    "description": "Cook her favorite meal, set up candles and roses, play soft music, and ask over dessert",
-    "mood": "intimate",
-    "difficulty": "medium",
-    "image": "/assets/proposals/dinner.jpg"
+    "description": "Cook your favourite meal, set candles, soft music — slow conversation night.",
+    "image": "https://cdn.togetherv.com/Relaxing-stay-and-dinner-sub8_1653378800.webp"
+  },
+ 
+    {
+    "id": "m6",
+    "category": "Dates",
+    "title": "Sunrise Breakfast Date",
+    "description": "Wake up early, watch sunrise and have breakfast together at a peaceful spot.",
+    "image": "https://fiyavalhumaldives.com/wp-content/uploads/2020/12/mg_6666-1024x683.jpg"
+  },
+  {
+    "id": "m7",
+    "category": "Travel",
+    "title": "Road Trip With No Plan",
+    "description": "Just the two of us, a playlist, and roads to explore — spontaneous and free.",
+    "image": "https://img.avianexperiences.com/attraction/fc6244b2-7a36-4c03-9988-5378e930b2e7"
+  },
+  {
+    "id": "m8",
+    "category": "Dates",
+    "title": "Cozy Movie Marathon",
+    "description": "Pajamas, blankets, our favorite snacks and a lineup of films we both love.",
+    "image": "https://i0.wp.com/blog2.roomiapp.com/wp-content/uploads/2021/01/MOVIE-MARATHON-scaled.jpg?resize=1250%2C834&ssl=1"
+  },
+  {
+    "id": "m9",
+    "category": "Adventure",
+    "title": "Rainy Day Walk",
+    "description": "Walk in the rain under one umbrella, laugh like kids and share hot chai.",
+    "image": "https://media.istockphoto.com/id/1182375180/photo/back-view-of-embraced-couple-walking-with-umbrella-at-foggy-forest.jpg?s=612x612&w=0&k=20&c=pTCz-jkH8r-CXEr9yJh-T0W-PghAQ7G4NKYYrk8Q4xc="
+  },
+  {
+    "id": "m10",
+    "category": "Silly",
+    "title": "Matching Outfits Day",
+    "description": "Pick matching outfits and take silly pictures all day long.",
+    "image": "https://www.ladyrefines.com/wp-content/uploads/2025/01/white-couple-outfit-idea.jpg.webp"
+  },
+  {
+    "id": "m11",
+    "category": "BigDreams",
+    "title": "Our Dream Home Vision",
+    "description": "Design a moodboard and plan our dream home, room by room.",
+    "image": "https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=800"
+  },
+  {
+    "id": "m12",
+    "category": "Activities",
+    "title": "Cooking Together Night",
+    "description": "Try a new recipe together and make a beautiful mess while laughing.",
+    "image": "https://static.wixstatic.com/media/3106e5_7b8c4c21aa784593baa1c992fce77093~mv2.jpg/v1/fill/w_900,h_600,al_c,q_85,enc_auto/3106e5_7b8c4c21aa784593baa1c992fce77093~mv2.jpg"
+  },
+  {
+    "id": "m13",
+    "category": "Travel",
+    "title": "Hillstation Staycation",
+    "description": "Cozy cottage, warm drinks, foggy mornings and long walks on hills.",
+    "image": "https://images.pexels.com/photos/417173/pexels-photo-417173.jpeg"
+  },
+  {
+    "id": "m14",
+    "category": "Romantic",
+    "title": "Write Each Other Letters",
+    "description": "Exchange handwritten letters and read them aloud with tea.",
+    "image": "https://images.pexels.com/photos/669610/pexels-photo-669610.jpeg"
+  },
+  {
+    "id": "m15",
+    "category": "Fun",
+    "title": "Dance In The Living Room",
+    "description": "Turn on our song and dance like no one’s watching.",
+    "image": "https://t4.ftcdn.net/jpg/05/79/75/69/360_F_579756909_DjSsFHCBxdywKKA9JrR0NK2GUhOiNkEw.jpg"
+  },
+  {
+    "id": "m16",
+    "category": "Dates",
+    "title": "Picnic In The Park",
+    "description": "A basket, a blanket and a lazy afternoon in a sunlit park.",
+    "image": "https://images.pexels.com/photos/1439226/pexels-photo-1439226.jpeg"
+  },
+  {
+    "id": "m17",
+    "category": "Silly",
+    "title": "Prank Each Other Playfully",
+    "description": "A harmless cute prank day and laughing about it afterwards.",
+    "image": "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg"
+  },
+  {
+    "id": "m18",
+    "category": "Memories",
+    "title": "Recreate Our First Date",
+    "description": "Try to recreate our first date: same vibe, similar jokes and the same smiles.",
+    "image": "https://images.pexels.com/photos/210647/pexels-photo-210647.jpeg"
+  },
+  {
+    "id": "m19",
+    "category": "Romantic",
+    "title": "Surprise Love Notes",
+    "description": "Hide small love notes in places she’ll find during the day.",
+    "image": "https://images.pexels.com/photos/733852/pexels-photo-733852.jpeg"
+  },
+  {
+    "id": "m20",
+    "category": "BigDreams",
+    "title": "Plan Our Big Trip",
+    "description": "Pick a dream destination and plan every detail together — flights to food.",
+    "image": "https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg"
+  },
+  {
+    "id": "m21",
+    "category": "Adventure",
+    "title": "Bike Ride To Nowhere",
+    "description": "Long bike ride along quiet roads, stopping wherever we feel like.",
+    "image": "https://images.pexels.com/photos/100582/pexels-photo-100582.jpeg"
+  },
+  {
+    "id": "m22",
+    "category": "Dates",
+    "title": "Bookstore Date",
+    "description": "Get lost in a bookstore, pick a book for each other and read snippets.",
+    "image": "https://images.pexels.com/photos/46274/pexels-photo-46274.jpeg"
+  },
+  {
+    "id": "m23",
+    "category": "Activities",
+    "title": "Volunteer Together",
+    "description": "Spend a day volunteering for a cause we both care about.",
+    "image": "https://images.pexels.com/photos/60720/pexels-photo-60720.jpeg"
+  },
+  {
+    "id": "m24",
+    "category": "Silly",
+    "title": "Karaoke Night At Home",
+    "description": "Sing our hearts out to cheesy songs and laugh at our performances.",
+    "image": "https://images.pexels.com/photos/164879/pexels-photo-164879.jpeg"
+  },
+  {
+    "id": "m25",
+    "category": "Romantic",
+    "title": "Sunset Picnic On A Hill",
+    "description": "Wrap in a blanket, watch the sun dip and share a quiet moment.",
+    "image": "https://images.pexels.com/photos/925743/pexels-photo-925743.jpeg"
+  },
+  {
+    "id": "m26",
+    "category": "Memories",
+    "title": "Create A Time Capsule",
+    "description": "Write notes to each other, hide small tokens, and bury a time capsule.",
+    "image": "https://images.pexels.com/photos/39333/pexels-photo-39333.jpeg"
+  },
+  {
+    "id": "m27",
+    "category": "Travel",
+    "title": "City Lights Night Drive",
+    "description": "Night drive through the city, stop for late-night dessert and watch lights.",
+    "image": "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
+  },
+  {
+    "id": "m28",
+    "category": "Dates",
+    "title": "Sunrise Yoga Together",
+    "description": "Gentle morning stretches or yoga together at sunrise.",
+    "image": "https://images.pexels.com/photos/3822622/pexels-photo-3822622.jpeg"
+  },
+  {
+    "id": "m29",
+    "category": "BigDreams",
+    "title": "Start A Tiny Garden",
+    "description": "Grow plants together — a small garden of memories and green mornings.",
+    "image": "https://images.pexels.com/photos/1405387/pexels-photo-1405387.jpeg"
+  },
+  {
+    "id": "m30",
+    "category": "Activities",
+    "title": "Make A Couple Playlist",
+    "description": "Create a playlist that tells our story through songs we both love.",
+    "image": "https://images.pexels.com/photos/164711/pexels-photo-164711.jpeg"
+  },
+  {
+    "id": "m31",
+    "category": "Silly",
+    "title": "Photo Booth Day",
+    "description": "Set up a mini photo booth and take funny themed pictures.",
+    "image": "https://images.pexels.com/photos/994605/pexels-photo-994605.jpeg"
+  },
+  {
+    "id": "m32",
+    "category": "Romantic",
+    "title": "Surprise Picnic On Balcony",
+    "description": "Turn balcony into a little cafe with lights, snacks and music.",
+    "image": "https://images.pexels.com/photos/1548668/pexels-photo-1548668.jpeg"
+  },
+  {
+    "id": "m33",
+    "category": "Travel",
+    "title": "Weekend Cabin Escape",
+    "description": "A quiet cabin, wood fire, board games and long talks by the window.",
+    "image": "https://images.pexels.com/photos/2529378/pexels-photo-2529378.jpeg"
+  },
+  {
+    "id": "m34",
+    "category": "Memories",
+    "title": "Make A Scrapbook",
+    "description": "Collect tickets, photos and write notes together in a scrapbook.",
+    "image": "https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg"
+  },
+  {
+    "id": "m35",
+    "category": "Adventure",
+    "title": "Zipline / Adventure Park",
+    "description": "Try an adventure activity together and cheer each other on.",
+    "image": "https://images.pexels.com/photos/1001682/pexels-photo-1001682.jpeg"
+  },
+  {
+    "id": "m36",
+    "category": "BigDreams",
+    "title": "Celebrate A Big Milestone",
+    "description": "Plan a meaningful celebration for an important milestone in our lives.",
+    "image": "https://images.pexels.com/photos/3184160/pexels-photo-3184160.jpeg"
+  },
+  {
+    "id": "m37",
+    "category": "Dates",
+    "title": "Late-night Drive & Coffee",
+    "description": "Drive with the windows down and stop for coffee near an open view.",
+    "image": "https://images.pexels.com/photos/210019/pexels-photo-210019.jpeg"
+  },
+  {
+    "id": "m38",
+    "category": "Silly",
+    "title": "Bake A Cake Together",
+    "description": "Bake something silly together, decorate badly and eat it anyway.",
+    "image": "https://images.pexels.com/photos/302680/pexels-photo-302680.jpeg"
+  },
+  {
+    "id": "m39",
+    "category": "Romantic",
+    "title": "Dance Under The Moon",
+    "description": "Slow dance outside late at night under the moonlight with soft music.",
+    "image": "https://images.pexels.com/photos/896259/pexels-photo-896259.jpeg"
+  },
+  {
+    "id": "m40",
+    "category": "BigDreams",
+    "title": "Start A Small Tradition",
+    "description": "Create a small recurring tradition that is ours alone — weekly or yearly.",
+    "image": "https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg"
   }
 ]

@@ -2,55 +2,55 @@
   {
     "id": "voice1",
     "title": "Good Morning Message",
-    "date": "2024-01-01",
+    "date": "2025-11-01",
     "duration": "0:45",
-    "file": "/assets/voices/morning-message.mp3",
+    "file": "/notes/goodmorning.mp4",
     "description": "A sweet morning greeting just for you",
     "category": "daily"
   },
   {
     "id": "voice2",
     "title": "Why I Love You",
-    "date": "2024-01-02",
+    "date": "2025-11-02",
     "duration": "2:30",
-    "file": "/assets/voices/why-i-love-you.mp3",
+    "file": "/notes/whyilove.mp4",
     "description": "All the reasons you're special to me",
     "category": "romantic"
   },
   {
     "id": "voice3",
-    "title": "Missing You",
-    "date": "2024-01-03",
-    "duration": "1:15",
-    "file": "/assets/voices/missing-you.mp3",
-    "description": "For when we're apart",
-    "category": "emotional"
-  },
-  {
-    "id": "voice4",
     "title": "Goodnight Sweet Dreams",
-    "date": "2024-01-04",
+    "date": "2025-11-04",
     "duration": "1:00",
-    "file": "/assets/voices/goodnight.mp3",
+    "file": "/notes/goodnight.mp4",
     "description": "A calming message before bed",
     "category": "daily"
   },
   {
-    "id": "voice5",
+    "id": "voice4",
     "title": "You Make Me Happy",
-    "date": "2024-01-05",
+    "date": "2025-11-05",
     "duration": "1:45",
-    "file": "/assets/voices/happy.mp3",
+    "file": "/notes/happy.mp4",
     "description": "How you brighten my days",
     "category": "romantic"
   },
   {
-    "id": "voice6",
+    "id": "voice5",
     "title": "Encouragement",
-    "date": "2024-01-06",
+    "date": "2025-11-06",
     "duration": "2:00",
-    "file": "/assets/voices/encouragement.mp3",
+    "file": "/notes/support.mp4",
     "description": "For when you need motivation",
     "category": "supportive"
+  },
+   {
+    "id": "voice6",
+    "title": "Missing You",
+    "date": "2025-11-03",
+    "duration": "1:15",
+    "file": "/notes/miss.mp4",
+    "description": "For when we're apart",
+    "category": "emotional"
   }
 ]

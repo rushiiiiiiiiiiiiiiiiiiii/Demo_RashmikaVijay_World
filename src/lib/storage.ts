@@ -32,6 +32,16 @@ export const storage = {
     }
   },
 
+  // ✔ NEW — get PIN directly
+  getPin(): string | null {
+    return this.getUserProfile()?.pin || null;
+  },
+
+  // ✔ NEW — update PIN safely
+  setPin(pin: string): void {
+    this.updateUserProfile({ pin });
+  },
+
   // App State
   getAppState(): AppState {
     const state = localStorage.getItem('appState');
@@ -102,7 +112,7 @@ export const storage = {
     document.documentElement.classList.toggle('dark', theme === 'dark');
   },
 
-  // Check if setup is complete
+  // Setup Complete
   isSetupComplete(): boolean {
     const profile = this.getUserProfile();
     return profile?.setupComplete || false;
@@ -114,7 +124,7 @@ export const storage = {
     return profile?.pin === pin;
   },
 
-  // Clear all data
+  // Clear all
   clearAll(): void {
     localStorage.clear();
   },

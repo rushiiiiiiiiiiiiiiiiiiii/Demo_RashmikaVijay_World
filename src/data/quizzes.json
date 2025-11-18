@@ -2,82 +2,551 @@
   "loveQuiz": [
     {
       "id": "q1",
-      "question": "What's your favorite thing about me?",
-      "options": [
-        "Your smile",
-        "Your sense of humor",
-        "Your kindness",
-        "Everything!"
-      ]
+      "question": "What reminds you of me instantly?",
+      "options": ["A song", "A place", "A smell", "Everything"]
     },
     {
       "id": "q2",
-      "question": "What's our perfect date?",
-      "options": [
-        "Cozy movie night at home",
-        "Adventure outdoors",
-        "Romantic dinner",
-        "Exploring new places"
-      ]
+      "question": "What do you love most about us?",
+      "options": ["Comfort", "Chemistry", "Understanding", "Everything"]
     },
     {
       "id": "q3",
-      "question": "How do you like receiving love?",
-      "options": [
-        "Words of affirmation",
-        "Quality time together",
-        "Physical touch",
-        "Thoughtful gifts"
-      ]
+      "question": "What's one thing you want to experience with me?",
+      "options": ["Travel", "Cooking", "Late-night talks", "Everything"]
+    },
+    {
+      "id": "q4",
+      "question": "What do you enjoy the most when we're together?",
+      "options": ["Talking", "Laughing", "Holding hands", "Just being together"]
+    },
+    {
+      "id": "q5",
+      "question": "What is my cutest habit?",
+      "options": ["Your smile", "Your teasing", "Your voice", "Your care"]
+    },
+    {
+      "id": "q6",
+      "question": "How close do you feel to me?",
+      "options": ["Very close", "Super close", "Emotionally connected", "Attached"]
+    },
+    {
+      "id": "q7",
+      "question": "Your favorite time to talk to me?",
+      "options": ["Morning", "Late night", "Anytime", "All the time"]
+    },
+    {
+      "id": "q8",
+      "question": "What would make you happiest right now?",
+      "options": ["A hug from me", "A kiss", "A long call", "Just me with you"]
+    },
+    {
+      "id": "q9",
+      "question": "Which describe us better?",
+      "options": ["Cute", "Romantic", "Crazy", "Perfect"]
+    },
+    {
+      "id": "q10",
+      "question": "What part of me do you find the most attractive?",
+      "options": ["Eyes", "Smile", "Voice", "Everything"]
+    },
+    {
+      "id": "q11",
+      "question": "What’s our ideal night together?",
+      "options": ["Movie + Food", "Deep talks", "Cuddles", "All of these"]
+    },
+    {
+      "id": "q12",
+      "question": "What kind of love do you give me?",
+      "options": ["Soft", "Deep", "Crazy", "Pure"]
+    },
+    {
+      "id": "q13",
+      "question": "How do you like me to express love?",
+      "options": ["Words", "Time", "Touch", "Everything"]
+    },
+    {
+      "id": "q14",
+      "question": "What's one thing you always want from me?",
+      "options": ["Attention", "Love", "Loyalty", "All"]
+    },
+    {
+      "id": "q15",
+      "question": "What makes you feel loved?",
+      "options": ["Listening", "Caring", "Understanding", "All"]
+    },
+    {
+      "id": "q16",
+      "question": "What do you treasure most about us?",
+      "options": ["Bond", "Comfort", "Connection", "Love"]
+    },
+    {
+      "id": "q17",
+      "question": "How would you describe our vibe?",
+      "options": ["Soulful", "Magnetic", "Comforting", "Perfect"]
+    },
+    {
+      "id": "q18",
+      "question": "If we had a theme song, what would it feel like?",
+      "options": ["Soft", "Romantic", "Emotional", "All of these"]
+    },
+    {
+      "id": "q19",
+      "question": "What do you want more of from us?",
+      "options": ["Time", "Memories", "Talks", "Everything"]
+    },
+    {
+      "id": "q20",
+      "question": "What would you choose right now?",
+      "options": ["Hold my hand", "Look into my eyes", "Hear my voice", "All together"]
+    },
+
+
+    {
+      "id": "q21",
+      "question": "What makes you miss me the most?",
+      "options": ["Silence", "Songs", "Nights", "Everything"]
+    },
+    {
+      "id": "q22",
+      "question": "Which moment with me you replay in your mind?",
+      "options": ["Our talks", "Our laughs", "Our chaos", "All of them"]
+    },
+    {
+      "id": "q23",
+      "question": "How do you want me to hold you?",
+      "options": ["Tightly", "Softly", "From behind", "In every way"]
+    },
+    {
+      "id": "q24",
+      "question": "What is the cutest thing I do without knowing?",
+      "options": ["Smile", "Look at you", "Talk", "Everything"]
+    },
+    {
+      "id": "q25",
+      "question": "What makes our love special?",
+      "options": ["Honesty", "Comfort", "Connection", "Everything"]
+    },
+    {
+      "id": "q26",
+      "question": "What kind of dates do you want with me?",
+      "options": ["Cute", "Romantic", "Fun", "All of them"]
+    },
+    {
+      "id": "q27",
+      "question": "What does my voice make you feel?",
+      "options": ["Calm", "Happy", "Loved", "Everything"]
+    },
+    {
+      "id": "q28",
+      "question": "What type of memories do you want to create with me?",
+      "options": ["Travel", "Daily life", "Deep moments", "Everything"]
+    },
+    {
+      "id": "q29",
+      "question": "What do you think I love most about you?",
+      "options": ["Your heart", "Your nature", "Your vibe", "Everything"]
+    },
+    {
+      "id": "q30",
+      "question": "What melts your heart instantly?",
+      "options": ["Compliments", "Care", "Attention", "Me"]
+    },
+    {
+      "id": "q31",
+      "question": "How do you want our future to feel?",
+      "options": ["Peaceful", "Romantic", "Strong", "All of these"]
+    },
+    {
+      "id": "q32",
+      "question": "What makes you fall for me more?",
+      "options": ["My words", "My actions", "My personality", "All"]
+    },
+    {
+      "id": "q33",
+      "question": "What do you enjoy the most when we talk?",
+      "options": ["Your honesty", "Your softness", "Your excitement", "Everything"]
+    },
+    {
+      "id": "q34",
+      "question": "What is your favorite compliment from me?",
+      "options": ["Cute", "Beautiful", "Important", "All"]
+    },
+    {
+      "id": "q35",
+      "question": "What about me feels like home?",
+      "options": ["Your words", "Your vibe", "Your presence", "Everything"]
+    },
+    {
+      "id": "q36",
+      "question": "What is your favorite way of loving me?",
+      "options": ["Talking", "Caring", "Showing effort", "Everything"]
+    },
+    {
+      "id": "q37",
+      "question": "What do you think our strongest bond is?",
+      "options": ["Trust", "Care", "Connection", "Everything"]
+    },
+    {
+      "id": "q38",
+      "question": "What do you love hearing from me?",
+      "options": ["I miss you", "I love you", "I'm here", "All of these"]
+    },
+    {
+      "id": "q39",
+      "question": "What is the cutest thing I call you?",
+      "options": ["Love", "Baby", "Jaan", "Everything"]
+    },
+    {
+      "id": "q40",
+      "question": "How do I make your day better?",
+      "options": ["Talking", "Teasing", "Supporting", "Everything"]
+    },
+    {
+      "id": "q41",
+      "question": "What about me calms you instantly?",
+      "options": ["My voice", "My words", "My presence", "All"]
+    },
+    {
+      "id": "q42",
+      "question": "What do you feel when I say your name?",
+      "options": ["Warmth", "Happiness", "Excitement", "Everything"]
+    },
+    {
+      "id": "q43",
+      "question": "What makes you feel connected to me?",
+      "options": ["Talks", "Energy", "Understanding", "Everything"]
+    },
+    {
+      "id": "q44",
+      "question": "What do you want me to do more?",
+      "options": ["Talk", "Care", "Express", "Everything"]
+    },
+    {
+      "id": "q45",
+      "question": "Which of my qualities makes you proud?",
+      "options": ["Mind", "Heart", "Strength", "All"]
+    },
+    {
+      "id": "q46",
+      "question": "What is your dream moment with me?",
+      "options": ["Hugging", "Laughing", "Dancing", "Everything"]
+    },
+    {
+      "id": "q47",
+      "question": "What makes our love strong?",
+      "options": ["Trust", "Effort", "Understanding", "Everything"]
+    },
+    {
+      "id": "q48",
+      "question": "How do you love me?",
+      "options": ["Softly", "Deeply", "Honestly", "Completely"]
+    },
+    {
+      "id": "q49",
+      "question": "What do you wish I knew more?",
+      "options": ["How much you care", "How much you try", "How much you love", "All"]
+    },
+    {
+      "id": "q50",
+      "question": "What do you want more with me?",
+      "options": ["Moments", "Memories", "Future", "Everything"]
     }
   ],
+
   "compatibilityGame": [
     {
       "id": "c1",
-      "question": "I prefer...",
-      "options": [
-        "Beach vacations",
-        "Mountain getaways",
-        "City adventures",
-        "Staying home"
-      ]
+      "question": "What's your comfort place?",
+      "options": ["Beach", "Mountains", "Home", "Anywhere with you"]
     },
     {
       "id": "c2",
-      "question": "My ideal weekend is...",
-      "options": [
-        "Relaxing and recharging",
-        "Out and exploring",
-        "Trying new restaurants",
-        "Quality time with loved ones"
-      ]
+      "question": "Your ideal Sunday?",
+      "options": ["Sleeping", "Exploring", "Watching movies", "Talking to me"]
+    },
+    {
+      "id": "c3",
+      "question": "If we travel, you want…",
+      "options": ["Adventure", "Romance", "Relaxing", "Everything mixed"]
+    },
+    {
+      "id": "c4",
+      "question": "Your love language?",
+      "options": ["Words", "Time", "Touch", "Care"]
+    },
+    {
+      "id": "c5",
+      "question": "You're more…",
+      "options": ["Emotional", "Practical", "Balanced", "Depends on me"]
+    },
+    {
+      "id": "c6",
+      "question": "You fall in love with…",
+      "options": ["Eyes", "Soul", "Vibe", "All"]
+    },
+    {
+      "id": "c7",
+      "question": "What makes you happiest?",
+      "options": ["Food", "Music", "People", "Me"]
+    },
+    {
+      "id": "c8",
+      "question": "Your perfect morning?",
+      "options": ["Sleep in", "Coffee", "Sunrise", "Good morning text from me"]
+    },
+    {
+      "id": "c9",
+      "question": "Your energy type?",
+      "options": ["Introvert", "Extrovert", "Ambivert", "Depends on me"]
+    },
+    {
+      "id": "c10",
+      "question": "You express love mostly by…",
+      "options": ["Talking", "Doing things", "Caring silently", "All"]
+    },
+    {
+      "id": "c11",
+      "question": "You prefer?",
+      "options": ["City life", "Nature", "Home", "With me anywhere"]
+    },
+    {
+      "id": "c12",
+      "question": "When you're upset, you want…",
+      "options": ["Space", "Hugs", "Talk", "Me next to you"]
+    },
+    {
+      "id": "c13",
+      "question": "You enjoy…",
+      "options": ["Deep talks", "Jokes", "Sharing things", "All"]
+    },
+    {
+      "id": "c14",
+      "question": "Your memory of love?",
+      "options": ["Songs", "Moments", "Messages", "Me"]
+    },
+    {
+      "id": "c15",
+      "question": "Your way to say 'I love you'?",
+      "options": ["Actions", "Words", "Eyes", "Everything"]
+    },
+    {
+      "id": "c16",
+      "question": "What kind of date suits your personality?",
+      "options": ["Quiet", "Fun", "Adventurous", "Anything with me"]
+    },
+    {
+      "id": "c17",
+      "question": "Your emotional strength?",
+      "options": ["Patience", "Hope", "Understanding", "Love"]
+    },
+    {
+      "id": "c18",
+      "question": "What inspires you the most?",
+      "options": ["People", "Dreams", "Moments", "Me"]
+    },
+    {
+      "id": "c19",
+      "question": "Your ideal relationship feels like…",
+      "options": ["Calm", "Exciting", "Deep", "Balanced"]
+    },
+    {
+      "id": "c20",
+      "question": "What grounds you?",
+      "options": ["Music", "People", "Thoughts", "Me"]
+    },
+    {
+      "id": "c21",
+      "question": "What’s your vibe?",
+      "options": ["Soft", "Chaotic", "Calm", "Magnetic"]
+    },
+    {
+      "id": "c22",
+      "question": "How do you show effort?",
+      "options": ["Checking in", "Listening", "Doing things", "All"]
+    },
+    {
+      "id": "c23",
+      "question": "What do you connect with most?",
+      "options": ["Energy", "Words", "Actions", "All"]
+    },
+    {
+      "id": "c24",
+      "question": "Your favorite type of moments?",
+      "options": ["Silent ones", "Funny ones", "Deep ones", "Every moment"]
+    },
+    {
+      "id": "c25",
+      "question": "When you fall in love, you become…",
+      "options": ["Soft", "Loyal", "Protective", "All"]
+    },
+    {
+      "id": "c26",
+      "question": "Your emotional attachment style?",
+      "options": ["Secure", "Anxious", "Reserved", "Depends on the person"]
+    },
+    {
+      "id": "c27",
+      "question": "What gives you butterflies?",
+      "options": ["Words", "Touch", "Eye contact", "Me"]
+    },
+    {
+      "id": "c28",
+      "question": "What matters most in love?",
+      "options": ["Respect", "Effort", "Understanding", "Everything"]
+    },
+    {
+      "id": "c29",
+      "question": "What is your perfect comfort activity?",
+      "options": ["Snacks", "Talks", "Silence", "Being with me"]
+    },
+    {
+      "id": "c30",
+      "question": "You trust people who…",
+      "options": ["Listen", "Understand", "Support", "All"]
+    },
+    {
+      "id": "c31",
+      "question": "How do you recharge?",
+      "options": ["Alone", "Music", "Talking", "Being with me"]
+    },
+    {
+      "id": "c32",
+      "question": "Your conflict style?",
+      "options": ["Calm", "Emotional", "Avoidant", "Communicative"]
+    },
+    {
+      "id": "c33",
+      "question": "What makes you stay in love?",
+      "options": ["Consistency", "Softness", "Understanding", "Everything"]
+    },
+    {
+      "id": "c34",
+      "question": "Your most lovable trait?",
+      "options": ["Honesty", "Care", "Loyalty", "Your heart"]
+    },
+    {
+      "id": "c35",
+      "question": "What type of lover are you?",
+      "options": ["Romantic", "Loyal", "Soft", "All of them"]
+    },
+    {
+      "id": "c36",
+      "question": "What makes someone compatible for you?",
+      "options": ["Energy", "Understanding", "Patience", "Everything"]
+    },
+    {
+      "id": "c37",
+      "question": "Your ideal conversation?",
+      "options": ["Deep talks", "Jokes", "Life talks", "Mix of everything"]
+    },
+    {
+      "id": "c38",
+      "question": "What makes you open up?",
+      "options": ["Safety", "Comfort", "Trust", "Me"]
+    },
+    {
+      "id": "c39",
+      "question": "What kind of person attracts you?",
+      "options": ["Soft", "Strong", "Understanding", "You"]
+    },
+    {
+      "id": "c40",
+      "question": "What does a healthy love feel like?",
+      "options": ["Safe", "Exciting", "Peaceful", "All of these"]
     }
   ],
+
   "wheelOptions": [
-    "Send you a voice message right now",
-    "Share my favorite memory of us",
-    "Tell you why you're amazing",
-    "Promise you a special date",
-    "Sing you a song",
-    "Write you a poem on the spot",
-    "Plan our next adventure",
-    "Give you 10 compliments"
+    "Send you a long heartfelt voice note",
+    "Write a 4-line personal shayari for you",
+    "Explain why I love you in 10 reasons",
+    "Call you and say 'I miss you'",
+    "Plan a surprise date idea for us",
+    "Give you 5 compliments about your looks",
+    "Give you 5 compliments about your personality",
+    "Send you a picture right now",
+    "Tell you one secret I've never told anyone",
+    "Tell you my first thought after waking up today",
+    "Write a paragraph about how you make me feel",
+    "Tell you something I admire deeply in you",
+    "Describe you in one beautiful sentence",
+    "Write you a cute flirty message",
+    "Tell you the cutest thing you did lately",
+    "Sing a line from a romantic song for you",
+    "Text you something soft and emotional",
+    "Tell you a future plan I want with you",
+    "Describe our perfect day together",
+    "Promise you something meaningful",
+    "Give you a virtual forehead kiss",
+    "Tell you what I dream about us",
+    "Say something that will make you blush",
+    "Tell you why you're special to me",
+    "Write your name in a poetic way",
+    "Send you a 'I love you' in 5 different styles",
+    "Explain what I felt when I first saw you",
+    "Tell you what I love about your vibe",
+    "Share a sweet memory of us",
+    "Say something cute in Marathi",
+    "Say something romantic in Hindi",
+    "Call you “my girl” in the softest way",
+    "Give you 3 wishes from me",
+    "Tell you one thing I want to do with you soon",
+    "Describe how I feel when you smile",
+    "Tell you my favorite thing about your personality",
+    "Give you a soft, warm, emotional compliment",
+    "Say something that will make you smile instantly"
   ],
+
   "compliments": [
-    "Your smile could light up the darkest room",
-    "You're the most beautiful person I've ever known",
-    "Your laugh is my favorite sound in the world",
-    "You make me want to be better every day",
-    "Your kindness touches everyone around you",
-    "You're incredibly intelligent and inspiring",
-    "I love how passionate you are about things",
-    "You have the most beautiful soul",
-    "Your strength amazes me constantly",
-    "You're my favorite person to talk to",
-    "Your eyes are absolutely mesmerizing",
-    "You make even ordinary moments magical",
-    "I'm so lucky to have you in my life",
-    "You're perfect just the way you are",
-    "Your dreams and ambitions are beautiful"
+    "Your smile hits different every single time.",
+    "You have this glow… it’s unreal.",
+    "Your voice feels like comfort.",
+    "You make everything around you feel lighter.",
+    "You’re the kind of girl someone prays for.",
+    "Your vibe is impossible to replace.",
+    "You make love feel easy and natural.",
+    "You’re beautiful without even trying.",
+    "Your laugh is my favorite sound.",
+    "You’re the softest part of my life.",
+    "Your presence feels like home.",
+    "You make my heart warm just by existing.",
+    "Your eyes tell stories I could listen to forever.",
+    "You’re effortlessly attractive.",
+    "Your energy is magnetic.",
+    "You make the world feel softer.",
+    "Your happiness feels important to me.",
+    "You look adorable when you think deeply.",
+    "You’re the prettiest girl I know.",
+    "Your confidence is beautiful.",
+    "You make me proud without even knowing.",
+    "You shine in your own unique way.",
+    "Your touch would heal me instantly.",
+    "Your soul is pure and golden.",
+    "You’re as rare as peace in this world.",
+    "Talking to you feels like a blessing.",
+    "You’re unforgettable.",
+    "Your heart is so gentle and precious.",
+    "You make me want to be a better man.",
+    "Your presence feels like magic.",
+    "You look cute when you blush.",
+    "You’re the kind of beautiful that stays.",
+    "Even when you’re silent… you say so much.",
+    "You make me feel lucky every day.",
+    "You’re more attractive than you think.",
+    "You deserve everything good in the world.",
+    "Your soft side is my favorite thing.",
+    "You’re wonderful — simply wonderful.",
+    "I adore your mind as much as your beauty.",
+    "You bring comfort wherever you go.",
+    "Your existence is a blessing in my life.",
+    "You’re not perfect, you’re real… and that’s better.",
+    "Your smile heals me.",
+    "Your eyes make everything stop for a moment.",
+    "You’re beautifully human — flaws and all.",
+    "You make my days brighter effortlessly.",
+    "You’re genuinely lovable.",
+    "You’re the best part of any room you walk into.",
+    "Just thinking of you makes me smile."
   ]
 }
