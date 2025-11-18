@@ -16,10 +16,10 @@ import { useGlobalMusic } from "@/hooks/useGlobalMusic";
  * - No other game logic is modified
  */
 
-const SOUND_SELECT = "/public/sounds/button-click-289742.mp3"; // small twinkle when selecting an option
-const SOUND_CELEBRATE = "/public/sounds/sound-effect-twinklesparkle-115095.mp3"; // small pop / sparkle
-const SOUND_WHEEL = "/public/sounds/wheel-spin-click-slow-down-101152.mp3"; // wheel spin sound
-const SOUND_RESULT = "/public/sounds/victory-chime-366449.mp3"; // result / victory chime
+const SOUND_SELECT = "/sounds/button-click-289742.mp3"; // small twinkle when selecting an option
+const SOUND_CELEBRATE = "/sounds/sound-effect-twinklesparkle-115095.mp3"; // small pop / sparkle
+const SOUND_WHEEL = "/sounds/wheel-spin-click-slow-down-101152.mp3"; // wheel spin sound
+const SOUND_RESULT = "/sounds/victory-chime-366449.mp3"; // result / victory chime
 
 function getQuestionBatch(type, allQuestions) {
   const BATCH_SIZE = 10;
