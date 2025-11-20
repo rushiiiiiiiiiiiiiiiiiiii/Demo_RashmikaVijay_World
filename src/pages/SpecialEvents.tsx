@@ -331,7 +331,7 @@ export default function SpecialEvents() {
 
             {/* Issued Date */}
             <p className="text-[10px] md:text-xs text-pink-700 mt-6 md:mt-8 font-medium tracking-wide">
-              📅 Issued on: <span className="underline">February 2025</span>
+              📅 Issued on: <span className="underline">January 2025</span>
             </p>
 
             <p className="mt-4 md:mt-6 text-[8px] md:text-[10px] text-pink-500 uppercase tracking-widest">
