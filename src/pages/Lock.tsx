@@ -18,19 +18,21 @@ export default function LockScreen() {
     if (!savedPin) return;
     if (pin.length >= savedPin.length) return;
 
-    setPin(prev => prev + num);
+    setPin((prev) => prev + num);
   };
 
   const handleDelete = () => {
-    setPin(prev => prev.slice(0, -1));
+    setPin((prev) => prev.slice(0, -1));
   };
 
   const handleUnlock = () => {
     if (storage.verifyPin(pin)) {
+      storage.unlock(); // ⭐ ADD THIS
+
       toast.success(`Welcome back, ${profile?.name}! ❤️`);
       navigate("/home");
     } else {
-      toast.error("Incorrect PIN Shrutii ❤️. Try again!");
+      toast.error("Incorrect PIN ❤️. Try again!");
       setPin("");
     }
   };
@@ -48,7 +50,6 @@ export default function LockScreen() {
 
       <Card className="w-full max-w-sm p-8 relative z-10 bg-card/95 backdrop-blur shadow-[var(--shadow-romantic)]">
         <div className="space-y-8 text-center">
-
           <div className="text-center space-y-3 animate-fade-in">
             <Lock className="w-14 h-14 mx-auto text-primary animate-pulse-soft" />
             <h1 className="text-3xl font-handwriting text-foreground">

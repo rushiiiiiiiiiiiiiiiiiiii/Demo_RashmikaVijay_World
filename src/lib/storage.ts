@@ -3,7 +3,7 @@
 interface UserProfile {
   name: string;
   pin: string;
-  theme: 'light' | 'dark';
+  theme: "light" | "dark";
   setupComplete: boolean;
 }
 
@@ -17,12 +17,12 @@ interface AppState {
 export const storage = {
   // User Profile
   getUserProfile(): UserProfile | null {
-    const profile = localStorage.getItem('userProfile');
+    const profile = localStorage.getItem("userProfile");
     return profile ? JSON.parse(profile) : null;
   },
 
   setUserProfile(profile: UserProfile): void {
-    localStorage.setItem('userProfile', JSON.stringify(profile));
+    localStorage.setItem("userProfile", JSON.stringify(profile));
   },
 
   updateUserProfile(updates: Partial<UserProfile>): void {
@@ -30,6 +30,19 @@ export const storage = {
     if (profile) {
       this.setUserProfile({ ...profile, ...updates });
     }
+  },
+
+  // Session Unlock (NEW)
+  isUnlocked(): boolean {
+    return sessionStorage.getItem("isUnlocked") === "true";
+  },
+
+  unlock(): void {
+    sessionStorage.setItem("isUnlocked", "true");
+  },
+
+  lock(): void {
+    sessionStorage.removeItem("isUnlocked");
   },
 
   // ✔ NEW — get PIN directly
@@ -44,17 +57,19 @@ export const storage = {
 
   // App State
   getAppState(): AppState {
-    const state = localStorage.getItem('appState');
-    return state ? JSON.parse(state) : {
-      favorites: [],
-      unlockedMessages: [],
-      lastVisit: new Date().toISOString(),
-      moodHistory: [],
-    };
+    const state = localStorage.getItem("appState");
+    return state
+      ? JSON.parse(state)
+      : {
+          favorites: [],
+          unlockedMessages: [],
+          lastVisit: new Date().toISOString(),
+          moodHistory: [],
+        };
   },
 
   setAppState(state: AppState): void {
-    localStorage.setItem('appState', JSON.stringify(state));
+    localStorage.setItem("appState", JSON.stringify(state));
   },
 
   // Favorites
@@ -68,7 +83,7 @@ export const storage = {
 
   removeFavorite(id: string): void {
     const state = this.getAppState();
-    state.favorites = state.favorites.filter(f => f !== id);
+    state.favorites = state.favorites.filter((f) => f !== id);
     this.setAppState(state);
   },
 
@@ -102,14 +117,14 @@ export const storage = {
   },
 
   // Theme
-  getTheme(): 'light' | 'dark' {
+  getTheme(): "light" | "dark" {
     const profile = this.getUserProfile();
-    return profile?.theme || 'light';
+    return profile?.theme || "light";
   },
 
-  setTheme(theme: 'light' | 'dark'): void {
+  setTheme(theme: "light" | "dark"): void {
     this.updateUserProfile({ theme });
-    document.documentElement.classList.toggle('dark', theme === 'dark');
+    document.documentElement.classList.toggle("dark", theme === "dark");
   },
 
   // Setup Complete

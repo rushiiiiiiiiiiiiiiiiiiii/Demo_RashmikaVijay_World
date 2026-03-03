@@ -2,20 +2,22 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Heart, Sparkles } from "lucide-react";
 // Assuming you have these or you can remove them if not needed
-// import { HeartAnimation } from "@/components/HeartAnimation"; 
+// import { HeartAnimation } from "@/components/HeartAnimation";
 // import { BackgroundText } from "@/components/BackgroundText";
-
+import { storage } from "@/lib/storage";
 export default function Entry() {
   const navigate = useNavigate();
   const [start, setStart] = useState(false);
   const [curtainOpen, setCurtainOpen] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
-  
+
   // Mouse Parallax State
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  
+
   // Ripples State
-  const [ripples, setRipples] = useState<{ x: number; y: number; id: number }[]>([]);
+  const [ripples, setRipples] = useState<
+    { x: number; y: number; id: number }[]
+  >([]);
   const [rippleId, setRippleId] = useState(0);
 
   // Audio ref (optional: if you want to add a soft click sound later)
@@ -56,7 +58,16 @@ export default function Entry() {
 
     // Delayed Navigation (Wait for the zoom/fade effect)
     setTimeout(() => {
-      navigate("/onboarding");
+      const isSetupComplete = storage.isSetupComplete();
+      const hasPin = storage.getPin();
+
+      if (!isSetupComplete) {
+        navigate("/onboarding");
+      } else if (hasPin) {
+        navigate("/lock");
+      } else {
+        navigate("/home");
+      }
     }, 1200);
   };
 
@@ -65,24 +76,60 @@ export default function Entry() {
       className={`min-h-screen relative overflow-hidden cursor-pointer transition-all duration-1000 ${isExiting ? "scale-110 opacity-0 filter blur-lg" : "opacity-100"}`}
       onClick={handleClick}
       style={{
-        background: "radial-gradient(circle at center, #ffeef5 0%, #ffe1eb 40%, #ffc9df 100%)",
+        background:
+          "radial-gradient(circle at center, #ffeef5 0%, #ffe1eb 40%, #ffc9df 100%)",
       }}
     >
       {/* --- FILM GRAIN TEXTURE (Adds high-end feel) --- */}
-      <div className="absolute inset-0 opacity-[0.07] pointer-events-none z-0 mix-blend-multiply" 
-           style={{ backgroundImage: `url("https://www.transparenttextures.com/patterns/stardust.png")` }}></div>
+      <div
+        className="absolute inset-0 opacity-[0.07] pointer-events-none z-0 mix-blend-multiply"
+        style={{
+          backgroundImage: `url("https://www.transparenttextures.com/patterns/stardust.png")`,
+        }}
+      ></div>
 
       {/* --- PARALLAX BACKGROUND ELEMENTS --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Clouds move slightly opposite to mouse */}
-        <div className="cloud cloud1" style={{ transform: `translate(${mousePos.x * 20}px, ${mousePos.y * 10}px)` }}></div>
-        <div className="cloud cloud2" style={{ transform: `translate(${mousePos.x * -30}px, ${mousePos.y * -15}px)` }}></div>
-        
+        <div
+          className="cloud cloud1"
+          style={{
+            transform: `translate(${mousePos.x * 20}px, ${mousePos.y * 10}px)`,
+          }}
+        ></div>
+        <div
+          className="cloud cloud2"
+          style={{
+            transform: `translate(${mousePos.x * -30}px, ${mousePos.y * -15}px)`,
+          }}
+        ></div>
+
         {/* Floating Roses move with mouse for depth */}
         {/* Replace with your actual image paths */}
-        <img src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png" className="floating-rose rose1" style={{ transform: `translate(${mousePos.x * -15}px, ${mousePos.y * -15}px)` }} alt="" />
-        <img src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png" className="floating-rose rose2" style={{ transform: `translate(${mousePos.x * 25}px, ${mousePos.y * 10}px)` }} alt="" />
-        <img src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png" className="floating-rose rose3" style={{ transform: `translate(${mousePos.x * -40}px, ${mousePos.y * 20}px)` }} alt="" />
+        <img
+          src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
+          className="floating-rose rose1"
+          style={{
+            transform: `translate(${mousePos.x * -15}px, ${mousePos.y * -15}px)`,
+          }}
+          alt=""
+        />
+        <img
+          src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
+          className="floating-rose rose2"
+          style={{
+            transform: `translate(${mousePos.x * 25}px, ${mousePos.y * 10}px)`,
+          }}
+          alt=""
+        />
+        <img
+          src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
+          className="floating-rose rose3"
+          style={{
+            transform: `translate(${mousePos.x * -40}px, ${mousePos.y * 20}px)`,
+          }}
+          alt=""
+        />
       </div>
 
       {/* --- CURTAINS --- */}
@@ -122,30 +169,40 @@ export default function Entry() {
 
       {/* --- CENTER STAGE CONTENT --- */}
       <div className="relative z-30 flex flex-col items-center justify-center min-h-screen text-center px-4">
-        
         {/* Glowing Light Behind Text */}
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-rose-400/20 blur-[100px] rounded-full transition-opacity duration-1000 ${start ? "opacity-100" : "opacity-0"}`}></div>
+        <div
+          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-rose-400/20 blur-[100px] rounded-full transition-opacity duration-1000 ${start ? "opacity-100" : "opacity-0"}`}
+        ></div>
 
-        <div className={`transition-all duration-1000 transform ${start ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}>
-          <Heart className="w-24 h-24 text-rose-500 mx-auto mb-6 drop-shadow-glow animate-heartbeat" fill="currentColor" />
-          
+        <div
+          className={`transition-all duration-1000 transform ${start ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+        >
+          <Heart
+            className="w-24 h-24 text-rose-500 mx-auto mb-6 drop-shadow-glow animate-heartbeat"
+            fill="currentColor"
+          />
+
           <h1 className="font-handwriting text-6xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-rose-500 to-rose-700 drop-shadow-sm leading-tight py-2">
             Shruti <br />
             <label htmlFor="">My Love</label>
           </h1>
-          
+
           <div className="h-px w-32 bg-gradient-to-r from-transparent via-rose-400 to-transparent mx-auto my-6 opacity-60"></div>
 
           <p className="text-xl md:text-2xl text-rose-800/80 font-light max-w-lg mx-auto leading-relaxed tracking-wide">
-            With all my love,<br/>
-            <span className="italic font-serif text-rose-600">I created a world  for you.</span>
+            With all my love,
+            <br />
+            <span className="italic font-serif text-rose-600">
+              I created a world for you.
+            </span>
           </p>
 
           {/* Interactive Call to Action */}
           <div className="mt-16 flex flex-col items-center gap-2 animate-bounce-slow opacity-70 hover:opacity-100 transition-opacity">
-             <span className="text-sm tracking-widest uppercase text-rose-700 font-medium flex items-center gap-2">
-               <Sparkles className="w-4 h-4" /> Tap to Enter that world<Sparkles className="w-4 h-4" />
-             </span>
+            <span className="text-sm tracking-widest uppercase text-rose-700 font-medium flex items-center gap-2">
+              <Sparkles className="w-4 h-4" /> Tap to Enter that world
+              <Sparkles className="w-4 h-4" />
+            </span>
           </div>
         </div>
       </div>

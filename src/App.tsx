@@ -6,7 +6,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { storage } from "./lib/storage";
 
-import Entry from "./pages/Entry";             // ✅ NEW INTRO PAGE
+import Entry from "./pages/Entry"; // ✅ NEW INTRO PAGE
 import Onboarding from "./pages/Onboarding";
 import LockScreen from "./pages/Lock";
 import Home from "./pages/Home";
@@ -35,12 +35,17 @@ const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const isSetupComplete = storage.isSetupComplete();
+  const isUnlocked = storage.isUnlocked();
 
-  return isSetupComplete ? (
-    <>{children}</>
-  ) : (
-    <Navigate to="/onboarding" replace />
-  );
+  if (!isSetupComplete) {
+    return <Navigate to="/onboarding" replace />;
+  }
+
+  if (!isUnlocked) {
+    return <Navigate to="/lock" replace />;
+  }
+
+  return <>{children}</>;
 };
 
 export default function App() {
@@ -55,6 +60,8 @@ export default function App() {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, []);
 
+  
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
@@ -66,12 +73,20 @@ export default function App() {
 
         {/* All routes */}
         <Routes>
-
           {/* ⭐ ENTRY PAGE FIRST */}
-         <Route path="/" element={<Entry />} />
+          <Route path="/" element={<Entry />} />
 
           {/* SETUP FLOW */}
-          <Route path="/onboarding" element={<Onboarding />} />
+          <Route
+            path="/onboarding"
+            element={
+              storage.isSetupComplete() ? (
+                <Navigate to="/lock" replace />
+              ) : (
+                <Onboarding />
+              )
+            }
+          />
           <Route path="/lock" element={<LockScreen />} />
 
           {/* PROTECTED PAGES */}
