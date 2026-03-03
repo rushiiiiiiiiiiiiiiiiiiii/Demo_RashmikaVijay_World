@@ -23,8 +23,8 @@ export default function Onboarding() {
   // Form State
   const [name, setName] = useState("");
   const [pin, setPin] = useState("");
-  const [confirmPin, setConfirmPin] = useState("");
-  const [isConfirmMode, setIsConfirmMode] = useState(false);
+  // const [confirmPin, setConfirmPin] = useState("");
+  // const [isConfirmMode, setIsConfirmMode] = useState(false);
   const [theme, setTheme] = useState("light");
 
   // Visual State
@@ -47,7 +47,7 @@ export default function Onboarding() {
   useEffect(() => {
     try {
       clickRef.current = new Audio(
-        "/sounds/sound-effect-twinklesparkle-115095.mp3"
+        "/sounds/sound-effect-twinklesparkle-115095.mp3",
       );
       clickRef.current.volume = 0.5;
 
@@ -97,7 +97,7 @@ export default function Onboarding() {
     setRipples((prev) => [...prev, { x, y, id: newRippleId }]);
     setTimeout(
       () => setRipples((prev) => prev.filter((r) => r.id !== newRippleId)),
-      1000
+      1000,
     );
 
     const sparkCount = 8;
@@ -109,7 +109,7 @@ export default function Onboarding() {
     setClickSparkles((prev) => [...prev, ...newSparkles]);
     setTimeout(() => {
       setClickSparkles((prev) =>
-        prev.filter((s) => !newSparkles.find((ns) => ns.id === s.id))
+        prev.filter((s) => !newSparkles.find((ns) => ns.id === s.id)),
       );
     }, 1000);
   };
@@ -132,40 +132,35 @@ export default function Onboarding() {
     e.stopPropagation();
     playSoft();
 
-    if (!isConfirmMode) {
-      if (pin.length < 4) {
-        const newPin = pin + num;
-        setPin(newPin);
-        if (newPin.length === 4) {
-          setTimeout(() => setIsConfirmMode(true), 300);
-        }
+    if (pin.length < 4) {
+      const newPin = pin + num;
+      setPin(newPin);
+
+      if (newPin.length === 4) {
+        setTimeout(() => setStep(3), 300); // ⭐ directly go to theme step
       }
-    } else {
-      if (confirmPin.length < 4) setConfirmPin(confirmPin + num);
     }
   };
 
   const handleDelete = (e) => {
-    e.stopPropagation();
-    playSoft();
-
-    if (!isConfirmMode) setPin(pin.slice(0, -1));
-    else setConfirmPin(confirmPin.slice(0, -1));
-  };
+  e.stopPropagation();
+  playSoft();
+  setPin(pin.slice(0, -1));
+};
 
   // Auto-submit PIN when confirm reaches 4
-  useEffect(() => {
-    if (isConfirmMode && confirmPin.length === 4) {
-      if (pin !== confirmPin) {
-        toast.error("The keys don't match. Try again?");
-        setConfirmPin("");
-        setPin("");
-        setIsConfirmMode(false);
-      } else {
-        setTimeout(() => setStep(3), 300);
-      }
-    }
-  }, [confirmPin, isConfirmMode, pin]);
+  // useEffect(() => {
+  //   if (isConfirmMode && confirmPin.length === 4) {
+  //     if (pin !== confirmPin) {
+  //       toast.error("The keys don't match. Try again?");
+  //       setConfirmPin("");
+  //       setPin("");
+  //       setIsConfirmMode(false);
+  //     } else {
+  //       setTimeout(() => setStep(3), 300);
+  //     }
+  //   }
+  // }, [confirmPin, isConfirmMode, pin]);
 
   const handleComplete = (e) => {
     e?.stopPropagation();
@@ -404,9 +399,7 @@ export default function Onboarding() {
                 <div className="flex flex-col items-center">
                   <Lock className="w-8 h-8 mb-2 text-rose-500" />
                   <h2 className="text-2xl font-handwriting">
-                    {isConfirmMode
-                      ? "Just to be sure..."
-                      : "Create a Secret Key"}
+                    Create a Secret Key
                   </h2>
                 </div>
 
@@ -419,7 +412,7 @@ export default function Onboarding() {
                   <div
                     key={i}
                     className={`w-4 h-4 rounded-full ${
-                      (isConfirmMode ? confirmPin.length : pin.length) > i
+                      pin.length > i
                         ? "bg-rose-500"
                         : "bg-rose-200"
                     }`}
