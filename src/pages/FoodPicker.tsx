@@ -4,38 +4,58 @@ import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
 import { ArrowLeft, UtensilsCrossed, Shuffle, Heart } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import foodData from "@/data/foodOptions.json";
 
+type Food = {
+  id: number;
+  name: string;
+  emoji: string;
+  description: string;
+  occasion?: string;
+};
 export default function FoodPicker() {
-  const [selectedFood, setSelectedFood] = useState<any[]>([]);
-  const [surprise, setSurprise] = useState<any | null>(null);
+  const [selectedFood, setSelectedFood] = useState<Food[]>([]);
+  const [surprise, setSurprise] = useState<Food | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
 
-  const toggleFood = (food: any) => {
+  const toggleFood = (food: Food) => {
     setSelectedFood((prev) =>
       prev.find((f) => f.id === food.id)
         ? prev.filter((f) => f.id !== food.id)
-        : [...prev, food]
+        : [...prev, food],
     );
   };
 
   const surpriseMe = () => {
-    const randomFood = foodData[Math.floor(Math.random() * foodData.length)];
+    let randomFood = foodData[Math.floor(Math.random() * foodData.length)];
+
+    if (selectedFood.length === 1 && selectedFood[0].id === randomFood.id) {
+      const filtered = foodData.filter((f) => f.id !== randomFood.id);
+      randomFood = filtered[Math.floor(Math.random() * filtered.length)];
+    }
+
     setSurprise(randomFood);
     setSelectedFood([randomFood]);
   };
 
+  const BackgroundLayer = useMemo(
+    () => (
+      <>
+        <HeartAnimation />
+        <BackgroundText />
+      </>
+    ),
+    [],
+  );
+  const selectedIds = new Set(selectedFood.map((f) => f.id));
   return (
     <div className="min-h-screen romantic-gradient relative">
-      <HeartAnimation />
-      <BackgroundText />
-
+      {BackgroundLayer}
       {/* ❤️ Romantic Confirmation Modal */}
       {confirmOpen && (
         <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999] animate-fade-in">
-          <div className="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-[90%] text-center relative">
-
+          <div className="bg-card rounded-2xl shadow-xl p-8 max-w-sm w-[90%] text-center relative">
             <Heart className="w-10 h-10 text-rose mx-auto mb-3 animate-pulse" />
 
             <h2 className="text-2xl font-handwriting text-foreground mb-2">
@@ -43,8 +63,9 @@ export default function FoodPicker() {
             </h2>
 
             <p className="text-foreground/80 mb-4 leading-relaxed">
-              We will enjoy <strong>{selectedFood.map((f) => f.name).join(", ")}</strong> together.  
-              I can’t wait to share this moment with you, baby. 🍽️💕
+              We will enjoy{" "}
+              <strong>{selectedFood.map((f) => f.name).join(", ")}</strong>{" "}
+              together. I can’t wait to share this moment with you, baby. 🍽️💕
             </p>
 
             <div className="flex justify-center gap-3 mb-4">
@@ -66,7 +87,7 @@ export default function FoodPicker() {
       )}
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-5xl">
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back Home
@@ -111,8 +132,8 @@ export default function FoodPicker() {
           {foodData.map((food, index) => (
             <Card
               key={food.id}
-              className={`p-6 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 hover:scale-105 bg-card/95 backdrop-blur cursor-pointer animate-fade-in group ${
-                selectedFood.find((f) => f.id === food.id)
+              className={`p-6 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 md:hover:scale-105 bg-card/95 backdrop-blur cursor-pointer animate-fade-in group ${
+                selectedIds.has(food.id)
                   ? "border-primary shadow-[var(--shadow-romantic)]"
                   : ""
               }`}
@@ -159,7 +180,8 @@ export default function FoodPicker() {
               </div>
 
               <p className="text-muted-foreground mb-4">
-                Perfect! Let's enjoy {selectedFood.map((f) => f.name).join(", ")} together 💕
+                Perfect! Let's enjoy{" "}
+                {selectedFood.map((f) => f.name).join(", ")} together 💕
               </p>
 
               <div className="flex justify-center gap-4">

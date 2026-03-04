@@ -5,6 +5,7 @@ import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
 import { ArrowLeft, Heart, Gift, Check, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
 
 // Love Coupons Book - single-file React component
 // Drop this file in your pages/components folder and import it in routes.
@@ -34,11 +35,12 @@ const defaultCoupons = [
   {
     id: "c4",
     title: "Street Food Date",
-    description: "A Unlimited Street Food date, you and me and our special food",
+    description:
+      "A Unlimited Street Food date, you and me and our special food",
     uses: 999,
     emoji: "🕯️",
   },
-  
+
   {
     id: "c5",
     title: "Massage Session",
@@ -82,14 +84,20 @@ const defaultCoupons = [
     uses: 999,
     emoji: "🎧",
   },
-
-  
 ];
 
+type Coupon = {
+  id: string;
+  title: string;
+  description: string;
+  uses: number;
+  emoji: string;
+};
+
 export default function LoveCoupons() {
-  const [coupons, setCoupons] = useState(() => {
+  const [coupons, setCoupons] = useState<Coupon[]>(() => {
     try {
-      const raw = localStorage.getItem("love_coupons_v2");
+      const raw = localStorage.getItem("love_coupons_v1");
       if (raw) return JSON.parse(raw);
     } catch (e) {
       // ignore
@@ -97,7 +105,7 @@ export default function LoveCoupons() {
     return defaultCoupons;
   });
 
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<Coupon | null>(null);
   const [showModal, setShowModal] = useState(false);
   const [justRedeemed, setJustRedeemed] = useState<string | null>(null);
 
@@ -107,7 +115,7 @@ export default function LoveCoupons() {
     } catch (e) {}
   }, [coupons]);
 
-  const openCoupon = (c) => {
+  const openCoupon = (c: Coupon) => {
     setSelected(c);
     setShowModal(true);
   };
@@ -118,7 +126,7 @@ export default function LoveCoupons() {
         if (c.id !== couponId) return c;
         const remaining = (c.uses ?? 0) - 1;
         return { ...c, uses: Math.max(0, remaining) };
-      })
+      }),
     );
 
     setJustRedeemed(couponId);
@@ -132,16 +140,23 @@ export default function LoveCoupons() {
     localStorage.removeItem("love_coupons_v1");
     setCoupons(defaultCoupons);
   };
-
-  return (
-    <div className="min-h-screen romantic-gradient relative">
+const BackgroundLayer = useMemo(
+  () => (
+    <>
       <HeartAnimation />
       <BackgroundText />
+    </>
+  ),
+  []
+);
+  return (
+    <div className="min-h-screen romantic-gradient relative">
+      {BackgroundLayer}
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-4xl">
         <div className="mb-6">
-          <Link to="/home">
-            <Button variant="ghost">
+          <Link to="/home" replace>
+            <Button variant="ghost" className="will-change-transform">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back Home
             </Button>
           </Link>

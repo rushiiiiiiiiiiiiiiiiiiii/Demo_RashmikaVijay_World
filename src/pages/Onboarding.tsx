@@ -1,6 +1,6 @@
 // ⭐⭐⭐ FULL UPDATED CODE WITH BUTTON SOUNDS ⭐⭐⭐
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 
 import { useNavigate } from "react-router-dom";
 import {
@@ -28,7 +28,7 @@ export default function Onboarding() {
   const [theme, setTheme] = useState("light");
 
   // Visual State
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const mousePosRef = useRef({ x: 0, y: 0 });
   const [spotlightPos, setSpotlightPos] = useState({ x: "50%", y: "50%" });
   const [isExiting, setIsExiting] = useState(false);
 
@@ -77,13 +77,33 @@ export default function Onboarding() {
     const handleMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth) * 2 - 1;
       const y = (e.clientY / window.innerHeight) * 2 - 1;
-      setMousePos({ x, y });
+      mousePosRef.current = { x, y };
       setSpotlightPos({ x: `${e.clientX}px`, y: `${e.clientY}px` });
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    if (window.innerWidth > 768) {
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => window.removeEventListener("mousemove", handleMouseMove);
+    }
   }, []);
 
+  const petals = useMemo(() => {
+    return [...Array(20)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 5}s`,
+      duration: `${8 + Math.random() * 5}s`,
+      scale: 0.5 + Math.random() * 0.5,
+    }));
+  }, []);
+  const particles = useMemo(() => {
+    return [...Array(25)].map(() => ({
+      width: Math.random() * 3 + 1,
+      height: Math.random() * 3 + 1,
+      left: `${Math.random() * 100}%`,
+      top: `${Math.random() * 100}%`,
+      duration: `${15 + Math.random() * 20}s`,
+      delay: `${Math.random() * 5}s`,
+    }));
+  }, []);
   // -------------------------------------
   // GLOBAL CLICK EFFECTS
   // -------------------------------------
@@ -143,10 +163,10 @@ export default function Onboarding() {
   };
 
   const handleDelete = (e) => {
-  e.stopPropagation();
-  playSoft();
-  setPin(pin.slice(0, -1));
-};
+    e.stopPropagation();
+    playSoft();
+    setPin(pin.slice(0, -1));
+  };
 
   // Auto-submit PIN when confirm reaches 4
   // useEffect(() => {
@@ -221,16 +241,16 @@ export default function Onboarding() {
 
       {/* PETALS */}
       <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-        {[...Array(20)].map((_, i) => (
+        {petals.map((p, i) => (
           <div
             key={i}
             className="white-petal"
             style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${8 + Math.random() * 5}s`,
+              left: p.left,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
               opacity: theme === "light" ? 0.6 : 0.2,
-              transform: `scale(${0.5 + Math.random() * 0.5})`,
+              transform: `scale(${p.scale})`,
             }}
           />
         ))}
@@ -238,7 +258,7 @@ export default function Onboarding() {
 
       {/* FLOATING PARTICLES */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
-        {[...Array(25)].map((_, i) => (
+        {particles.map((_, i) => (
           <div
             key={i}
             className={`absolute rounded-full blur-[1px] animate-float ${
@@ -263,7 +283,7 @@ export default function Onboarding() {
             theme === "dark" ? "opacity-[0.08]" : "opacity-60"
           }`}
           style={{
-            transform: `translate(${mousePos.x * 20}px, ${mousePos.y * 10}px)`,
+            transform: `translate(${mousePosRef.current.x * 20}px, ${mousePosRef.current.y * 10}px)`,
           }}
         ></div>
         <div
@@ -271,9 +291,7 @@ export default function Onboarding() {
             theme === "dark" ? "opacity-[0.08]" : "opacity-60"
           }`}
           style={{
-            transform: `translate(${mousePos.x * -20}px, ${
-              mousePos.y * -10
-            }px)`,
+            transform: `translate(${mousePosRef.current.x * -20}px, ${mousePosRef.current.y * -10}px)`,
           }}
         ></div>
       </div>
@@ -412,9 +430,7 @@ export default function Onboarding() {
                   <div
                     key={i}
                     className={`w-4 h-4 rounded-full ${
-                      pin.length > i
-                        ? "bg-rose-500"
-                        : "bg-rose-200"
+                      pin.length > i ? "bg-rose-500" : "bg-rose-200"
                     }`}
                   ></div>
                 ))}

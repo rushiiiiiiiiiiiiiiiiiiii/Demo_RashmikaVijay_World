@@ -5,6 +5,7 @@ import { Lock, Delete } from "lucide-react";
 import { storage } from "@/lib/storage";
 import { HeartAnimation } from "@/components/HeartAnimation";
 import { toast } from "sonner";
+import { useMemo } from "react";
 
 export default function LockScreen() {
   const navigate = useNavigate();
@@ -30,7 +31,7 @@ export default function LockScreen() {
   useEffect(() => {
     if (!savedPin) return;
 
-    if (pin.length === savedPin.length) {
+    if (pin.length === savedPin.length && !isUnlocking) {
       if (storage.verifyPin(pin)) {
         setIsUnlocking(true);
 
@@ -43,39 +44,39 @@ export default function LockScreen() {
         setTimeout(() => setPin(""), 300);
       }
     }
-  }, [pin]);
+  }, [pin, savedPin, navigate]);
 
-  const keypadNumbers = ["1","2","3","4","5","6","7","8","9","0"];
-
+  const keypadNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
+const BackgroundLayer = useMemo(
+  () => (
+    <>
+      <HeartAnimation />
+    </>
+  ),
+  []
+);
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4 bg-gradient-to-br from-rose-100 via-pink-100 to-rose-200">
-
       {/* Floating hearts background */}
-      <HeartAnimation />
+      {BackgroundLayer}
 
       <Card className="w-full max-w-sm p-10 text-center bg-white/30 backdrop-blur-xl shadow-2xl rounded-3xl transition-all duration-700">
-
         <div className="space-y-6">
-
           <Lock className="w-14 h-14 mx-auto text-rose-500 animate-pulse" />
 
           <h1 className="text-3xl font-handwriting text-rose-600">
-            Welcome back, {profile?.name}
+            Welcome back, {profile?.name || "My Love"}
           </h1>
 
-          <p className="text-sm text-rose-500/80">
-            Enter your secret PIN ❤️
-          </p>
+          <p className="text-sm text-rose-500/80">Enter your secret PIN ❤️</p>
 
           {/* PIN DOTS */}
           <div className="flex justify-center gap-4 my-6">
             {Array.from({ length: savedPin?.length || 4 }).map((_, i) => (
               <div
                 key={i}
-                className={`w-4 h-4 rounded-full transition-all duration-300 ${
-                  i < pin.length
-                    ? "bg-rose-500 scale-110"
-                    : "bg-rose-300/50"
+                className={`w-4 h-4 rounded-full transition-all duration-300 will-change-transform ${
+                  i < pin.length ? "bg-rose-500 scale-110" : "bg-rose-300/50"
                 }`}
               />
             ))}
@@ -85,6 +86,7 @@ export default function LockScreen() {
           <div className="grid grid-cols-3 gap-4">
             {keypadNumbers.slice(0, 9).map((num) => (
               <button
+              disabled={isUnlocking}
                 key={num}
                 className="h-14 text-xl rounded-full bg-white/40 hover:bg-white/60 backdrop-blur-md transition-all"
                 onClick={() => handlePress(num)}

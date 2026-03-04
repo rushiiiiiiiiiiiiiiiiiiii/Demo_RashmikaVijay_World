@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
-
+import { useMemo } from "react";
 import {
   ArrowLeft,
   Calendar as CalendarIcon,
@@ -30,26 +30,24 @@ export default function Calendar() {
         return <CalendarIcon className="w-6 h-6 text-primary" />;
     }
   };
-
+  const today = dayjs();
   const daysLeft = (date: string) => {
-    const now = dayjs();
-    const eventDate = dayjs(date);
-    return eventDate.diff(now, "day");
+    return dayjs(date).diff(today, "day");
   };
 
-  const countdownEvents = ["birthday", "anniversary"];
+  const countdownEvents = useMemo(() => ["birthday", "anniversary"], []);
 
-  const sortedEvents = [...calendarData].sort((a, b) => {
-    // 1. Sort by custom order if exists
-    if (a.sortOrder && b.sortOrder) {
-      if (a.sortOrder !== b.sortOrder) {
-        return a.sortOrder - b.sortOrder;
+  const sortedEvents = useMemo(() => {
+    return [...calendarData].sort((a, b) => {
+      if (a.sortOrder && b.sortOrder) {
+        if (a.sortOrder !== b.sortOrder) {
+          return a.sortOrder - b.sortOrder;
+        }
       }
-    }
 
-    // 2. Otherwise sort by date
-    return dayjs(a.date).diff(dayjs(b.date));
-  });
+      return dayjs(a.date).diff(dayjs(b.date));
+    });
+  }, []);
 
   const nextEvent = sortedEvents.find((e) => daysLeft(e.date) >= 0);
 
@@ -61,15 +59,21 @@ export default function Calendar() {
     trip: "bg-peach/20 text-peach border-peach/40",
     temple: "bg-rose/20 text-rose border-rose/40",
   };
-
-  return (
-    <div className="min-h-screen romantic-gradient relative">
+const BackgroundLayer = useMemo(
+  () => (
+    <>
       <HeartAnimation />
       <BackgroundText />
-
+    </>
+  ),
+  []
+);
+  return (
+    <div className="min-h-screen romantic-gradient relative">
+      {BackgroundLayer}
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-4xl">
         {/* BACK BUTTON */}
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back Home
@@ -120,9 +124,11 @@ export default function Calendar() {
                 {/* IMAGE */}
                 <div className="relative h-48 w-full overflow-hidden">
                   <img
+                    loading="lazy"
+                    decoding="async"
                     src={event.image}
                     alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover md:group-hover:scale-105 transition-transform duration-500"
                   />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

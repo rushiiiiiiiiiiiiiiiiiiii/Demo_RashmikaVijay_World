@@ -4,36 +4,52 @@ import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
 import { ArrowLeft, Play, Heart, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import moodsData from "@/data/moods.json";
 import { storage } from "@/lib/storage";
-
+type Mood = {
+  id: string;
+  name: string;
+  emoji: string;
+  color: string;
+  message: string;
+  memory: string;
+  activity: string;
+};
 export default function Moods() {
-  const [selectedMood, setSelectedMood] = useState<any>(null);
+  const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
   const profile = storage.getUserProfile();
   const name = profile?.name || "my love";
 
-  const moodColors: Record<string, string> = {
-    rose: "from-rose-light to-rose",
-    lavender: "from-lavender-light to-lavender",
-    peach: "from-peach-light to-peach",
-    gold: "from-gold to-peach",
-
-    // ⭐ NEW COLORS FOR YOUR NEW MOODS
-    sky: "from-sky-200 to-sky-500",
-    indigo: "from-indigo-200 to-indigo-500",
-    pink: "from-pink-200 to-pink-500",
-    red: "from-red-300 to-red-500",
-    purple: "from-purple-300 to-purple-500",
-  };
-
+  const moodColors = useMemo(
+    () => ({
+      rose: "from-rose-light to-rose",
+      lavender: "from-lavender-light to-lavender",
+      peach: "from-peach-light to-peach",
+      gold: "from-gold to-peach",
+      sky: "from-sky-200 to-sky-500",
+      indigo: "from-indigo-200 to-indigo-500",
+      pink: "from-pink-200 to-pink-500",
+      red: "from-red-300 to-red-500",
+      purple: "from-purple-300 to-purple-500",
+    }),
+    [],
+  );
+  const BackgroundLayer = useMemo(
+    () => (
+      <>
+        <HeartAnimation />
+        <BackgroundText />
+      </>
+    ),
+    [],
+  );
   return (
     <div className="min-h-screen romantic-gradient relative">
-      <HeartAnimation />
-      <BackgroundText />
+      {BackgroundLayer}
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-4xl">
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back Home
@@ -50,11 +66,11 @@ export default function Moods() {
         </div>
 
         {!selectedMood ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in will-change-transform">
             {moodsData.map((mood, index) => (
               <Card
                 key={mood.id}
-                className="p-8 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 hover:scale-105 bg-card/95 backdrop-blur cursor-pointer group"
+                className="p-8 hover:shadow-[var(--shadow-romantic)] transition-transform duration-300 hover:scale-105 will-change-transform bg-card/95 backdrop-blur cursor-pointer group"
                 onClick={() => setSelectedMood(mood)}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
@@ -67,7 +83,7 @@ export default function Moods() {
                   </h3>
                   <div
                     className={`h-2 rounded-full bg-gradient-to-r ${
-                      moodColors[mood.color]
+                      moodColors[mood.color] || "from-rose-light to-rose"
                     } mt-4`}
                   />
                 </div>
@@ -121,18 +137,18 @@ export default function Moods() {
                 </div>
 
                 {/* {selectedMood.voice && (
-                  <Card className="p-6 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20">
-                    <div className="flex items-center justify-between">
-                      <div>
-                        <p className="text-sm text-muted-foreground mb-1">Voice Note</p>
-                        <p className="font-medium text-foreground">Listen to my voice</p>
+                    <Card className="p-6 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="text-sm text-muted-foreground mb-1">Voice Note</p>
+                          <p className="font-medium text-foreground">Listen to my voice</p>
+                        </div>
+                        <Button size="lg" className="rounded-full">
+                          <Play className="w-5 h-5" />
+                        </Button>
                       </div>
-                      <Button size="lg" className="rounded-full">
-                        <Play className="w-5 h-5" />
-                      </Button>
-                    </div>
-                  </Card>
-                )} */}
+                    </Card>
+                  )} */}
 
                 <div className="bg-gradient-to-r from-peach/20 to-rose/20 rounded-lg p-6 border border-peach/30">
                   <h3 className="font-semibold text-foreground mb-2">

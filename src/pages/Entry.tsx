@@ -1,57 +1,85 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Heart, Sparkles } from "lucide-react";
 // Assuming you have these or you can remove them if not needed
 // import { HeartAnimation } from "@/components/HeartAnimation";
 // import { BackgroundText } from "@/components/BackgroundText";
 import { storage } from "@/lib/storage";
-export default function Entry() {
+function Entry() {
   const navigate = useNavigate();
   const [start, setStart] = useState(false);
   const [curtainOpen, setCurtainOpen] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
 
   // Mouse Parallax State
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const cloud1Ref = useRef<HTMLDivElement>(null);
+  const cloud2Ref = useRef<HTMLDivElement>(null);
+  const rose1Ref = useRef<HTMLImageElement>(null);
+  const rose2Ref = useRef<HTMLImageElement>(null);
+  const rose3Ref = useRef<HTMLImageElement>(null);
 
   // Ripples State
-  const [ripples, setRipples] = useState<
-    { x: number; y: number; id: number }[]
-  >([]);
-  const [rippleId, setRippleId] = useState(0);
+  // const [ripples, setRipples] = useState<
+  //   { x: number; y: number; id: number }[]
+  // >([]);
+  // const [rippleId, setRippleId] = useState(0);
 
   // Audio ref (optional: if you want to add a soft click sound later)
   // const audioRef = useRef(new Audio('/assets/soft-click.mp3'));
 
   useEffect(() => {
-    // Sequence: Curtain -> Text Reveal
     setTimeout(() => setCurtainOpen(true), 500);
     setTimeout(() => setStart(true), 1800);
-
-    // Mouse move handler for parallax
     const handleMouseMove = (e: MouseEvent) => {
-      // Normalize coordinates -1 to 1
       const x = (e.clientX / window.innerWidth) * 2 - 1;
       const y = (e.clientY / window.innerHeight) * 2 - 1;
-      setMousePos({ x, y });
+
+      cloud1Ref.current?.style.setProperty(
+        "transform",
+        `translate(${x * 20}px, ${y * 10}px)`,
+      );
+
+      cloud2Ref.current?.style.setProperty(
+        "transform",
+        `translate(${x * -30}px, ${y * -15}px)`,
+      );
+
+      rose1Ref.current?.style.setProperty(
+        "transform",
+        `translate(${x * -15}px, ${y * -15}px)`,
+      );
+
+      rose2Ref.current?.style.setProperty(
+        "transform",
+        `translate(${x * 25}px, ${y * 10}px)`,
+      );
+
+      rose3Ref.current?.style.setProperty(
+        "transform",
+        `translate(${x * -40}px, ${y * 20}px)`,
+      );
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    if (window.innerWidth > 768) {
+  window.addEventListener("mousemove", handleMouseMove);
+  return () => window.removeEventListener("mousemove", handleMouseMove);
+}
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // Prevent double firing
     if (isExiting) return;
-
-    // Ripple Logic
     const rect = e.currentTarget.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const id = rippleId + 1;
-    setRippleId(id);
-    setRipples((old) => [...old, { x, y, id }]);
-    setTimeout(() => setRipples((old) => old.filter((r) => r.id !== id)), 1000);
+    // Ripple Logic
+    const ripple = document.createElement("span");
+    ripple.className = "ripple";
+    ripple.style.left = `${x}px`;
+    ripple.style.top = `${y}px`;
+    e.currentTarget.appendChild(ripple);
+
+    setTimeout(() => ripple.remove(), 1000);
 
     // Trigger Exit Animation
     setIsExiting(true);
@@ -70,7 +98,14 @@ export default function Entry() {
       }
     }, 1200);
   };
-
+  const petals = useMemo(() => {
+    return [...Array(15)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 5}s`,
+      duration: `${8 + Math.random() * 7}s`,
+      opacity: 0.6 + Math.random() * 0.4,
+    }));
+  }, []);
   return (
     <div
       className={`min-h-screen relative overflow-hidden cursor-pointer transition-all duration-1000 ${isExiting ? "scale-110 opacity-0 filter blur-lg" : "opacity-100"}`}
@@ -91,43 +126,30 @@ export default function Entry() {
       {/* --- PARALLAX BACKGROUND ELEMENTS --- */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         {/* Clouds move slightly opposite to mouse */}
-        <div
-          className="cloud cloud1"
-          style={{
-            transform: `translate(${mousePos.x * 20}px, ${mousePos.y * 10}px)`,
-          }}
-        ></div>
-        <div
-          className="cloud cloud2"
-          style={{
-            transform: `translate(${mousePos.x * -30}px, ${mousePos.y * -15}px)`,
-          }}
-        ></div>
+        <div ref={cloud1Ref} className="cloud cloud1" />
+        <div ref={cloud2Ref} className="cloud cloud2"></div>
 
         {/* Floating Roses move with mouse for depth */}
         {/* Replace with your actual image paths */}
         <img
+        loading="lazy"
+          ref={rose1Ref}
           src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
           className="floating-rose rose1"
-          style={{
-            transform: `translate(${mousePos.x * -15}px, ${mousePos.y * -15}px)`,
-          }}
           alt=""
         />
         <img
+        loading="lazy"
+          ref={rose2Ref}
           src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
           className="floating-rose rose2"
-          style={{
-            transform: `translate(${mousePos.x * 25}px, ${mousePos.y * 10}px)`,
-          }}
           alt=""
         />
         <img
+        loading="lazy"
+          ref={rose3Ref}
           src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
           className="floating-rose rose3"
-          style={{
-            transform: `translate(${mousePos.x * -40}px, ${mousePos.y * 20}px)`,
-          }}
           alt=""
         />
       </div>
@@ -144,28 +166,28 @@ export default function Entry() {
 
       {/* --- FALLING PETALS (More organic movement) --- */}
       <div className="absolute inset-0 pointer-events-none z-10">
-        {[...Array(15)].map((_, i) => (
+        {petals.map((p, i) => (
           <div
             key={i}
             className="white-petal"
             style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${8 + Math.random() * 7}s`,
-              opacity: 0.6 + Math.random() * 0.4,
+              left: p.left,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
+              opacity: p.opacity,
             }}
           />
         ))}
       </div>
 
       {/* --- RIPPLES --- */}
-      {ripples.map((r) => (
-        <span
-          key={r.id}
-          className="ripple"
-          style={{ top: r.y, left: r.x }}
-        ></span>
-      ))}
+      {/* {ripples.map((r) => (
+  <span
+    key={r.id}
+    className="ripple"
+    style={{ top: r.y, left: r.x }}
+  ></span>
+))} */}
 
       {/* --- CENTER STAGE CONTENT --- */}
       <div className="relative z-30 flex flex-col items-center justify-center min-h-screen text-center px-4">
@@ -256,6 +278,11 @@ export default function Entry() {
           box-shadow: 0 0 5px rgba(255,255,255,0.5);
           animation: falling linear infinite;
         }
+          .white-petal,
+.cloud,
+.sparkle-icon {
+  will-change: transform;
+}
 
         @keyframes falling {
           0% { transform: translate(0, -10vh) rotate(0deg) scale(0.8); opacity: 0; }
@@ -311,3 +338,4 @@ export default function Entry() {
     </div>
   );
 }
+export default React.memo(Entry);

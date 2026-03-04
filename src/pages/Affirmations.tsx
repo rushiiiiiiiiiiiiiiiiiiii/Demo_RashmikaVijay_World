@@ -4,7 +4,7 @@ import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
 import { ArrowLeft, Sparkles, Heart, RefreshCw } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import affirmationsData from "@/data/affirmations.json";
 import { storage } from "@/lib/storage";
 
@@ -25,6 +25,7 @@ export default function Affirmations() {
 
   const transition = (nextIndex: number) => {
     setFadeDirection("fade-out");
+
     setTimeout(() => {
       setCurrentIndex(nextIndex);
       setFadeDirection("fade-in");
@@ -54,26 +55,42 @@ export default function Affirmations() {
     strength: "from-peach to-gold",
     encouragement: "from-primary to-lavender",
     confidence: "from-gold to-rose",
-    appreciation: "from-lavender-light to-rose"
+    appreciation: "from-lavender-light to-rose",
   };
 
-  return (
-    <div className="min-h-screen romantic-gradient relative overflow-hidden">
+  const floatingHearts = useMemo(() => {
+    return [...Array(18)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 4}s`,
+      size: `${18 + Math.random() * 22}px`,
+      emoji: ["💖", "💕", "✨", "💗"][Math.floor(Math.random() * 4)],
+    }));
+  }, []);
+  const BackgroundLayer = useMemo(
+  () => (
+    <>
       <HeartAnimation />
       <BackgroundText />
-
+    </>
+  ),
+  []
+);
+  return (
+    <div className="min-h-screen romantic-gradient relative overflow-hidden">
+      
+    {BackgroundLayer}
       {/* Floating Hearts */}
-      {[...Array(18)].map((_, i) => (
+      {floatingHearts.map((h, i) => (
         <div
           key={"heart-floating-" + i}
           className="floating-heart"
           style={{
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 4}s`,
-            fontSize: `${18 + Math.random() * 22}px`,
+            left: h.left,
+            animationDelay: h.delay,
+            fontSize: h.size,
           }}
         >
-          {["💖", "💕", "✨", "💗"][Math.floor(Math.random() * 4)]}
+          {h.emoji}
         </div>
       ))}
 
@@ -83,12 +100,13 @@ export default function Affirmations() {
 
       <style>{`
         .floating-heart {
-          position: absolute;
-          bottom: -40px;
-          animation: floatUp 9s linear infinite;
-          opacity: 0.5;
-          pointer-events: none;
-        }
+  position: absolute;
+  bottom: -40px;
+  animation: floatUp 9s linear infinite;
+  opacity: 0.5;
+  pointer-events: none;
+  will-change: transform;
+}
         @keyframes floatUp {
           0% { transform: translateY(40px) scale(0.9); opacity: 0; }
           50% { opacity: 0.8; }
@@ -131,7 +149,7 @@ export default function Affirmations() {
       `}</style>
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-3xl">
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" /> Back Home
           </Button>
@@ -150,9 +168,7 @@ export default function Affirmations() {
         <Card className="p-10 bg-white/40 backdrop-blur-xl rounded-2xl shadow-xl border border-white/50 relative overflow-hidden">
           {/* Category Ribbon */}
           <div
-            className={`h-1 w-28 mx-auto rounded-full bg-gradient-to-r ${
-              categoryColors[current.category]
-            } mb-8 shadow-lg`}
+            className={`h-1 w-28 mx-auto rounded-full bg-gradient-to-r ${categoryColors[current.category] || "from-rose to-primary"} mb-8 shadow-lg`}
           />
 
           {/* Animated Text */}
@@ -196,7 +212,9 @@ export default function Affirmations() {
               <div
                 key={idx}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  idx === currentIndex ? "w-8 bg-primary shadow-lg" : "w-2 bg-muted"
+                  idx === currentIndex
+                    ? "w-8 bg-primary shadow-lg"
+                    : "w-2 bg-muted"
                 }`}
               />
             ))}

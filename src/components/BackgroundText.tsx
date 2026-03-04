@@ -69,16 +69,19 @@ export const BackgroundText = () => {
         src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
         className="bg-rose-img roseA"
         alt=""
+        loading="lazy"
       />
       <img
         src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
         className="bg-rose-img roseB"
         alt=""
+        loading="lazy"
       />
       <img
         src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
         className="bg-rose-img roseC"
         alt=""
+        loading="lazy"
       />
 
       {/* --- FLOATING ROMANTIC WORDS --- */}

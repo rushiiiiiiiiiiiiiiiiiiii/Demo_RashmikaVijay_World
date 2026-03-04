@@ -1,13 +1,14 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { HeartAnimation } from "@/components/HeartAnimation";
-import { Heart, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
 import { storage } from "@/lib/storage";
 import { toast } from "sonner";
 import messages from "@/data/messages.json";
 import { BackgroundText } from "@/components/BackgroundText";
+import { useMemo } from "react";
 
 export default function DailyMessage() {
   const [currentMessage, setCurrentMessage] = useState(messages[0]);
@@ -19,11 +20,10 @@ export default function DailyMessage() {
 
   /* Select today's message */
   useEffect(() => {
-    const day =
-      Math.floor(
-        (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) /
-          86400000
-      );
+    const day = Math.floor(
+      (Date.now() - new Date(new Date().getFullYear(), 0, 0).getTime()) /
+        86400000,
+    );
     const msgIndex = day % messages.length;
     setCurrentMessage(messages[msgIndex]);
   }, []);
@@ -53,39 +53,74 @@ export default function DailyMessage() {
     setIsFavorite(!isFavorite);
   };
 
-  return (
-    <div className="min-h-screen romantic-gradient relative overflow-hidden">
+  const risingHearts = React.useMemo(() => {
+    return [...Array(14)].map(() => ({
+      left: `${5 + Math.random() * 90}%`,
+      delay: `${Math.random() * 6}s`,
+      size: `${25 + Math.random() * 30}px`,
+      opacity: 0.6 + Math.random() * 0.3,
+      emoji: ["💗", "💘", "❤️", "💖"][Math.floor(Math.random() * 4)],
+    }));
+  }, []);
+
+  const floatingEmojis = React.useMemo(() => {
+    return [...Array(18)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 5}s`,
+      size: `${18 + Math.random() * 20}px`,
+      emoji: ["💖", "✨", "💕", "💗", "💞"][Math.floor(Math.random() * 5)],
+    }));
+  }, []);
+
+  const burstEmojis = React.useMemo(() => {
+    return [...Array(6)].map((_, i) => ({
+      left: `${30 + Math.random() * 40}%`,
+      top: `${10 + Math.random() * 40}%`,
+      delay: `${i * 0.3}s`,
+      emoji: ["💖", "💕", "✨"][Math.floor(Math.random() * 3)],
+    }));
+  }, []);
+
+  const BackgroundLayer = useMemo(
+  () => (
+    <>
       <HeartAnimation />
       <BackgroundText />
-
+    </>
+  ),
+  []
+);
+  return (
+    <div className="min-h-screen romantic-gradient relative overflow-hidden">
+      {BackgroundLayer}
       {/* Rising large hearts OVER THE CARD */}
-      {[...Array(14)].map((_, i) => (
+      {risingHearts.map((h, i) => (
         <div
           key={"heart-rise-" + i}
           className="heart-rise"
           style={{
-            left: `${5 + Math.random() * 90}%`,
-            animationDelay: `${Math.random() * 6}s`,
-            fontSize: `${25 + Math.random() * 30}px`,
-            opacity: 0.6 + Math.random() * 0.3,
+            left: h.left,
+            animationDelay: h.delay,
+            fontSize: h.size,
+            opacity: h.opacity,
           }}
         >
-          {["💗", "💘", "❤️", "💖"][Math.floor(Math.random() * 4)]}
+          {h.emoji}
         </div>
       ))}
 
       {/* Floating emojis */}
-      {[...Array(18)].map((_, i) => (
+      {floatingEmojis.map((e, i) => (
         <div
           key={i}
           className="emoji-float"
           style={{
-            left: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 5}s`,
-            fontSize: `${18 + Math.random() * 20}px`,
+            left: e.left,
+            animationDelay: e.delay,
+            fontSize: e.size,
           }}
         >
-          {["💖", "✨", "💕", "💗", "💞"][Math.floor(Math.random() * 5)]}
+          {e.emoji}
         </div>
       ))}
 
@@ -104,6 +139,11 @@ export default function DailyMessage() {
           opacity: 0.5;
           z-index: 40;  /* NOW ABOVE CARD */
         }
+          .emoji-float,
+.heart-rise,
+.burst-emoji {
+  will-change: transform;
+}
 
         /* Rising big hearts */
         @keyframes heartRise {
@@ -154,7 +194,7 @@ export default function DailyMessage() {
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-2xl">
         {/* Back */}
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" /> Back Home
           </Button>
@@ -165,7 +205,9 @@ export default function DailyMessage() {
           <h1 className="text-4xl font-handwriting text-foreground mb-2">
             Today’s Message, {profile?.name} 💖✨
           </h1>
-          <p className="text-muted-foreground">A gift from my heart to you 💕</p>
+          <p className="text-muted-foreground">
+            A gift from my heart to you 💕
+          </p>
         </div>
 
         {/* Main Card */}
@@ -174,17 +216,17 @@ export default function DailyMessage() {
           {!revealed ? (
             <div className="text-center space-y-6 relative">
               {/* Burst hearts */}
-              {[...Array(6)].map((_, i) => (
+              {burstEmojis.map((e, i) => (
                 <div
                   key={i}
                   className="burst-emoji"
                   style={{
-                    left: `${30 + Math.random() * 40}%`,
-                    top: `${10 + Math.random() * 40}%`,
-                    animationDelay: `${i * 0.3}s`,
+                    left: e.left,
+                    top: e.top,
+                    animationDelay: e.delay,
                   }}
                 >
-                  {["💖", "💕", "✨"][Math.floor(Math.random() * 3)]}
+                  {e.emoji}
                 </div>
               ))}
 

@@ -7,6 +7,7 @@ import { ArrowLeft, Play, Music, Heart, Shuffle, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useGlobalMusic } from "@/hooks/useGlobalMusic";
+import { useMemo } from "react";
 
 // DIRECT SONG DATA (NO JSON)
 const songsData = [
@@ -14,7 +15,7 @@ const songsData = [
     id: "song1",
     title: "Aaj Se Teri",
     artist: "Arijit Singh (Cover)",
-    youtube: "https://www.youtube.com/embed/0v0Xfj8Ial8?autoplay=1&playsinline=1",
+    youtube: "https://www.youtube.com/embed/0v0Xfj8Ial8",
     dedication: "Aaj se teri saari galiyaan meri ho gayi ❤️",
     category: "romantic",
   },
@@ -51,11 +52,18 @@ const songsData = [
     category: "classic",
   },
 ];
-
+type Song = {
+  id: string;
+  title: string;
+  artist: string;
+  youtube: string;
+  dedication: string;
+  category: string;
+};
 
 export default function Songs() {
-  const [modalSong, setModalSong] = useState<any>(null);
-const { pauseMusic, resumeMusic } = useGlobalMusic();
+  const [modalSong, setModalSong] = useState<Song | null>(null);
+  const { pauseMusic, resumeMusic } = useGlobalMusic();
 
   const categoryColors: Record<string, string> = {
     romantic: "bg-rose/20 text-rose border-rose/30",
@@ -66,16 +74,22 @@ const { pauseMusic, resumeMusic } = useGlobalMusic();
     const random = songsData[Math.floor(Math.random() * songsData.length)];
     setModalSong(random);
   };
-
-  return (
-    <div className="min-h-screen romantic-gradient relative">
+const BackgroundLayer = useMemo(
+  () => (
+    <>
       <HeartAnimation />
       <BackgroundText />
+    </>
+  ),
+  []
+);
+  return (
+    <div className="min-h-screen romantic-gradient relative">
+      {BackgroundLayer}
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-4xl">
-        
         {/* BACK BUTTON */}
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back Home
@@ -107,7 +121,6 @@ const { pauseMusic, resumeMusic } = useGlobalMusic();
               style={{ animationDelay: `${index * 0.05}s` }}
             >
               <div className="flex items-center gap-4">
-
                 {/* ICON */}
                 <div className="p-4 rounded-xl bg-gradient-to-br from-primary to-rose">
                   <Music className="w-8 h-8 text-white" />
@@ -125,7 +138,12 @@ const { pauseMusic, resumeMusic } = useGlobalMusic();
                       </p>
                     </div>
 
-                    <Badge className={categoryColors[song.category]}>
+                    <Badge
+                      className={
+                        categoryColors[song.category] ||
+                        "bg-rose/20 text-rose border-rose/30"
+                      }
+                    >
                       {song.category}
                     </Badge>
                   </div>
@@ -135,12 +153,10 @@ const { pauseMusic, resumeMusic } = useGlobalMusic();
                   </p>
 
                   <Button
-                    onClick={() =>{
-                      pauseMusic()
-                      setModalSong(song); 
-                    }
-
-                    }
+                    onClick={() => {
+                      pauseMusic();
+                      setModalSong(song);
+                    }}
                     size="sm"
                     className="rounded-full"
                   >
@@ -165,24 +181,22 @@ const { pauseMusic, resumeMusic } = useGlobalMusic();
       {/* FULLSCREEN VIDEO MODAL */}
       {modalSong && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center p-4">
-
           {/* CLOSE */}
           <button
             className="absolute top-6 right-6 text-white"
-            onClick={() =>{ 
+            onClick={() => {
               setModalSong(null);
               resumeMusic();
-            }
-            }
+            }}
           >
             <X className="w-8 h-8" />
           </button>
 
           <div className="w-full max-w-3xl">
-            
             {/* YOUTUBE PLAYER */}
             <div className="aspect-video rounded-xl overflow-hidden shadow-xl">
               <iframe
+                loading="lazy"
                 width="100%"
                 height="100%"
                 src={`${modalSong.youtube}?autoplay=1&mute=1&playsinline=1`}

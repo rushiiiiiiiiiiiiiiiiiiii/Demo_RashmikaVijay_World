@@ -11,10 +11,17 @@ import {
   Shuffle,
   Pin,
   CheckCircle,
-  ChevronLeft
+  ArrowUp,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import momentsData from "../data/proposals.json";
+type Moment = {
+  id: number;
+  title: string;
+  description: string;
+  category: string;
+  image: string;
+};
 
 /*
   OurFutureTogether.jsx
@@ -26,28 +33,30 @@ import momentsData from "../data/proposals.json";
 
 const LOCAL_KEY = "our_future_state_v1";
 
-function usePersistentState(key, initial) {
-  const [state, setState] = useState(() => {
+function usePersistentState<T>(key: string, initial: T) {
+  const [state, setState] = useState<T>(() => {
     try {
       const raw = localStorage.getItem(key);
       return raw ? JSON.parse(raw) : initial;
-    } catch (e) {
+    } catch {
       return initial;
     }
   });
+
   useEffect(() => {
     try {
       localStorage.setItem(key, JSON.stringify(state));
-    } catch (e) {}
+    } catch {}
   }, [key, state]);
-  return [state, setState];
+
+  return [state, setState] as const;
 }
 
 export default function OurFutureTogether() {
   const categories = useMemo(() => {
     const cats = new Set(momentsData.map((m) => m.category));
     return ["All", ...Array.from(cats)];
-  }, []);
+  }, [momentsData]);
 
   // persistent state: pinnedIds, completedIds, pinnedOrder
   const [state, setState] = usePersistentState(LOCAL_KEY, {
@@ -56,7 +65,7 @@ export default function OurFutureTogether() {
   });
 
   const [activeTab, setActiveTab] = useState("All");
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<Moment | null>(null);
   const [showPinnedOnly, setShowPinnedOnly] = useState(false);
 
   // derived lists
@@ -69,7 +78,8 @@ export default function OurFutureTogether() {
   const totalCount = momentsData.length;
   const completedCount = state.completed.length;
   const pinnedCount = state.pinned.length;
-  const progressPercent = Math.round((completedCount / totalCount) * 100);
+  const progressPercent =
+    totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
 
   const togglePin = (id) => {
     setState((prev) => {
@@ -109,18 +119,33 @@ export default function OurFutureTogether() {
     });
 
   // UI helpers
-  const isPinned = (id) => state.pinned.includes(id);
-  const isCompleted = (id) => state.completed.includes(id);
+
+  const pinnedSet = useMemo(() => new Set(state.pinned), [state.pinned]);
+  const completedSet = useMemo(
+    () => new Set(state.completed),
+    [state.completed],
+  );
+  const isPinned = (id: number) => pinnedSet.has(id);
+  const isCompleted = (id: number) => completedSet.has(id);
+
+  const BackgroundLayer = useMemo(
+    () => (
+      <>
+        <HeartAnimation />
+        <BackgroundText />
+      </>
+    ),
+    [],
+  );
 
   return (
     <div className="min-h-screen relative romantic-gradient overflow-x-hidden">
-      <HeartAnimation />
-      <BackgroundText />
+      {BackgroundLayer}
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-6xl">
         <div className="mb-6">
-          <Link to="/home">
-            <Button variant="ghost">
+          <Link to="/home" replace>
+            <Button variant="ghost" className="will-change-transform">
               <ArrowLeft className="w-4 h-4 mr-2" /> Back Home
             </Button>
           </Link>
@@ -131,7 +156,8 @@ export default function OurFutureTogether() {
             Our Future Together…
           </h1>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Cute things, places to visit, little traditions and big dreams — all the moments I want to live with you.
+            Cute things, places to visit, little traditions and big dreams — all
+            the moments I want to live with you.
           </p>
 
           {/* Progress / Heart bar */}
@@ -150,10 +176,17 @@ export default function OurFutureTogether() {
               </div>
 
               <div className="flex items-center gap-2">
-                <Button variant="ghost" onClick={pickRandom} title="Random Future Moment">
+                <Button
+                  variant="ghost"
+                  onClick={pickRandom}
+                  title="Random Future Moment"
+                >
                   <Shuffle className="w-5 h-5" />
                 </Button>
-                <Button variant="outline" onClick={() => setShowPinnedOnly(!showPinnedOnly)}>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowPinnedOnly(!showPinnedOnly)}
+                >
                   {showPinnedOnly ? "Show All" : "Show Pinned"}
                 </Button>
               </div>
@@ -186,9 +219,14 @@ export default function OurFutureTogether() {
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => { setActiveTab(cat); setShowPinnedOnly(false); }}
+                onClick={() => {
+                  setActiveTab(cat);
+                  setShowPinnedOnly(false);
+                }}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                  activeTab === cat ? "bg-gradient-to-r from-rose to-primary text-white" : "bg-background/30 text-muted-foreground"
+                  activeTab === cat
+                    ? "bg-gradient-to-r from-rose to-primary text-white"
+                    : "bg-background/30 text-muted-foreground"
                 }`}
               >
                 {cat}
@@ -202,30 +240,37 @@ export default function OurFutureTogether() {
           {filtered.map((item, idx) => (
             <Card
               key={item.id}
-              className="overflow-hidden rounded-2xl shadow-md bg-card/60 backdrop-blur animate-fade-in transform transition hover:scale-[1.02]"
+              className="overflow-hidden rounded-2xl shadow-md bg-card/60 backdrop-blur animate-fade-in transform transition md:hover:scale-[1.02]"
               style={{ animationDelay: `${idx * 0.03}s` }}
             >
               <div className="h-48 w-full overflow-hidden relative">
                 <img
+                  loading="lazy"
                   src={item.image}
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30" />
+                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 animate-fade-in" />
                 <div className="absolute top-3 right-3 flex gap-2">
                   <button
                     onClick={() => togglePin(item.id)}
                     className={`p-2 rounded-full backdrop-blur bg-white/10 ${isPinned(item.id) ? "ring-2 ring-rose/40" : ""}`}
                     title={isPinned(item.id) ? "Unpin" : "Pin"}
                   >
-                    <Pin className={`w-4 h-4 ${isPinned(item.id) ? "text-rose" : "text-white"}`} />
+                    <Pin
+                      className={`w-4 h-4 ${isPinned(item.id) ? "text-rose" : "text-white"}`}
+                    />
                   </button>
                   <button
                     onClick={() => toggleComplete(item.id)}
                     className={`p-2 rounded-full backdrop-blur bg-white/10 ${isCompleted(item.id) ? "ring-2 ring-green-300" : ""}`}
-                    title={isCompleted(item.id) ? "Mark as not done" : "Mark as done"}
+                    title={
+                      isCompleted(item.id) ? "Mark as not done" : "Mark as done"
+                    }
                   >
-                    <CheckCircle className={`w-4 h-4 ${isCompleted(item.id) ? "text-green-300" : "text-white"}`} />
+                    <CheckCircle
+                      className={`w-4 h-4 ${isCompleted(item.id) ? "text-green-300" : "text-white"}`}
+                    />
                   </button>
                 </div>
               </div>
@@ -233,9 +278,15 @@ export default function OurFutureTogether() {
               <div className="p-6">
                 <div className="flex items-start justify-between">
                   <div>
-                    <h3 className="text-2xl font-handwriting text-foreground mb-1">{item.title}</h3>
-                    <p className="text-sm text-muted-foreground mb-2">{item.description}</p>
-                    <div className="text-xs text-foreground/70 italic">{item.category}</div>
+                    <h3 className="text-2xl font-handwriting text-foreground mb-1">
+                      {item.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground mb-2">
+                      {item.description}
+                    </p>
+                    <div className="text-xs text-foreground/70 italic">
+                      {item.category}
+                    </div>
                   </div>
                 </div>
 
@@ -243,7 +294,12 @@ export default function OurFutureTogether() {
                   <Button className="flex-1" onClick={() => setSelected(item)}>
                     I Want This With You ❤️
                   </Button>
-                  <Button variant="outline" onClick={() => { togglePin(item.id); }}>
+                  <Button
+                    variant="outline"
+                    onClick={() => {
+                      togglePin(item.id);
+                    }}
+                  >
                     {isPinned(item.id) ? "Pinned" : "Pin"}
                   </Button>
                 </div>
@@ -255,14 +311,20 @@ export default function OurFutureTogether() {
         {/* Footer controls */}
         <div className="mt-8 flex items-center justify-between gap-4">
           <div className="text-sm text-muted-foreground">
-            {pinnedCount} pinned • {completedCount} completed • {totalCount} total
+            {pinnedCount} pinned • {completedCount} completed • {totalCount}{" "}
+            total
           </div>
 
           <div className="flex items-center gap-3">
-            <Button variant="ghost" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
-              <ChevronLeft className="w-4 h-4 mr-2" /> Back to top
+            <Button
+              variant="ghost"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            >
+              <ArrowUp className="w-4 h-4 mr-2" /> Back to top
             </Button>
-            <Button variant="outline" onClick={clearProgress}>Reset Progress</Button>
+            <Button variant="outline" onClick={clearProgress}>
+              Reset Progress
+            </Button>
           </div>
         </div>
       </div>
@@ -270,31 +332,66 @@ export default function OurFutureTogether() {
       {/* Selected modal */}
       {selected && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setSelected(null)} />
+          <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={() => setSelected(null)}
+          />
           <div className="relative z-10 max-w-2xl w-full">
             <Card className="p-6">
               <div className="flex items-start gap-4">
-                <img src={selected.image} alt={selected.title} className="w-36 h-36 object-cover rounded-2xl" />
+                <img
+                  loading="lazy"
+                  src={selected.image}
+                  alt={selected.title}
+                  className="w-36 h-36 object-cover rounded-2xl"
+                />
                 <div className="flex-1">
                   <div className="flex items-center gap-3">
-                    <h2 className="text-2xl font-handwriting text-foreground">{selected.title}</h2>
-                    {isPinned(selected.id) && <div className="text-xs px-2 py-1 bg-rose/20 rounded-full">Pinned</div>}
-                    {isCompleted(selected.id) && <div className="text-xs px-2 py-1 bg-green-200 rounded-full">Done</div>}
+                    <h2 className="text-2xl font-handwriting text-foreground">
+                      {selected.title}
+                    </h2>
+                    {isPinned(selected.id) && (
+                      <div className="text-xs px-2 py-1 bg-rose/20 rounded-full">
+                        Pinned
+                      </div>
+                    )}
+                    {isCompleted(selected.id) && (
+                      <div className="text-xs px-2 py-1 bg-green-200 rounded-full">
+                        Done
+                      </div>
+                    )}
                   </div>
-                  <p className="text-muted-foreground mt-2">{selected.description}</p>
+                  <p className="text-muted-foreground mt-2">
+                    {selected.description}
+                  </p>
 
                   <div className="mt-4 flex gap-3">
-                    <Button onClick={() => { toggleComplete(selected.id); }}>
-                      {isCompleted(selected.id) ? "Mark as not done" : "Mark as done"} ✔
+                    <Button
+                      onClick={() => {
+                        toggleComplete(selected.id);
+                      }}
+                    >
+                      {isCompleted(selected.id)
+                        ? "Mark as not done"
+                        : "Mark as done"}{" "}
+                      ✔
                     </Button>
-                    <Button onClick={() => { togglePin(selected.id); }}>
-                      {isPinned(selected.id) ? "Unpin" : "Pin"} <Pin className="w-4 h-4 ml-2" />
+                    <Button
+                      onClick={() => {
+                        togglePin(selected.id);
+                      }}
+                    >
+                      {isPinned(selected.id) ? "Unpin" : "Pin"}{" "}
+                      <Pin className="w-4 h-4 ml-2" />
                     </Button>
-                    <Button variant="outline" onClick={() => setSelected(null)}>Close</Button>
+                    <Button variant="outline" onClick={() => setSelected(null)}>
+                      Close
+                    </Button>
                   </div>
 
                   <div className="mt-3 text-sm text-muted-foreground">
-                    Try adding this to our calendar or pinning it so we remember.
+                    Try adding this to our calendar or pinning it so we
+                    remember.
                   </div>
                 </div>
               </div>

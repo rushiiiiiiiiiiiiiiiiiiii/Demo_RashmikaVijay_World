@@ -8,6 +8,7 @@ import { ArrowLeft, Heart, Sparkles, Radio } from "lucide-react";
 import { Link } from "react-router-dom";
 import quizzesData from "@/data/quizzes.json";
 import { useGlobalMusic } from "@/hooks/useGlobalMusic";
+import { useMemo } from "react";
 
 /**
  * FunZone.jsx
@@ -76,6 +77,9 @@ function QuizGame({ type, questions, onBack }) {
       resultRef.current = new Audio(SOUND_RESULT);
       resultRef.current.volume = 0.6;
     } catch {}
+    selectRef.current?.load();
+    celebrateRef.current?.load();
+    resultRef.current?.load();
   }, []);
 
   const current = questions[index];
@@ -123,22 +127,33 @@ function QuizGame({ type, questions, onBack }) {
   };
 
   // Compatibility-specific metrics (purely visual)
-  const compatibilityPercent = Math.min(100, Math.round((lovePoints / (questions.length * 10)) * 100));
+  const compatibilityPercent = Math.min(
+    100,
+    Math.round((lovePoints / (questions.length * 10)) * 100),
+  );
 
+  const celebrationItems = useMemo(() => {
+    return [...Array(12)].map(() => ({
+      left: `${10 + Math.random() * 80}%`,
+      top: `${10 + Math.random() * 80}%`,
+      delay: `${Math.random() * 0.25}s`,
+      size: `${14 + Math.random() * 20}px`,
+    }));
+  }, []);
   return (
     <div className="text-center relative animate-fade-in">
       {/* celebration layer */}
       {celebrate && (
         <div className="absolute inset-0 pointer-events-none overflow-hidden z-[40]">
-          {[...Array(12)].map((_, i) => (
+          {celebrationItems.map((item, i) => (
             <span
               key={i}
               className="absolute celebration-pop"
               style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
-                animationDelay: `${Math.random() * 0.25}s`,
-                fontSize: `${14 + Math.random() * 20}px`,
+                left: item.left,
+                top: item.top,
+                animationDelay: item.delay,
+                fontSize: item.size,
               }}
             >
               {["❤️", "💖", "✨", "💕"][Math.floor(Math.random() * 4)]}
@@ -191,22 +206,31 @@ function QuizGame({ type, questions, onBack }) {
                       strokeWidth="2.8"
                       strokeDasharray={`${compatibilityPercent}, 100`}
                     />
-                    <text x="18" y="19.5" fontSize="4" textAnchor="middle" fill="#ff6b8a" fontWeight="700">
+                    <text
+                      x="18"
+                      y="19.5"
+                      fontSize="4"
+                      textAnchor="middle"
+                      fill="#ff6b8a"
+                      fontWeight="700"
+                    >
                       {compatibilityPercent}%
                     </text>
                   </svg>
-
                 </div>
 
                 <p className="mt-3 text-sm text-muted-foreground max-w-[160px]">
-                  Compatibility meter shows how playfully close we are during this mini-game.
+                  Compatibility meter shows how playfully close we are during
+                  this mini-game.
                 </p>
               </div>
 
               {/* Middle: question */}
               <div className="md:col-span-2">
                 <div className="bg-gradient-to-r from-rose-50 to-pink-50 rounded-2xl p-6 shadow-soft border border-pink-100">
-                  <h3 className="text-xl font-semibold mb-3 text-rose-700">{current.question}</h3>
+                  <h3 className="text-xl font-semibold mb-3 text-rose-700">
+                    {current.question}
+                  </h3>
 
                   {/* options grid (2x2 on desktop) */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -217,23 +241,39 @@ function QuizGame({ type, questions, onBack }) {
                           key={opt}
                           onClick={() => handleSelect(opt)}
                           className={`relative overflow-hidden rounded-xl p-4 text-left transition transform
-                            ${active ? "scale-[1.02] shadow-lg" : "hover:scale-[1.01]"}
+                            ${active ? "scale-[1.02] shadow-lg" : "md:hover:scale-[1.01]"}
                             ${active ? "bg-gradient-to-br from-rose-500 to-primary text-white" : "bg-white/80 border border-pink-100"}
                           `}
                         >
                           <div className="flex items-start gap-3">
-                            <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${active ? "bg-white/20" : "bg-rose-50"}`}>
-                              <span className={`text-xl ${active ? "text-white" : "text-rose-500"}`}>💫</span>
+                            <div
+                              className={`w-10 h-10 rounded-lg flex items-center justify-center ${active ? "bg-white/20" : "bg-rose-50"}`}
+                            >
+                              <span
+                                className={`text-xl ${active ? "text-white" : "text-rose-500"}`}
+                              >
+                                💫
+                              </span>
                             </div>
                             <div className="flex-1">
-                              <div className={`font-medium ${active ? "text-white" : "text-rose-800"}`}>{opt}</div>
-                              <div className={`text-xs mt-1 ${active ? "text-white/90" : "text-muted-foreground"}`}>
+                              <div
+                                className={`font-medium ${active ? "text-white" : "text-rose-800"}`}
+                              >
+                                {opt}
+                              </div>
+                              <div
+                                className={`text-xs mt-1 ${active ? "text-white/90" : "text-muted-foreground"}`}
+                              >
                                 {/* playful subtext generated for UI feel */}
-                                {active ? "You chose this — nice!" : "Tap to choose this option"}
+                                {active
+                                  ? "You chose this — nice!"
+                                  : "Tap to choose this option"}
                               </div>
                             </div>
                             {/* small tick */}
-                            <div className={`ml-2 flex items-center justify-center w-6 h-6 rounded-full ${active ? "bg-white/20 text-white" : "bg-transparent text-pink-400"}`}>
+                            <div
+                              className={`ml-2 flex items-center justify-center w-6 h-6 rounded-full ${active ? "bg-white/20 text-white" : "bg-transparent text-pink-400"}`}
+                            >
                               {active ? "✓" : ""}
                             </div>
                           </div>
@@ -244,18 +284,23 @@ function QuizGame({ type, questions, onBack }) {
 
                   {/* bottom controls */}
                   <div className="mt-6 flex items-center justify-between">
-                    <div className="text-sm text-muted-foreground">Question {index + 1} of {questions.length}</div>
+                    <div className="text-sm text-muted-foreground">
+                      Question {index + 1} of {questions.length}
+                    </div>
                     <div className="flex items-center gap-3">
                       <Button onClick={handleNext} disabled={!selected}>
-                        {index + 1 === questions.length ? "See Result 💖" : "Next ➜"}
+                        {index + 1 === questions.length
+                          ? "See Result 💖"
+                          : "Next ➜"}
                       </Button>
-                      <Button variant="outline" onClick={onBack}>Back</Button>
+                      <Button variant="outline" onClick={onBack}>
+                        Back
+                      </Button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-
           ) : (
             /* ---------- Default love-quiz UI (keeps previous look) ---------- */
             <div>
@@ -288,11 +333,15 @@ function QuizGame({ type, questions, onBack }) {
       ) : (
         <div className="animate-fade-in">
           <h2 className="text-3xl font-handwriting mb-6">
-            {type === "love-quiz" ? "Your Love Quiz Result 💕" : "Your Compatibility Result 💑"}
+            {type === "love-quiz"
+              ? "Your Love Quiz Result 💕"
+              : "Your Compatibility Result 💑"}
           </h2>
 
           <div className="bg-gradient-to-r from-primary/10 to-rose/10 p-6 rounded-xl border border-primary/20 mb-6">
-            <p className="text-2xl font-handwriting text-rose-600 mb-2">You earned:</p>
+            <p className="text-2xl font-handwriting text-rose-600 mb-2">
+              You earned:
+            </p>
 
             <p className="text-1xl font-bold text-rose-500 animate-pulse drop-shadow-[0_0_10px_rgba(255,80,120,0.35)] mb-4">
               ❤️ Love Points: {lovePoints}
@@ -349,7 +398,7 @@ export default function FunZone() {
   const [wheelSpinning, setWheelSpinning] = useState(false);
   const [wheelResult, setWheelResult] = useState(null);
   const [compliment, setCompliment] = useState(null);
-
+  const resultRef = useRef(null);
   // wheel audio ref
   const wheelRef = useRef(null);
 
@@ -357,6 +406,9 @@ export default function FunZone() {
     try {
       wheelRef.current = new Audio(SOUND_WHEEL);
       wheelRef.current.volume = 0.45;
+
+      resultRef.current = new Audio(SOUND_RESULT);
+      resultRef.current.volume = 0.5;
     } catch {}
   }, []);
 
@@ -383,9 +435,7 @@ export default function FunZone() {
         }
       } catch {}
       try {
-        const r = new Audio(SOUND_RESULT);
-        r.volume = 0.5;
-        r.play().catch(() => {});
+        resultRef.current?.play().catch(() => {});
       } catch {}
     }, 1800);
   };
@@ -403,44 +453,55 @@ export default function FunZone() {
     } catch {}
   };
 
-  const games = [
-    {
-      id: "love-quiz",
-      title: "Love Quiz",
-      emoji: "💕",
-      description: "Answer cute questions about us",
-      gradient: "from-rose to-primary",
-    },
-    {
-      id: "compatibility",
-      title: "Compatibility Game",
-      emoji: "💑",
-      description: "Let's see how perfectly we match",
-      gradient: "from-lavender to-peach",
-    },
-    {
-      id: "wheel",
-      title: "Wheel of Love",
-      emoji: "🎡",
-      description: "Spin and see what I'll do for you",
-      gradient: "from-primary to-rose",
-    },
-    {
-      id: "compliments",
-      title: "Random Compliment",
-      emoji: "✨",
-      description: "Get a sweet compliment from me",
-      gradient: "from-peach to-gold",
-    },
-  ];
+  const games = useMemo(
+    () => [
+      {
+        id: "love-quiz",
+        title: "Love Quiz",
+        emoji: "💕",
+        description: "Answer cute questions about us",
+        gradient: "from-rose to-primary",
+      },
+      {
+        id: "compatibility",
+        title: "Compatibility Game",
+        emoji: "💑",
+        description: "Let's see how perfectly we match",
+        gradient: "from-lavender to-peach",
+      },
+      {
+        id: "wheel",
+        title: "Wheel of Love",
+        emoji: "🎡",
+        description: "Spin and see what I'll do for you",
+        gradient: "from-primary to-rose",
+      },
+      {
+        id: "compliments",
+        title: "Random Compliment",
+        emoji: "✨",
+        description: "Get a sweet compliment from me",
+        gradient: "from-peach to-gold",
+      },
+    ],
+    [],
+  );
 
+  const BackgroundLayer = useMemo(
+    () => (
+      <>
+        <HeartAnimation />
+        <BackgroundText />
+      </>
+    ),
+    [],
+  );
   return (
     <div className="min-h-screen romantic-gradient relative">
-      <HeartAnimation />
-      <BackgroundText />
+      {BackgroundLayer}
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-4xl">
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back Home
@@ -462,7 +523,7 @@ export default function FunZone() {
             {games.map((game, index) => (
               <Card
                 key={game.id}
-                className="p-8 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 hover:scale-105 bg-card/95 backdrop-blur cursor-pointer group animate-fade-in"
+                className="p-8 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 md:hover:scale-105 bg-card/95 backdrop-blur cursor-pointer group animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
                 onClick={() => setActiveGame(game.id)}
               >
@@ -495,7 +556,7 @@ export default function FunZone() {
 
                   <div
                     className={`w-64 h-64 mx-auto mb-8 rounded-full bg-gradient-to-br from-primary to-rose flex items-center justify-center ${
-                      wheelSpinning ? "animate-spin" : ""
+                      wheelSpinning ? "animate-[spin_1.8s_linear]" : ""
                     }`}
                   >
                     <Radio className="w-32 h-32 text-white" />
@@ -506,16 +567,25 @@ export default function FunZone() {
                       <h3 className="font-semibold text-foreground text-xl mb-2">
                         I will:
                       </h3>
-                      <p className="text-foreground/90 text-lg">{wheelResult}</p>
+                      <p className="text-foreground/90 text-lg">
+                        {wheelResult}
+                      </p>
                     </div>
                   )}
 
                   <div className="flex gap-3 justify-center">
-                    <Button onClick={spinWheel} disabled={wheelSpinning} size="lg">
+                    <Button
+                      onClick={spinWheel}
+                      disabled={wheelSpinning}
+                      size="lg"
+                    >
                       {wheelSpinning ? "Spinning..." : "Spin the Wheel"}
                     </Button>
 
-                    <Button variant="outline" onClick={() => setActiveGame(null)}>
+                    <Button
+                      variant="outline"
+                      onClick={() => setActiveGame(null)}
+                    >
                       Back
                     </Button>
                   </div>
@@ -546,7 +616,10 @@ export default function FunZone() {
                       Get Compliment
                     </Button>
 
-                    <Button variant="outline" onClick={() => setActiveGame(null)}>
+                    <Button
+                      variant="outline"
+                      onClick={() => setActiveGame(null)}
+                    >
                       Back
                     </Button>
                   </div>
@@ -562,7 +635,10 @@ export default function FunZone() {
                   questions={
                     activeGame === "love-quiz"
                       ? getQuestionBatch("love-quiz", quizzesData.loveQuiz)
-                      : getQuestionBatch("compatibility", quizzesData.compatibilityGame)
+                      : getQuestionBatch(
+                          "compatibility",
+                          quizzesData.compatibilityGame,
+                        )
                   }
                   onBack={() => setActiveGame(null)}
                 />

@@ -11,7 +11,7 @@ import {
   Heart,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import photosData from "@/data/photos.json";
 import { useGlobalMusic } from "@/hooks/useGlobalMusic";
 
@@ -21,10 +21,10 @@ export default function Photos() {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const [loadingStates, setLoadingStates] = useState(
-    Array(photosData.length).fill(true)
+    Array(photosData.length).fill(true),
   );
 
-  const slideshowInterval = useRef<NodeJS.Timeout | null>(null);
+  const slideshowInterval = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // GLOBAL MUSIC
   const { pauseMusic, resumeMusic } = useGlobalMusic();
@@ -36,7 +36,7 @@ export default function Photos() {
       .forEach((m) => {
         const v = document.createElement("video");
         v.src = m.file;
-        v.preload = "auto";
+        v.preload = "metadata";
         v.muted = true;
         v.playsInline = true;
         v.load();
@@ -45,13 +45,17 @@ export default function Photos() {
 
   // SLIDESHOW AUTOPLAY
   useEffect(() => {
-    if (slideshowActive) {
-      slideshowInterval.current = setInterval(() => {
-        setSlideIndex((prev) => (prev + 1) % photosData.length);
-      }, 4000);
-    }
+    if (!slideshowActive) return;
+
+    slideshowInterval.current = setInterval(() => {
+      setSlideIndex((prev) => (prev + 1) % photosData.length);
+    }, 4000);
+
     return () => {
-      if (slideshowInterval.current) clearInterval(slideshowInterval.current);
+      if (slideshowInterval.current) {
+        clearInterval(slideshowInterval.current);
+        slideshowInterval.current = null;
+      }
     };
   }, [slideshowActive]);
 
@@ -73,12 +77,12 @@ export default function Photos() {
   const prevSlide = () =>
     setSlideIndex((prev) => (prev - 1 + photosData.length) % photosData.length);
 
-  const isVideo = (file: string) => file.endsWith(".mp4");
+  const isVideo = useCallback((file: string) => file.endsWith(".mp4"), []);
 
   const closeFullscreen = () => {
     if (selectedMedia !== null && isVideo(photosData[selectedMedia].file)) {
       const vid = document.getElementById(
-        "fullscreen-video"
+        "fullscreen-video",
       ) as HTMLVideoElement | null;
       if (vid) vid.pause();
     }
@@ -95,13 +99,21 @@ export default function Photos() {
     });
   };
 
+  const BackgroundLayer = useMemo(
+    () => (
+      <>
+        <HeartAnimation />
+        <BackgroundText />
+      </>
+    ),
+    [],
+  );
   return (
     <div className="min-h-screen romantic-gradient relative">
-      <HeartAnimation />
-      <BackgroundText />
+      {BackgroundLayer}
 
       <div className="container mx-auto px-4 py-8 max-w-6xl relative z-10">
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" /> Back Home
           </Button>
@@ -134,8 +146,9 @@ export default function Photos() {
           {photosData.map((item, index) => (
             <Card
               key={item.id}
-              className="rounded-2xl overflow-hidden bg-card/95 backdrop-blur border border-rose-300/40 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(255,150,170,0.5)] transition-all cursor-pointer"
-              onClick={() => {
+              className="rounded-2xl overflow-hidden bg-card/95 backdrop-blur border border-rose-300/40 hover:scale-[1.03] hover:shadow-[0_0_20px_rgba(255,150,170,0.5)] transition-transform will-change-transform cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
                 pauseMusic();
                 setSlideshowActive(false);
                 setSelectedMedia(index);
@@ -157,7 +170,7 @@ export default function Photos() {
                       playsInline
                       preload="auto"
                       onLoadedData={() => handleLoaded(index)}
-                      className={`w-full h-full object-cover transition-all duration-500 ${
+                      className={`w-full h-full object-cover transition-transform duration-500 ${
                         loadingStates[index]
                           ? "blur-md opacity-40"
                           : "blur-0 opacity-100"
@@ -165,9 +178,10 @@ export default function Photos() {
                     />
                   ) : (
                     <img
+                      loading="lazy"
                       src={item.file}
                       onLoad={() => handleLoaded(index)}
-                      className={`w-full h-full object-cover transition-all duration-500 ${
+                      className={`w-full h-full object-cover transition-transform duration-500 ${
                         loadingStates[index]
                           ? "blur-md opacity-40"
                           : "blur-0 opacity-100"
@@ -199,7 +213,7 @@ export default function Photos() {
                     muted
                     playsInline
                     onLoadedData={() => handleLoaded(slideIndex)}
-                    className={`w-full h-full object-cover transition-all duration-500 ${
+                    className={`w-full h-full object-cover transition-transform duration-500 ${
                       loadingStates[slideIndex]
                         ? "blur-md opacity-40"
                         : "blur-0 opacity-100"
@@ -207,9 +221,10 @@ export default function Photos() {
                   />
                 ) : (
                   <img
+                    loading="lazy"
                     src={photosData[slideIndex].file}
                     onLoad={() => handleLoaded(slideIndex)}
-                    className={`w-full h-full object-cover transition-all duration-500 ${
+                    className={`w-full h-full object-cover transition-transform duration-500 ${
                       loadingStates[slideIndex]
                         ? "blur-md opacity-40"
                         : "blur-0 opacity-100"
@@ -251,7 +266,10 @@ export default function Photos() {
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
             onClick={closeFullscreen}
           >
-            <Card className="max-w-4xl w-full p-6 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl animate-fade-in">
+            <Card
+              className="max-w-4xl w-full p-6 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl animate-fade-in"
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className="relative rounded-xl overflow-hidden border-4 border-rose-200/60 shadow-xl max-h-[70vh]">
                 {isVideo(photosData[selectedMedia].file) ? (
                   <video
@@ -262,7 +280,7 @@ export default function Photos() {
                     playsInline
                     preload="auto"
                     onLoadedData={() => handleLoaded(selectedMedia)}
-                    className={`w-full h-full object-cover transition-all duration-500 ${
+                    className={`w-full h-full object-cover transition-opacity duration-500 ${
                       loadingStates[selectedMedia]
                         ? "blur-md opacity-40"
                         : "blur-0 opacity-100"
@@ -270,9 +288,10 @@ export default function Photos() {
                   />
                 ) : (
                   <img
+                    loading="lazy"
                     src={photosData[selectedMedia].file}
                     onLoad={() => handleLoaded(selectedMedia)}
-                    className={`w-full h-full object-cover transition-all duration-500 ${
+                    className={`w-full h-full object-cover transition-transform duration-500 ${
                       loadingStates[selectedMedia]
                         ? "blur-md opacity-40"
                         : "blur-0 opacity-100"

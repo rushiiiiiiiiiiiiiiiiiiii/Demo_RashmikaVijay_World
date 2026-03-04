@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
 import { storage } from "@/lib/storage";
@@ -47,6 +47,12 @@ export default function Home() {
   const [sparkles, setSparkles] = useState([]); // sparkle burst when curtain opens
   const sparkleIdRef = useRef(0);
 
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth > 768);
+  }, []);
+
   // Audio ref for curtain sound
   const curtainAudioRef = useRef(null);
 
@@ -54,7 +60,7 @@ export default function Home() {
     // Setup audio using the provided local file path
     try {
       curtainAudioRef.current = new Audio(
-        "/sounds/sound-effect-twinklesparkle-115095.mp3"
+        "/sounds/sound-effect-twinklesparkle-115095.mp3",
       );
       curtainAudioRef.current.volume = 0.55;
     } catch (err) {
@@ -110,6 +116,8 @@ export default function Home() {
 
   // --- EFFECT: Parallax & Spotlight ---
   useEffect(() => {
+    if (window.innerWidth <= 768) return;
+
     const handleMouseMove = (e) => {
       const x = (e.clientX / window.innerWidth) * 2 - 1;
       const y = (e.clientY / window.innerHeight) * 2 - 1;
@@ -123,13 +131,14 @@ export default function Home() {
 
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("scroll", handleScroll);
+
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const features = [
+  const features = React.useMemo(() => [
     {
       id: "daily-message",
       title: "Daily Love Message",
@@ -295,7 +304,10 @@ export default function Home() {
       darkColor: "text-rose-200",
       darkBg: "bg-rose-800/30",
     },
-  ];
+  ]);
+  useEffect(() => {
+    import("./DailyMessage");
+  }, []);
 
   // --- DYNAMIC STYLES ---
   const backgroundStyle =
@@ -316,13 +328,31 @@ export default function Home() {
   const textPrimary = theme === "light" ? "text-gray-800" : "text-gray-100";
   const textSecondary = theme === "light" ? "text-gray-500" : "text-gray-400";
 
+  const petals = React.useMemo(() => {
+    return [...Array(15)].map(() => ({
+      left: `${Math.random() * 100}%`,
+      delay: `${Math.random() * 10}s`,
+      duration: `${10 + Math.random() * 10}s`,
+      opacity: theme === "light" ? 0.4 : 0.15,
+      width: `${10 + Math.random() * 15}px`,
+      height: `${10 + Math.random() * 15}px`,
+    }));
+  }, [theme]);
+  const BackgroundLayer = useMemo(
+  () => (
+    <>
+      <HeartAnimation />
+      <BackgroundText />
+    </>
+  ),
+  []
+);
   return (
     <div
       className="min-h-screen relative overflow-hidden transition-colors duration-1000"
       style={{ background: backgroundStyle }}
     >
-      <BackgroundText />
-      <HeartAnimation />
+      {BackgroundLayer}
 
       {/* TEXTURE OVERLAY */}
       <div
@@ -333,16 +363,18 @@ export default function Home() {
       ></div>
 
       {/* SPOTLIGHT */}
-      <div
-        className={`absolute w-[800px] h-[800px] blur-[120px] rounded-full pointer-events-none transition-opacity duration-700 z-0 fixed ${
-          theme === "light" ? "bg-rose-400/10" : "bg-rose-500/10"
-        }`}
-        style={{
-          left: spotlightPos.x,
-          top: spotlightPos.y,
-          transform: "translate(-50%, -50%)",
-        }}
-      ></div>
+      {isDesktop && (
+        <div
+          className={`absolute w-[800px] h-[800px] blur-[120px] rounded-full pointer-events-none transition-opacity duration-700 z-0 fixed ${
+            theme === "light" ? "bg-rose-400/10" : "bg-rose-500/10"
+          }`}
+          style={{
+            left: spotlightPos.x,
+            top: spotlightPos.y,
+            transform: "translate(-50%, -50%)",
+          }}
+        ></div>
+      )}
 
       {/* PARALLAX ELEMENTS */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
@@ -365,17 +397,17 @@ export default function Home() {
           }}
         ></div>
 
-        {[...Array(15)].map((_, i) => (
+        {petals.map((p, i) => (
           <div
             key={`petal-${i}`}
             className="white-petal"
             style={{
-              left: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 10}s`,
-              animationDuration: `${10 + Math.random() * 10}s`,
-              opacity: theme === "light" ? 0.4 : 0.15,
-              width: `${10 + Math.random() * 15}px`,
-              height: `${10 + Math.random() * 15}px`,
+              left: p.left,
+              animationDelay: p.delay,
+              animationDuration: p.duration,
+              opacity: p.opacity,
+              width: p.width,
+              height: p.height,
             }}
           />
         ))}
@@ -573,6 +605,11 @@ export default function Home() {
           animation: falling linear infinite;
           top: -10%;
         }
+          .white-petal,
+.cloud,
+.sparkle-icon {
+  will-change: transform;
+}
         @keyframes falling {
           0% { transform: translate(0, -10px) rotate(0deg) scale(0.8); opacity: 0; }
           20% { opacity: 1; }
@@ -664,7 +701,7 @@ export default function Home() {
         /* Ripple (if needed later) */
         .ripple { position: absolute; border-radius: 50%; pointer-events: none; }
 
-        .animate-spin-slow { animation: spin 12s linear infinite; }
+        .animate-spin-slow { animation: spin 20s linear infinite; }
         @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
       `}</style>
     </div>

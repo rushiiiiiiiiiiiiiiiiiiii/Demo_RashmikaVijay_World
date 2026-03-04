@@ -4,17 +4,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BackgroundText } from "@/components/BackgroundText";
 
-import {
-  ArrowLeft,
-  Play,
-  Pause,
-  Mic,
-  Heart,
-  Calendar,
-} from "lucide-react";
+import { ArrowLeft, Play, Pause, Mic, Heart, Calendar } from "lucide-react";
 
 import { Link } from "react-router-dom";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import voiceNotesData from "@/data/voiceNotes.json";
 import { useGlobalMusic } from "@/hooks/useGlobalMusic";
 
@@ -37,17 +30,18 @@ export default function VoiceNotes() {
 
   /* ===== Progress Tracking ===== */
   useEffect(() => {
-    if (!audioRef.current) return;
+    const audio = audioRef.current;
+    if (!audio) return;
 
-    const interval = setInterval(() => {
-      if (audioRef.current && audioRef.current.duration) {
-        setProgress(
-          (audioRef.current.currentTime / audioRef.current.duration) * 100
-        );
+    const update = () => {
+      if (audio.duration) {
+        setProgress((audio.currentTime / audio.duration) * 100);
       }
-    }, 150);
+    };
 
-    return () => clearInterval(interval);
+    audio.addEventListener("timeupdate", update);
+
+    return () => audio.removeEventListener("timeupdate", update);
   }, [playingId]);
 
   /* ===== Play Note ===== */
@@ -84,12 +78,19 @@ export default function VoiceNotes() {
   };
 
   /* ===== Sprinkle Count Based on Screen Width ===== */
-  const sprinkleCount =
-    window.innerWidth < 640 ? 18 : window.innerWidth < 1024 ? 30 : 40;
-
-  /* ============================================================
-            🌟 RETURN UI
-============================================================== */
+  const sprinkleCount = useMemo(() => {
+    if (window.innerWidth < 640) return 18;
+    if (window.innerWidth < 1024) return 30;
+    return 40;
+  }, []);
+  const sprinkles = useMemo(() => {
+    return Array.from({ length: sprinkleCount }).map(() => ({
+      size: 4 + Math.random() * 6,
+      left: Math.random() * 100,
+      delay: Math.random() * 5,
+      duration: 6 + Math.random() * 8,
+    }));
+  }, [sprinkleCount]);
   return (
     <div className="min-h-screen romantic-gradient relative overflow-hidden">
       <BackgroundText />
@@ -97,32 +98,25 @@ export default function VoiceNotes() {
       {/* 🌟 SPRINKLES — ONLY WHEN PLAYING */}
       {playingId && (
         <div className="sprinkle-container pointer-events-none fixed inset-0 z-40">
-          {Array.from({ length: sprinkleCount }).map((_, i) => {
-            const size = 4 + Math.random() * 6;
-            const left = Math.random() * 100;
-            const delay = Math.random() * 5;
-            const duration = 6 + Math.random() * 8;
-
-            return (
-              <span
-                key={i}
-                className="sprinkle"
-                style={{
-                  left: `${left}%`,
-                  width: size,
-                  height: size,
-                  animationDelay: `${delay}s`,
-                  animationDuration: `${duration}s`,
-                }}
-              ></span>
-            );
-          })}
+          {sprinkles.map((s, i) => (
+            <span
+              key={i}
+              className="sprinkle"
+              style={{
+                left: `${s.left}%`,
+                width: s.size,
+                height: s.size,
+                animationDelay: `${s.delay}s`,
+                animationDuration: `${s.duration}s`,
+              }}
+            ></span>
+          ))}
         </div>
       )}
 
       {/* MAIN CONTENT */}
       <div className="container mx-auto px-4 py-8 relative z-50 max-w-4xl">
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back Home
@@ -238,8 +232,8 @@ export default function VoiceNotes() {
         <Card className="mt-8 p-8 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20 text-center">
           <Heart className="w-12 h-12 mx-auto mb-4 text-rose fill-rose animate-pulse-soft" />
           <p className="text-foreground/90 italic">
-            "Whenever your heart misses me…  
-            press play. I'm always here with you, Shrutiii ❤️"
+            "Whenever your heart misses me… press play. I'm always here with
+            you, Shrutiii ❤️"
           </p>
         </Card>
       </div>
@@ -256,6 +250,7 @@ export default function VoiceNotes() {
           animation-timing-function: linear;
           animation-iteration-count: infinite;
           opacity: 0.8;
+  will-change: transform;
         }
 
         @keyframes sprinkleFall {

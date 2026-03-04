@@ -2,24 +2,31 @@ import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { HeartAnimation } from "@/components/HeartAnimation";
-import { ArrowLeft, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import {
+  ArrowLeft,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Pause,
+} from "lucide-react";
 import { Link } from "react-router-dom";
 import timeline from "@/data/timeline.json";
+import { useMemo } from "react";
 
 export default function Timeline() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(false);
-  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const currentMoment = timeline[currentIndex];
 
   /* ----------- HANDLE AUTOPLAY ----------- */
   useEffect(() => {
-    if (autoplay) {
-      intervalRef.current = setInterval(() => {
-        nextMoment();
-      }, 4000);
-    }
+    if (!autoplay) return;
+
+    intervalRef.current = setInterval(() => {
+      nextMoment();
+    }, 4000);
 
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
@@ -28,13 +35,12 @@ export default function Timeline() {
 
   /* Reset autoplay when manually changed */
   useEffect(() => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current);
-      if (autoplay) {
-        intervalRef.current = setInterval(nextMoment, 4000);
-      }
-    }
-  }, [currentIndex]);
+    if (!autoplay) return;
+
+    const interval = setInterval(nextMoment, 4000);
+
+    return () => clearInterval(interval);
+  }, [autoplay, currentIndex]);
 
   const nextMoment = () => {
     setCurrentIndex((prev) => (prev + 1) % timeline.length);
@@ -48,9 +54,19 @@ export default function Timeline() {
     setAutoplay((prev) => !prev);
   };
 
+
+const BackgroundLayer = useMemo(
+  () => (
+    <>
+      <HeartAnimation />
+
+    </>
+  ),
+  []
+);
   return (
     <div className="min-h-screen romantic-gradient relative">
-      <HeartAnimation />
+      {BackgroundLayer}
 
       <style>{`
         .fade-slide {
@@ -66,7 +82,7 @@ export default function Timeline() {
       `}</style>
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-4xl">
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back Home
@@ -85,8 +101,7 @@ export default function Timeline() {
 
         {/* CARD */}
         <Card className="p-8 animate-fade-in bg-card/95 backdrop-blur shadow-[var(--shadow-romantic)]">
-          <div className="space-y-6 fade-slide">
-
+          <div key={currentIndex} className="space-y-6 fade-slide">
             {/* EMOJI + TITLE */}
             <div className="text-center">
               <div className="text-6xl mb-4 animate-bounce-slow">
@@ -103,9 +118,11 @@ export default function Timeline() {
             {/* IMAGE */}
             <div className="relative w-full max-h-[600px] rounded-lg overflow-hidden border-4 border-white shadow-lg bg-black/10 flex justify-center items-center">
               <img
+                loading="lazy"
                 src={currentMoment.image}
+                loading="lazy"
                 alt={currentMoment.title}
-                className="h-full w-auto object-contain fade-slide"
+                className="h-full w-auto object-contain fade-slide will-change-transform"
                 onError={(e) => (e.currentTarget.src = "/placeholder.svg")}
               />
 
@@ -150,7 +167,11 @@ export default function Timeline() {
 
             {/* SLIDESHOW BUTTON */}
             <div className="text-center mt-4">
-              <Button variant="ghost" onClick={toggleAutoplay} className="text-sm">
+              <Button
+                variant="ghost"
+                onClick={toggleAutoplay}
+                className="text-sm"
+              >
                 {autoplay ? (
                   <>
                     <Pause className="w-4 h-4 mr-2" /> Stop Slideshow

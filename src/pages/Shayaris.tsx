@@ -4,7 +4,7 @@ import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
 import { ArrowLeft, BookHeart, RefreshCw } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import shayarisData from "@/data/shayaris.json";
 
 export default function Shayaris() {
@@ -28,18 +28,38 @@ export default function Shayaris() {
     setShowTranslation(false);
   };
 
-  const current = shayarisData[currentIndex];
+  const current = shayarisData[currentIndex] ?? {
+    text: "No shayari found",
+    translation: "",
+    category: "romantic",
+  };
 
-  const categoryColors = {
+  const categoryColors: Record<string, string> = {
     romantic: "from-rose to-primary",
     emotional: "from-lavender to-peach",
     sweet: "from-peach to-gold",
   };
 
-  return (
-    <div className="min-h-screen romantic-gradient relative">
+  const floatingHearts = useMemo(() => {
+    return [...Array(6)].map((_, i) => ({
+      left: `${10 + Math.random() * 80}%`,
+      top: `${10 + Math.random() * 80}%`,
+      size: `${20 + Math.random() * 20}px`,
+      delay: `${i * 0.8}s`,
+    }));
+  }, []);
+  const BackgroundLayer = useMemo(
+  () => (
+    <>
       <HeartAnimation />
       <BackgroundText />
+    </>
+  ),
+  []
+);
+  return (
+    <div className="min-h-screen romantic-gradient relative">
+      {BackgroundLayer}
 
       {/* ✨ Extra Styles */}
       <style>{`
@@ -61,6 +81,7 @@ export default function Shayaris() {
           position: absolute;
           animation: floatUp 4s infinite ease-in-out;
           opacity: 0.4;
+          will-change: transform;
         }
 
         @keyframes floatUp {
@@ -80,9 +101,8 @@ export default function Shayaris() {
       `}</style>
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-3xl">
-
         {/* Header */}
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back Home
@@ -100,18 +120,20 @@ export default function Shayaris() {
         </div>
 
         {/* Main Card */}
-        <Card className="shayari-card p-10 relative overflow-hidden">
-
+        <Card
+          key={currentIndex}
+          className="shayari-card p-10 relative overflow-hidden"
+        >
           {/* floating soft hearts */}
-          {[...Array(6)].map((_, i) => (
+          {floatingHearts.map((heart, i) => (
             <div
               key={i}
               className="floating-heart"
               style={{
-                left: `${10 + Math.random() * 80}%`,
-                top: `${10 + Math.random() * 80}%`,
-                fontSize: `${20 + Math.random() * 20}px`,
-                animationDelay: `${i * 0.8}s`,
+                left: heart.left,
+                top: heart.top,
+                fontSize: heart.size,
+                animationDelay: heart.delay,
               }}
             >
               ❤️
@@ -121,7 +143,7 @@ export default function Shayaris() {
           {/* divider */}
           <div
             className={`h-1 w-32 mx-auto rounded-full bg-gradient-to-r ${
-              categoryColors[current.category]
+              categoryColors[current.category] || "from-rose to-primary"
             } mb-10 shadow-md`}
           />
 
@@ -145,7 +167,10 @@ export default function Shayaris() {
 
           {/* Buttons */}
           <div className="flex flex-col items-center gap-3 mt-6">
-            <Button variant="outline" onClick={() => setShowTranslation(!showTranslation)}>
+            <Button
+              variant="outline"
+              onClick={() => setShowTranslation(!showTranslation)}
+            >
               {showTranslation ? "Hide" : "Show"} Translation
             </Button>
 
@@ -166,7 +191,9 @@ export default function Shayaris() {
               <div
                 key={idx}
                 className={`h-2 rounded-full transition-all duration-300 ${
-                  idx === currentIndex ? "w-8 bg-primary shadow-lg" : "w-2 bg-muted"
+                  idx === currentIndex
+                    ? "w-8 bg-primary shadow-lg"
+                    : "w-2 bg-muted"
                 }`}
               />
             ))}

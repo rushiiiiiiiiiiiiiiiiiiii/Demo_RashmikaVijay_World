@@ -4,30 +4,53 @@ import { BackgroundText } from "@/components/BackgroundText";
 import { ArrowLeft, Heart, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useState, useCallback } from "react";
+import { useMemo } from "react";
+
+type Reason = {
+  id: number;
+  text: string;
+};
 
 export default function Reasons() {
-  const [randomReason, setRandomReason] = useState(null as any);
+  const [randomReason, setRandomReason] = useState<Reason | null>(null);
 
-  const shuffleReason = () => {
+  const shuffleReason = useCallback(() => {
+    if (!reasons.length) return;
+
     const random = reasons[Math.floor(Math.random() * reasons.length)];
     setRandomReason(random);
-  };
 
-  return (
-    <div className="min-h-screen romantic-gradient relative overflow-hidden">
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+const BackgroundLayer = useMemo(
+  () => (
+    <>
       <HeartAnimation />
       <BackgroundText />
+    </>
+  ),
+  []
+);
+  return (
+    <div className="min-h-screen romantic-gradient relative overflow-hidden">
+      {BackgroundLayer}
 
       {/* Floating hearts */}
       <div className="absolute inset-0 pointer-events-none opacity-30">
-        <div className="floating-hearts text-rose absolute top-10 left-10 text-4xl">❤️</div>
-        <div className="floating-hearts text-rose absolute top-1/2 right-10 text-5xl">💕</div>
-        <div className="floating-hearts text-rose absolute bottom-20 left-1/2 text-4xl">💖</div>
+        <div className="floating-hearts text-rose absolute top-10 left-10 text-4xl">
+          ❤️
+        </div>
+        <div className="floating-hearts text-rose absolute top-1/2 right-10 text-5xl">
+          💕
+        </div>
+        <div className="floating-hearts text-rose absolute bottom-20 left-1/2 text-4xl">
+          💖
+        </div>
       </div>
 
       <div className="container mx-auto px-4 py-8 max-w-3xl relative z-10">
-        <Link to="/home">
+        <Link to="/home" replace>
           <Button variant="ghost" className="mb-6">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back Home
@@ -72,7 +95,7 @@ export default function Reasons() {
 
         {/* All Reasons List */}
         <div className="space-y-4 animate-fade-in">
-          {reasons.map((item) => (
+          {reasons.map((item, index) => (
             <div
               key={item.id}
               className="
@@ -86,7 +109,7 @@ export default function Reasons() {
                 hover:scale-[1.02]
                 relative
               "
-              style={{ animationDelay: `${item.id * 0.02}s` }}
+              style={{ animationDelay: `${index * 0.02}s` }}
             >
               {/* Decorative small heart */}
               <Heart className="w-5 h-5 text-rose absolute -top-2 -left-2 animate-pulse" />
@@ -109,19 +132,18 @@ export default function Reasons() {
         </div>
 
         <div className="text-center mb-10">
-  <Button
-    className="rounded-full px-8 py-3 primary-gradient text-white hover:scale-105 transition-all"
-    onClick={() => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    }}
-  >
-    Read Again 💕
-  </Button>
-</div>
-
+          <Button
+            className="rounded-full px-8 py-3 primary-gradient text-white hover:scale-105 transition-all"
+            onClick={() => {
+              window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+              });
+            }}
+          >
+            Read Again 💕
+          </Button>
+        </div>
       </div>
     </div>
   );
