@@ -6,10 +6,12 @@ import { ArrowLeft, BookHeart, RefreshCw } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import shayarisData from "@/data/shayaris.json";
-
+import { storage } from "@/lib/storage";
 export default function Shayaris() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTranslation, setShowTranslation] = useState(false);
+  const profile = useMemo(() => storage.getUserProfile(), []);
+  const name = profile?.name || "My Love";
 
   // random on open
   useEffect(() => {
@@ -216,7 +218,7 @@ export default function Shayaris() {
         <Card className="p-6 bg-gradient-to-r from-rose/10 to-foreground/5 text-center mt-8">
           <BookHeart className="w-10 h-10 mx-auto mb-3 text-rose-400" />
           <p className="text-foreground/90 italic text-lg">
-            “Every word is written only for you, Shruti 💗”
+            “Every word is written only for you, {name} 💗”
           </p>
         </Card>
       </div>

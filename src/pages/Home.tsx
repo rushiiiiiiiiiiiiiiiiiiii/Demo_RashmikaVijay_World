@@ -329,24 +329,24 @@ export default function Home() {
   const textSecondary = theme === "light" ? "text-gray-500" : "text-gray-400";
 
   const petals = React.useMemo(() => {
-    return [...Array(15)].map(() => ({
+    return [...Array(25)].map(() => ({
       left: `${Math.random() * 100}%`,
       delay: `${Math.random() * 10}s`,
-      duration: `${10 + Math.random() * 10}s`,
+      duration: `${6 + Math.random() * 6}s`,
       opacity: theme === "light" ? 0.4 : 0.15,
       width: `${10 + Math.random() * 15}px`,
       height: `${10 + Math.random() * 15}px`,
     }));
   }, [theme]);
   const BackgroundLayer = useMemo(
-  () => (
-    <>
-      <HeartAnimation />
-      <BackgroundText />
-    </>
-  ),
-  []
-);
+    () => (
+      <>
+        <HeartAnimation />
+        <BackgroundText />
+      </>
+    ),
+    [],
+  );
   return (
     <div
       className="min-h-screen relative overflow-hidden transition-colors duration-1000"
@@ -378,6 +378,18 @@ export default function Home() {
 
       {/* PARALLAX ELEMENTS */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        {[...Array(8)].map((_, i) => (
+          <div
+            key={"heart-" + i}
+            className="floating-heart"
+            style={{
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 10}s`,
+            }}
+          >
+            ❤️
+          </div>
+        ))}
         <div
           className={`cloud cloud1 ${
             theme === "dark" ? "opacity-[0.05]" : "opacity-40"
@@ -596,6 +608,23 @@ export default function Home() {
         }
         .cloud1 { top: -100px; left: -100px; }
         .cloud2 { bottom: -100px; right: -100px; }
+        .cloud1{
+  animation: cloudFloat1 40s linear infinite;
+}
+
+.cloud2{
+  animation: cloudFloat2 50s linear infinite;
+}
+
+@keyframes cloudFloat1{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(200px)}
+}
+
+@keyframes cloudFloat2{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-200px)}
+}
 
         .white-petal {
           position: absolute;
@@ -605,6 +634,27 @@ export default function Home() {
           animation: falling linear infinite;
           top: -10%;
         }
+          .floating-heart{
+  position:absolute;
+  bottom:-40px;
+  font-size:20px;
+  opacity:0.25;
+  animation: floatUp 18s linear infinite;
+}
+
+@keyframes floatUp{
+  0%{
+    transform:translateY(0) scale(.8);
+    opacity:0;
+  }
+  20%{
+    opacity:.25;
+  }
+  100%{
+    transform:translateY(-120vh) scale(1.2);
+    opacity:0;
+  }
+}
           .white-petal,
 .cloud,
 .sparkle-icon {

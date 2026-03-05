@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState, useCallback } from "react";
 import { useMemo } from "react";
-
+import { storage } from "@/lib/storage";
 type Reason = {
   id: number;
   text: string;
@@ -14,6 +14,8 @@ type Reason = {
 
 export default function Reasons() {
   const [randomReason, setRandomReason] = useState<Reason | null>(null);
+  const profile = useMemo(() => storage.getUserProfile(), []);
+const name = profile?.name || "My Love";
 
   const shuffleReason = useCallback(() => {
     if (!reasons.length) return;
@@ -79,7 +81,7 @@ export default function Reasons() {
           </div>
 
           <h1 className="text-4xl font-handwriting text-foreground drop-shadow-lg">
-            100 Reasons Why I Love You Shrutii ❤️
+            100 Reasons Why I Love You {name} ❤️
           </h1>
           <p className="text-muted-foreground mt-2 font-medium">
             Every reason comes straight from my heart.
@@ -139,7 +141,7 @@ export default function Reasons() {
           <Heart className="w-14 h-14 text-rose mx-auto mb-3 animate-pulse drop-shadow-lg" />
 
           <p className="text-2xl font-handwriting text-rose drop-shadow">
-            You are my forever reason Shruti ❤️
+            You are my forever reason {name} ❤️
           </p>
         </div>
 

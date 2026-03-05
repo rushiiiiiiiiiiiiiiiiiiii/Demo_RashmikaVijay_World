@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 import { useState, useRef, useEffect, useMemo } from "react";
 import voiceNotesData from "@/data/voiceNotes.json";
 import { useGlobalMusic } from "@/hooks/useGlobalMusic";
-
+import { storage } from "@/lib/storage";
 /* ============================================================
    MAIN COMPONENT — With Beautiful TOP SPRINKLES Animation
 ============================================================== */
@@ -20,6 +20,8 @@ export default function VoiceNotes() {
   const [progress, setProgress] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { pauseMusic, resumeMusic } = useGlobalMusic();
+  const profile = useMemo(() => storage.getUserProfile(), []);
+const name = profile?.name || "My Love";
 
   const categoryColors: Record<string, string> = {
     daily: "bg-rose/20 text-rose border-rose/30",
@@ -131,7 +133,7 @@ export default function VoiceNotes() {
     "
           >
             <ArrowLeft className="w-4 h-4 shrink-0" />
-            <span className="whitespace-nowrap">Back Home</span>
+            <span className="whitespace-nowrap">h</span>
           </button>
         </Link>
 
@@ -245,7 +247,7 @@ export default function VoiceNotes() {
           <Heart className="w-12 h-12 mx-auto mb-4 text-rose fill-rose animate-pulse-soft" />
           <p className="text-foreground/90 italic">
             "Whenever your heart misses me… press play. I'm always here with
-            you, Shrutiii ❤️"
+            you, {name} ❤️"
           </p>
         </Card>
       </div>

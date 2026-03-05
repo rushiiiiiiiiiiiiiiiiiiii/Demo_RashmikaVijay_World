@@ -4,8 +4,10 @@ import { Button } from "@/components/ui/button";
 import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
 import { ArrowLeft, Heart } from "lucide-react";
-
+import { storage } from "@/lib/storage";
 export default function SpecialEvents() {
+  const profile = useMemo(() => storage.getUserProfile(), []);
+  const name = profile?.name || "My Love";
   const BackgroundLayer = useMemo(
     () => (
       <>
@@ -140,10 +142,14 @@ export default function SpecialEvents() {
         <div className="pt-10 pb-6 fade-up">
           <Link to="/home" replace>
             <Button
-              variant="ghost"
-              className="text-pink-800 hover:text-pink-900"
+              className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
+    bg-white/40 backdrop-blur-md border border-white/40 
+    text-rose-700 hover:bg-white/60 
+    shadow-[0_6px_20px_rgba(255,120,150,0.25)] 
+    transition-all duration-300 hover:scale-105"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" /> Back Home
+              <ArrowLeft className="w-4 h-4" />
+              Back Home
             </Button>
           </Link>
         </div>
@@ -333,7 +339,7 @@ export default function SpecialEvents() {
             </p>
 
             <p className="text-2xl md:text-5xl font-bold text-pink-800 my-3 md:my-4 drop-shadow">
-              Rushi ❤️ Shruti
+              Rushi ❤️ {name}
             </p>
 
             <p className="text-pink-900 text-xs md:text-base tracking-wide">
@@ -357,7 +363,7 @@ export default function SpecialEvents() {
               {/* Left signature */}
               <div className="text-center">
                 <p className="text-pink-800 font-handwriting text-base md:text-xl mb-1">
-                  Shruti
+                  {name}
                 </p>
                 <div className="w-16 md:w-24 mx-auto border-t border-pink-400"></div>
                 <p className="text-[10px] md:text-xs text-pink-600 mt-1">

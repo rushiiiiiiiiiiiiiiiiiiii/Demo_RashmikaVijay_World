@@ -2,15 +2,34 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>For Shruti — From Rushi</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Our Love Story</title>
+
+    <script>
+      try {
+        const profile = JSON.parse(localStorage.getItem("userProfile") || "{}");
+        const name = profile?.name || "My Love";
+
+        document.title = `For ${name} — From Rushi`;
+
+        const ogTitle = document.querySelector('meta[property="og:title"]');
+        if (ogTitle)
+          ogTitle.setAttribute("content", `For ${name} — From Rushi`);
+      } catch (e) {}
+    </script>
     <meta name="description" content="A romantic gift made with love" />
     <meta name="author" content="Rushi" />
-    
+
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
 
     <meta property="og:title" content="For Shruti — From Rushi" />
     <meta property="og:description" content="A romantic gift made with love" />

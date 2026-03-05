@@ -17,6 +17,8 @@ export default function Settings() {
   const [confirmNewPin, setConfirmNewPin] = useState("");
   const [theme, setTheme] = useState(storage.getTheme());
   const [showClearModal, setShowClearModal] = useState(false);
+  // const profile = useMemo(() => storage.getUserProfile(), []);
+  const gname = profile?.name || "My Love";
 
   const handleUpdateName = () => {
     if (name.trim().length < 2)
@@ -38,11 +40,14 @@ export default function Settings() {
     toast.success("PIN updated successfully! 🔒");
   };
 
-  const handleThemeChange = useCallback((mode) => {
-    setTheme(mode);
-    storage.setTheme(mode);
-    toast.success(`Theme changed to ${mode}`);
-  }, [storage])
+  const handleThemeChange = useCallback(
+    (mode) => {
+      setTheme(mode);
+      storage.setTheme(mode);
+      toast.success(`Theme changed to ${mode}`);
+    },
+    [storage],
+  );
 
   const handleClearData = () => {
     setShowClearModal(true);
@@ -52,52 +57,51 @@ export default function Settings() {
     storage.clearAll();
     toast.success("All data cleared!");
     navigate("/");
-  }, [navigate])
+  }, [navigate]);
   const BackgroundLayer = useMemo(() => <HeartAnimation />, []);
 
-const ClearModal = useMemo(() => {
-  if (!showClearModal) return null;
+  const ClearModal = useMemo(() => {
+    if (!showClearModal) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-md px-6 animate-fade-in">
-      <div className="relative bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_25px_80px_rgba(255,120,150,0.35)] rounded-3xl p-10 max-w-sm w-full text-center animate-modal-in">
-        
-        <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-28 h-28 bg-rose-200/40 blur-3xl rounded-full"></div>
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/30 backdrop-blur-md px-6 animate-fade-in">
+        <div className="relative bg-white/70 backdrop-blur-md border border-white/40 shadow-[0_25px_80px_rgba(255,120,150,0.35)] rounded-3xl p-10 max-w-sm w-full text-center animate-modal-in">
+          <div className="absolute -top-10 left-1/2 -translate-x-1/2 w-28 h-28 bg-rose-200/40 blur-3xl rounded-full"></div>
 
-        <Heart className="w-12 h-12 mx-auto text-rose-500 mb-4 animate-pulse" />
+          <Heart className="w-12 h-12 mx-auto text-rose-500 mb-4 animate-pulse" />
 
-        <h2 className="text-2xl font-handwriting text-rose-700 mb-3">
-          Begin Our Story Again?
-        </h2>
+          <h2 className="text-2xl font-handwriting text-rose-700 mb-3">
+            Begin Our Story Again?
+          </h2>
 
-        <p className="text-sm text-rose-900/70 mb-6 leading-relaxed">
-          This will gently reset our little world — your name, memories, and
-          settings.
-          <br />
-          <br />
-          But don't worry… a beautiful new story can begin anytime. ❤️
-        </p>
+          <p className="text-sm text-rose-900/70 mb-6 leading-relaxed">
+            This will gently reset our little world — your name, memories, and
+            settings.
+            <br />
+            <br />
+            But don't worry… a beautiful new story can begin anytime. ❤️
+          </p>
 
-        <div className="flex gap-3">
-          <Button
-            variant="outline"
-            className="w-full border-rose-200 hover:bg-rose-50"
-            onClick={() => setShowClearModal(false)}
-          >
-            Keep Our Story
-          </Button>
+          <div className="flex gap-3">
+            <Button
+              variant="outline"
+              className="w-full border-rose-200 hover:bg-rose-50"
+              onClick={() => setShowClearModal(false)}
+            >
+              Keep Our Story
+            </Button>
 
-          <Button
-            className="w-full bg-rose-500 hover:bg-rose-600 text-white shadow-md"
-            onClick={confirmClearData}
-          >
-            Begin Again
-          </Button>
+            <Button
+              className="w-full bg-rose-500 hover:bg-rose-600 text-white shadow-md"
+              onClick={confirmClearData}
+            >
+              Begin Again
+            </Button>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}, [showClearModal, confirmClearData]);
+    );
+  }, [showClearModal, confirmClearData]);
 
   return (
     <div className="min-h-screen romantic-gradient relative pb-20">
@@ -158,15 +162,15 @@ const ClearModal = useMemo(() => {
       <div className="container mx-auto px-5 py-10 max-w-2xl relative z-10">
         <Link to="/home" replace>
           <Button
-    className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
+            className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
     bg-white/40 backdrop-blur-md border border-white/40 
     text-rose-700 hover:bg-white/60 
     shadow-[0_6px_20px_rgba(255,120,150,0.25)] 
     transition-all duration-300 hover:scale-105"
-  >
-    <ArrowLeft className="w-4 h-4" />
-    Back Home
-  </Button>
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back Home
+          </Button>
         </Link>
 
         <div className="text-center fade-up mb-8">
@@ -292,7 +296,7 @@ const ClearModal = useMemo(() => {
         </div>
 
         <div className="text-center mt-10 text-sm text-muted-foreground fade-up">
-          <p>Made with ❤️ for Shruti By Rushi</p>
+          <p>Made with ❤️ for {gname} By Rushi</p>
         </div>
       </div>
       {ClearModal}

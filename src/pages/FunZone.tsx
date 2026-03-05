@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import quizzesData from "@/data/quizzes.json";
 import { useGlobalMusic } from "@/hooks/useGlobalMusic";
 import { useMemo } from "react";
-
+import { storage } from "@/lib/storage";
 /**
  * FunZone.jsx
  * - Keeps all existing functionality
@@ -399,6 +399,8 @@ export default function FunZone() {
   const [wheelResult, setWheelResult] = useState(null);
   const [compliment, setCompliment] = useState(null);
   const resultRef = useRef(null);
+  const profile = useMemo(() => storage.getUserProfile(), []);
+  const name = profile?.name || "My Love";
   // wheel audio ref
   const wheelRef = useRef(null);
 
@@ -662,7 +664,7 @@ export default function FunZone() {
         <Card className="mt-8 p-8 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20 text-center">
           <Heart className="w-12 h-12 mx-auto mb-4 text-rose fill-rose animate-pulse-soft" />
           <p className="text-foreground/90 italic">
-            "Having fun with you is my favorite thing in the world, Shruti 💕"
+            "Having fun with you is my favorite thing in the world, {name} 💕"
           </p>
         </Card>
       </div>
