@@ -195,6 +195,7 @@ export default function Onboarding() {
       setupComplete: true,
     });
     storage.setTheme(theme);
+    storage.unlock(); 
 
     setTimeout(() => {
       toast.success(`Welcome home, ${name}. ❤️`);

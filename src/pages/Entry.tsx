@@ -7,6 +7,8 @@ import { Heart, Sparkles } from "lucide-react";
 import { storage } from "@/lib/storage";
 function Entry() {
   const navigate = useNavigate();
+  const profile = storage.getUserProfile();
+  const girlName = profile?.name || "My Love";
   const [start, setStart] = useState(false);
   const [curtainOpen, setCurtainOpen] = useState(false);
   const [isExiting, setIsExiting] = useState(false);
@@ -61,9 +63,9 @@ function Entry() {
     };
 
     if (window.innerWidth > 768) {
-  window.addEventListener("mousemove", handleMouseMove);
-  return () => window.removeEventListener("mousemove", handleMouseMove);
-}
+      window.addEventListener("mousemove", handleMouseMove);
+      return () => window.removeEventListener("mousemove", handleMouseMove);
+    }
   }, []);
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -132,21 +134,21 @@ function Entry() {
         {/* Floating Roses move with mouse for depth */}
         {/* Replace with your actual image paths */}
         <img
-        loading="lazy"
+          loading="lazy"
           ref={rose1Ref}
           src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
           className="floating-rose rose1"
           alt=""
         />
         <img
-        loading="lazy"
+          loading="lazy"
           ref={rose2Ref}
           src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
           className="floating-rose rose2"
           alt=""
         />
         <img
-        loading="lazy"
+          loading="lazy"
           ref={rose3Ref}
           src="https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png"
           className="floating-rose rose3"
@@ -205,8 +207,8 @@ function Entry() {
           />
 
           <h1 className="font-handwriting text-6xl md:text-8xl text-transparent bg-clip-text bg-gradient-to-br from-rose-500 to-rose-700 drop-shadow-sm leading-tight py-2">
-            Shruti <br />
-            <label htmlFor="">My Love</label>
+            {girlName} <br />
+            <span>My World</span>
           </h1>
 
           <div className="h-px w-32 bg-gradient-to-r from-transparent via-rose-400 to-transparent mx-auto my-6 opacity-60"></div>

@@ -142,5 +142,6 @@ export const storage = {
   // Clear all
   clearAll(): void {
     localStorage.clear();
+    sessionStorage.clear(); 
   },
 };

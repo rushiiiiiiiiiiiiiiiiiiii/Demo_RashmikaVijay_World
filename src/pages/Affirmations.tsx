@@ -67,18 +67,17 @@ export default function Affirmations() {
     }));
   }, []);
   const BackgroundLayer = useMemo(
-  () => (
-    <>
-      <HeartAnimation />
-      <BackgroundText />
-    </>
-  ),
-  []
-);
+    () => (
+      <>
+        <HeartAnimation />
+        <BackgroundText />
+      </>
+    ),
+    [],
+  );
   return (
     <div className="min-h-screen romantic-gradient relative overflow-hidden">
-      
-    {BackgroundLayer}
+      {BackgroundLayer}
       {/* Floating Hearts */}
       {floatingHearts.map((h, i) => (
         <div
@@ -150,8 +149,15 @@ export default function Affirmations() {
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-3xl">
         <Link to="/home" replace>
-          <Button variant="ghost" className="mb-6">
-            <ArrowLeft className="w-4 h-4 mr-2" /> Back Home
+          <Button
+            className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
+    bg-white/40 backdrop-blur-md border border-white/40 
+    text-rose-700 hover:bg-white/60 
+    shadow-[0_6px_20px_rgba(255,120,150,0.25)] 
+    transition-all duration-300 hover:scale-105"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back Home
           </Button>
         </Link>
 

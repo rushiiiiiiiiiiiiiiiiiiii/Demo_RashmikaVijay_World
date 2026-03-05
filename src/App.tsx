@@ -3,7 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, useMemo} from "react";
+import { useEffect, useMemo } from "react";
 import { storage } from "./lib/storage";
 import { lazy, Suspense } from "react";
 
@@ -36,8 +36,8 @@ import { useGlobalMusic } from "@/hooks/useGlobalMusic";
 const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const isSetupComplete = useMemo(() => storage.isSetupComplete(), []);
-const isUnlocked = useMemo(() => storage.isUnlocked(), []);
+  const isSetupComplete = storage.isSetupComplete();
+  const isUnlocked = storage.isUnlocked();
 
   if (!isSetupComplete) {
     return <Navigate to="/onboarding" replace />;
@@ -62,8 +62,8 @@ export default function App() {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, []);
   useEffect(() => {
-  import("./pages/Home");
-}, []);
+    import("./pages/Home");
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -77,38 +77,39 @@ export default function App() {
         {/* All routes */}
         <Suspense
           fallback={
- <div className="flex items-center justify-center min-h-screen px-6">
-  <div className="bg-white/40 backdrop-blur-xl border border-white/40 shadow-[0_10px_40px_rgba(255,150,170,0.25)] rounded-3xl px-10 py-12 text-center space-y-6 max-w-sm w-full">
-    
-<div className="relative flex items-center justify-center w-24 h-24 mx-auto">
+            <div className="flex items-center justify-center min-h-screen px-6">
+              <div className="bg-white/40 backdrop-blur-xl border border-white/40 shadow-[0_10px_40px_rgba(255,150,170,0.25)] rounded-3xl px-10 py-12 text-center space-y-6 max-w-sm w-full">
+                <div className="relative flex items-center justify-center w-24 h-24 mx-auto">
+                  <div className="absolute w-20 h-20 rounded-full bg-rose-200/40 blur-xl animate-pulse"></div>
 
-  <div className="absolute w-20 h-20 rounded-full bg-rose-200/40 blur-xl animate-pulse"></div>
+                  <Heart className="w-12 h-12 text-rose-500 animate-pulse z-10" />
 
-  <Heart className="w-12 h-12 text-rose-500 animate-pulse z-10" />
+                  <span className="absolute text-rose-300 text-sm animate-bounce -top-2 left-4">
+                    ♡
+                  </span>
+                  <span className="absolute text-rose-300 text-sm animate-bounce delay-200 -bottom-1 right-4">
+                    ♡
+                  </span>
+                  <span className="absolute text-rose-300 text-sm animate-bounce delay-300 top-3 -right-2">
+                    ♡
+                  </span>
+                </div>
 
-  <span className="absolute text-rose-300 text-sm animate-bounce -top-2 left-4">♡</span>
-  <span className="absolute text-rose-300 text-sm animate-bounce delay-200 -bottom-1 right-4">♡</span>
-  <span className="absolute text-rose-300 text-sm animate-bounce delay-300 top-3 -right-2">♡</span>
+                <div className="space-y-2">
+                  <p className="text-rose-600 font-semibold text-lg tracking-wide">
+                    Preparing our love story...
+                  </p>
 
-</div>
-
-    <div className="space-y-2">
-
-  <p className="text-rose-600 font-semibold text-lg tracking-wide">
-    Preparing our love story...
-  </p>
-
-  <p className="text-sm text-rose-500/80 animate-pulse">
-    Every beautiful memory is getting ready ❤️
-  </p>
-  <div className="w-full h-1 bg-rose-100 rounded-full overflow-hidden mt-4">
-  <div className="h-full bg-gradient-to-r from-rose-400 via-pink-400 to-rose-500 animate-[loading_2s_linear_infinite] w-1/3"></div>
-</div>
-
-</div>
-</div>
-  </div>
-}
+                  <p className="text-sm text-rose-500/80 animate-pulse">
+                    Every beautiful memory is getting ready ❤️
+                  </p>
+                  <div className="w-full h-1 bg-rose-100 rounded-full overflow-hidden mt-4">
+                    <div className="h-full bg-gradient-to-r from-rose-400 via-pink-400 to-rose-500 animate-[loading_2s_linear_infinite] w-1/3"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
         >
           <Routes>
             {/* ⭐ ENTRY PAGE FIRST */}

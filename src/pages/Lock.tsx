@@ -14,6 +14,11 @@ export default function LockScreen() {
 
   const profile = storage.getUserProfile();
   const savedPin = storage.getPin();
+  useEffect(() => {
+    if (storage.isUnlocked()) {
+      navigate("/home");
+    }
+  }, [navigate]);
 
   const handlePress = (num: string) => {
     if (!savedPin || isUnlocking) return;
@@ -44,17 +49,17 @@ export default function LockScreen() {
         setTimeout(() => setPin(""), 300);
       }
     }
-  }, [pin, savedPin, navigate]);
+  }, [pin, savedPin, navigate, isUnlocking]);
 
   const keypadNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-const BackgroundLayer = useMemo(
-  () => (
-    <>
-      <HeartAnimation />
-    </>
-  ),
-  []
-);
+  const BackgroundLayer = useMemo(
+    () => (
+      <>
+        <HeartAnimation />
+      </>
+    ),
+    [],
+  );
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center p-4 bg-gradient-to-br from-rose-100 via-pink-100 to-rose-200">
       {/* Floating hearts background */}
@@ -86,7 +91,7 @@ const BackgroundLayer = useMemo(
           <div className="grid grid-cols-3 gap-4">
             {keypadNumbers.slice(0, 9).map((num) => (
               <button
-              disabled={isUnlocking}
+                disabled={isUnlocking}
                 key={num}
                 className="h-14 text-xl rounded-full bg-white/40 hover:bg-white/60 backdrop-blur-md transition-all"
                 onClick={() => handlePress(num)}
@@ -105,7 +110,8 @@ const BackgroundLayer = useMemo(
             </button>
 
             <button
-              className="h-14 rounded-full bg-red-400/80 text-white"
+              disabled={isUnlocking}
+              className="h-14 rounded-full bg-red-400/80 text-white disabled:opacity-50"
               onClick={handleDelete}
             >
               <Delete className="w-5 h-5 mx-auto" />

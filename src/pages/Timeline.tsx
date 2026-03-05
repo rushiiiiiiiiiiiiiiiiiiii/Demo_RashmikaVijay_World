@@ -54,16 +54,14 @@ export default function Timeline() {
     setAutoplay((prev) => !prev);
   };
 
-
-const BackgroundLayer = useMemo(
-  () => (
-    <>
-      <HeartAnimation />
-
-    </>
-  ),
-  []
-);
+  const BackgroundLayer = useMemo(
+    () => (
+      <>
+        <HeartAnimation />
+      </>
+    ),
+    [],
+  );
   return (
     <div className="min-h-screen romantic-gradient relative">
       {BackgroundLayer}
@@ -82,11 +80,23 @@ const BackgroundLayer = useMemo(
       `}</style>
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-4xl">
-        <Link to="/home" replace>
-          <Button variant="ghost" className="mb-6">
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Back Home
-          </Button>
+        <Link to="/home" replace className="inline-block mb-6">
+          <button
+            className="
+    flex items-center gap-2 px-5 py-2.5 rounded-full
+    bg-white/40 backdrop-blur-md border border-white/40
+    text-rose-700 font-medium
+    shadow-sm
+    transition-transform duration-200 ease-out
+    hover:bg-white/60 hover:translate-x-[-2px]
+    active:scale-95
+    will-change-transform
+    touch-manipulation
+    "
+          >
+            <ArrowLeft className="w-4 h-4 shrink-0" />
+            <span className="whitespace-nowrap">Back Home</span>
+          </button>
         </Link>
 
         {/* HEADER */}
