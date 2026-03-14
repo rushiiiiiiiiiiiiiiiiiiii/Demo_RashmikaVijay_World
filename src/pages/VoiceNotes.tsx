@@ -4,7 +4,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BackgroundText } from "@/components/BackgroundText";
 
-import { ArrowLeft, Play, Pause, Mic, Heart, Calendar } from "lucide-react";
+import { ArrowLeft, Play, Pause, Mic, Heart, Calendar, X } from "lucide-react";
 
 import { Link } from "react-router-dom";
 import { useState, useRef, useEffect, useMemo } from "react";
@@ -21,7 +21,8 @@ export default function VoiceNotes() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const { pauseMusic, resumeMusic } = useGlobalMusic();
   const profile = useMemo(() => storage.getUserProfile(), []);
-const name = profile?.name || "My Love";
+  const name = profile?.name || "My Love";
+  const [createModal, setCreateModal] = useState(false);
 
   const categoryColors: Record<string, string> = {
     daily: "bg-rose/20 text-rose border-rose/30",
@@ -80,11 +81,12 @@ const name = profile?.name || "My Love";
   };
 
   /* ===== Sprinkle Count Based on Screen Width ===== */
-  const sprinkleCount = useMemo(() => {
-    if (window.innerWidth < 640) return 18;
-    if (window.innerWidth < 1024) return 30;
-    return 40;
-  }, []);
+const sprinkleCount = useMemo(() => {
+  if (typeof window === "undefined") return 30;
+  if (window.innerWidth < 640) return 18;
+  if (window.innerWidth < 1024) return 30;
+  return 40;
+}, []);
   const sprinkles = useMemo(() => {
     return Array.from({ length: sprinkleCount }).map(() => ({
       size: 4 + Math.random() * 6,
@@ -133,7 +135,7 @@ const name = profile?.name || "My Love";
     "
           >
             <ArrowLeft className="w-4 h-4 shrink-0" />
-            <span className="whitespace-nowrap">h</span>
+            <span className="whitespace-nowrap">Back Home</span>
           </button>
         </Link>
 
@@ -242,6 +244,62 @@ const name = profile?.name || "My Love";
             );
           })}
         </div>
+        <Card className="mt-4 p-8 hover:shadow-[var(--shadow-romantic)] bg-card/95 backdrop-blur transition-all duration-300 animate-fade-in relative overflow-hidden">
+          {/* Overlay */}
+          <div className="absolute inset-0 backdrop-blur-[0px] bg-white/40 z-10 flex flex-col items-center justify-center text-center p-6">
+            <Mic className="w-10 h-10 text-rose mb-3" />
+
+            <h3 className="font-semibold text-lg text-foreground">
+              Your Next Voice Message for Your love 🎤❤️
+            </h3>
+
+            <Button
+              size="sm"
+              onClick={() => setCreateModal(true)}
+              className="rounded-full mt-3 bg-primary text-white hover:bg-primary/90 p-1.5 shadow-[0_4px_15px_rgba(255,120,150,0.25)] transition-all duration-300 hover:scale-105"
+            >
+              <Mic className="w-4 h-4 mr-2" />
+              Record a Voice Note ❤️
+            </Button>
+
+            <p className="text-sm text-muted-foreground max-w-sm">
+              Imagine your partner listening to your voice anytime they miss you.
+            </p>
+
+            <p className="text-xs italic text-muted-foreground mt-2">
+              Send romantic voice notes in your personal love website 🎧
+            </p>
+          </div>
+
+          {/* Fake blurred layout */}
+          <div className="flex items-center gap-4 blur-[2px]">
+            <div className="p-3 rounded-xl bg-gradient-to-br from-primary to-rose">
+              <Mic className="w-6 h-6 text-white" />
+            </div>
+
+            <div className="flex-1">
+              <h3 className="font-semibold text-lg text-foreground">
+                A Message In Your own voice
+              </h3>
+
+              <p className="text-sm text-muted-foreground">
+                Your voice note will appear here ❤️
+              </p>
+
+              <p className="text-sm text-muted-foreground">
+                Waiting to be recorded ❤️
+              </p>
+
+              <Button
+                size="sm"
+                className="rounded-full mt-2 pointer-events-none opacity-70"
+              >
+                <Play className="w-4 h-4 mr-2" />
+                Play
+              </Button>
+            </div>
+          </div>
+        </Card>
 
         <Card className="mt-8 p-8 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20 text-center">
           <Heart className="w-12 h-12 mx-auto mb-4 text-rose fill-rose animate-pulse-soft" />
@@ -285,6 +343,41 @@ const name = profile?.name || "My Love";
           }
         }
       `}</style>
+      {createModal && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="p-6 max-w-md w-full text-center relative">
+            <button
+              className="absolute top-3 right-3"
+              onClick={() => setCreateModal(false)}
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <Mic className="w-10 h-10 mx-auto text-rose mb-3" />
+
+            <h2 className="text-xl font-semibold mb-2">
+              Create Your Love Website ❤️
+            </h2>
+
+            <p className="text-muted-foreground text-sm mb-5">
+              Record voice messages, love notes, memories, songs and surprises
+              for your partner in your own romantic website 💖
+            </p>
+
+            <Button
+              className="w-full"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                  "_blank",
+                )
+              }
+            >
+              Create Mine
+            </Button>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

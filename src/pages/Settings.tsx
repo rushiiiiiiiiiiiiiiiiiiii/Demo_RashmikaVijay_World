@@ -19,7 +19,10 @@ export default function Settings() {
   const [showClearModal, setShowClearModal] = useState(false);
   // const profile = useMemo(() => storage.getUserProfile(), []);
   const gname = profile?.name || "My Love";
-
+  const [showPromoModal, setShowPromoModal] = useState(false);
+  const blockAction = () => {
+    setShowPromoModal(true);
+  };
   const handleUpdateName = () => {
     if (name.trim().length < 2)
       return toast.error("Name must be at least 2 characters");
@@ -191,10 +194,11 @@ export default function Settings() {
             </div>
             <Input
               value={name}
-              onChange={(e) => setName(e.target.value)}
               placeholder="Enter name"
+              readOnly
+              onClick={blockAction}
             />
-            <Button className="w-full mt-3" onClick={handleUpdateName}>
+            <Button className="w-full mt-3" onClick={blockAction}>
               Update Name
             </Button>
           </Card>
@@ -225,7 +229,7 @@ export default function Settings() {
               <Button
                 variant={theme === "dark" ? "default" : "outline"}
                 className="shadow-sm"
-                onClick={() => handleThemeChange("dark")}
+                onClick={blockAction}
               >
                 <Moon className="w-4 h-4 mr-2" /> Dark
               </Button>
@@ -245,24 +249,23 @@ export default function Settings() {
             <div className="space-y-3">
               <Input
                 type="password"
-                autoComplete="off"
                 placeholder="Current PIN"
-                value={currentPin}
-                onChange={(e) => setCurrentPin(e.target.value)}
+                readOnly
+                onClick={blockAction}
               />
               <Input
                 type="password"
                 placeholder="New PIN"
-                value={newPin}
-                onChange={(e) => setNewPin(e.target.value)}
+                readOnly
+                onClick={blockAction}
               />
               <Input
                 type="password"
                 placeholder="Confirm New PIN"
-                value={confirmNewPin}
-                onChange={(e) => setConfirmNewPin(e.target.value)}
+                readOnly
+                onClick={blockAction}
               />
-              <Button className="w-full" onClick={handleUpdatePin}>
+              <Button className="w-full" onClick={blockAction}>
                 Update PIN
               </Button>
             </div>
@@ -288,7 +291,7 @@ export default function Settings() {
             <Button
               variant="destructive"
               className="w-full"
-              onClick={handleClearData}
+              onClick={blockAction}
             >
               Clear Data
             </Button>
@@ -296,9 +299,44 @@ export default function Settings() {
         </div>
 
         <div className="text-center mt-10 text-sm text-muted-foreground fade-up">
-          <p>Made with ❤️ for {gname} By Rushi</p>
+          <p>Made with ❤️ for {gname} By Vijay</p>
         </div>
       </div>
+      {showPromoModal && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="p-6 max-w-md w-full text-center relative">
+            <button
+              className="absolute top-3 right-3"
+              onClick={() => setShowPromoModal(false)}
+            >
+              ✕
+            </button>
+
+            <span className="text-4xl mb-2 block">⚙️</span>
+
+            <h2 className="text-xl font-semibold mb-2">
+              Settings Available in Your Love Website ❤️
+            </h2>
+
+            <p className="text-muted-foreground text-sm mb-5">
+              In your personal love website you can customize names, themes,
+              security PIN, memories and more.
+            </p>
+
+            <Button
+              className="w-full"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                  "_blank",
+                )
+              }
+            >
+              Create My Love Website ❤️
+            </Button>
+          </Card>
+        </div>
+      )}
       {ClearModal}
     </div>
   );

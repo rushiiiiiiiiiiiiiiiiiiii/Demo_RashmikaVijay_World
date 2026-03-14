@@ -1,7 +1,7 @@
 // ⭐⭐⭐ FULL UPDATED CODE WITH BUTTON SOUNDS ⭐⭐⭐
 
 import React, { useState, useEffect, useRef, useMemo } from "react";
-
+import { DEMO_MODE, DEMO_PROFILE } from "@/lib/demo";
 import { useNavigate } from "react-router-dom";
 import {
   Heart,
@@ -21,8 +21,8 @@ export default function Onboarding() {
   const [step, setStep] = useState(1);
 
   // Form State
-  const [name, setName] = useState("");
-  const [pin, setPin] = useState("");
+  const [name, setName] = useState(DEMO_MODE ? DEMO_PROFILE.name : "");
+  const [pin, setPin] = useState(DEMO_MODE ? "" : "");
   // const [confirmPin, setConfirmPin] = useState("");
   // const [isConfirmMode, setIsConfirmMode] = useState(false);
   const [theme, setTheme] = useState("light");
@@ -31,7 +31,7 @@ export default function Onboarding() {
   const mousePosRef = useRef({ x: 0, y: 0 });
   const [spotlightPos, setSpotlightPos] = useState({ x: "50%", y: "50%" });
   const [isExiting, setIsExiting] = useState(false);
-
+  const [showLockedModal, setShowLockedModal] = useState(false);
   // Interactive Effects State
   const [ripples, setRipples] = useState([]);
   const [clickSparkles, setClickSparkles] = useState([]);
@@ -157,7 +157,13 @@ export default function Onboarding() {
       setPin(newPin);
 
       if (newPin.length === 4) {
-        setTimeout(() => setStep(3), 300); // ⭐ directly go to theme step
+        if (DEMO_MODE && newPin !== DEMO_PROFILE.pin) {
+          toast.error("Demo PIN is 1111 ❤️");
+          setPin("");
+          return;
+        }
+
+        setTimeout(() => setStep(3), 300);
       }
     }
   };
@@ -189,13 +195,13 @@ export default function Onboarding() {
     setIsExiting(true);
 
     storage.setUserProfile({
-      name: name.trim(),
-      pin,
+      name: DEMO_MODE ? DEMO_PROFILE.name : name.trim(),
+      pin: DEMO_MODE ? DEMO_PROFILE.pin : pin,
       theme,
       setupComplete: true,
     });
     storage.setTheme(theme);
-    storage.unlock(); 
+    storage.unlock();
 
     setTimeout(() => {
       toast.success(`Welcome home, ${name}. ❤️`);
@@ -369,6 +375,7 @@ export default function Onboarding() {
                 <input
                   type="text"
                   value={name}
+                  disabled={DEMO_MODE}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Your beautiful name..."
                   className={`
@@ -386,6 +393,11 @@ export default function Onboarding() {
                 />
                 <Sparkles className="absolute right-2 top-3 w-5 h-5 text-rose-400 opacity-0 group-focus-within:opacity-100 transition-opacity duration-500 animate-spin-slow" />
               </div>
+              {DEMO_MODE && (
+                <p className="text-xs text-rose-400 mt-2 text-center">
+                  Demo name. Your version will use your partner's name ❤️
+                </p>
+              )}
 
               <button
                 onClick={handleNameSubmit}
@@ -403,6 +415,17 @@ export default function Onboarding() {
               <h3 className="text-2xl md:text-3xl font-['Parisienne']">
                 This world opens only for your touch..
               </h3>
+              {DEMO_MODE && (
+                <div className="text-xs text-rose-400 mt-3 space-y-1">
+                  <p>
+                    Demo PIN: <span className="font-semibold">1111</span>
+                  </p>
+                  <p className="opacity-80">
+                    In your own love website you will create your personal
+                    secret PIN ❤️
+                  </p>
+                </div>
+              )}
 
               <div className="flex items-center justify-between mb-4 w-full">
                 <button
@@ -523,6 +546,12 @@ export default function Onboarding() {
                   onClick={(e) => {
                     e.stopPropagation();
                     playClick();
+
+                    if (DEMO_MODE) {
+                      setShowLockedModal(true);
+                      return;
+                    }
+
                     setTheme("dark");
                   }}
                   className={`
@@ -568,7 +597,48 @@ export default function Onboarding() {
           )}
         </div>
       </div>
+      {showLockedModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md px-6">
+          <div className="bg-white rounded-3xl p-7 max-w-sm w-full text-center shadow-2xl animate-fade-in">
+            <Sparkles className="w-12 h-12 text-rose-500 mx-auto mb-4 animate-pulse" />
 
+            <h2 className="text-xl font-handwriting text-rose-600 mb-3">
+              Dark Mode is Locked
+            </h2>
+
+            <p className="text-sm text-rose-900/70 mb-4 leading-relaxed">
+              This feature is locked in the demo version.
+              <br />
+              When you create your own love website, you can unlock:
+            </p>
+
+            {/* Feature list */}
+            <div className="text-sm text-rose-900/80 space-y-1 mb-5">
+              <p>🌙 Dark Mode Themes</p>
+              <p>🎵 Custom Background Music</p>
+              <p>💖 Your Partner's Name</p>
+              <p>🔐 Private Secret PIN</p>
+            </div>
+
+            {/* CTA */}
+            <a
+              href="https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block text-sm font-medium text-rose-500 hover:text-rose-600 transition mb-4"
+            >
+              Create Your Own Love Website →
+            </a>
+
+            <button
+              onClick={() => setShowLockedModal(false)}
+              className="w-full py-3 rounded-xl bg-rose-500 text-white hover:bg-rose-600 transition"
+            >
+              Continue Demo ❤️
+            </button>
+          </div>
+        </div>
+      )}
       {/* GLOBAL STYLES */}
       <style>{`
         .white-petal {

@@ -1,12 +1,14 @@
 import reasons from "@/data/reasons.json";
 import { HeartAnimation } from "@/components/HeartAnimation";
 import { BackgroundText } from "@/components/BackgroundText";
-import { ArrowLeft, Heart, Sparkles } from "lucide-react";
+import { ArrowLeft, Heart, Sparkles, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useState, useCallback } from "react";
 import { useMemo } from "react";
 import { storage } from "@/lib/storage";
+import { DEMO_MODE } from "@/lib/demo";
+
 type Reason = {
   id: number;
   text: string;
@@ -14,8 +16,9 @@ type Reason = {
 
 export default function Reasons() {
   const [randomReason, setRandomReason] = useState<Reason | null>(null);
+
   const profile = useMemo(() => storage.getUserProfile(), []);
-const name = profile?.name || "My Love";
+  const name = profile?.name || "My Love";
 
   const shuffleReason = useCallback(() => {
     if (!reasons.length) return;
@@ -25,6 +28,7 @@ const name = profile?.name || "My Love";
 
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
   const BackgroundLayer = useMemo(
     () => (
       <>
@@ -32,8 +36,9 @@ const name = profile?.name || "My Love";
         <BackgroundText />
       </>
     ),
-    [],
+    []
   );
+
   return (
     <div className="min-h-screen romantic-gradient relative overflow-hidden">
       {BackgroundLayer}
@@ -83,12 +88,13 @@ const name = profile?.name || "My Love";
           <h1 className="text-4xl font-handwriting text-foreground drop-shadow-lg">
             100 Reasons Why I Love You {name} ❤️
           </h1>
+
           <p className="text-muted-foreground mt-2 font-medium">
             Every reason comes straight from my heart.
           </p>
         </div>
 
-        {/* Random Reason Popup */}
+        {/* Random Reason */}
         {randomReason && (
           <div className="mb-6 p-6 rounded-xl bg-rose/20 border border-rose/30 shadow-lg animate-fade-in-down text-center">
             <p className="text-rose font-handwriting text-2xl mb-2">
@@ -107,9 +113,9 @@ const name = profile?.name || "My Love";
           </Button>
         </div>
 
-        {/* All Reasons List */}
+        {/* Reasons */}
         <div className="space-y-4 animate-fade-in">
-          {reasons.map((item, index) => (
+          {(DEMO_MODE ? reasons.slice(0, 12) : reasons).map((item, index) => (
             <div
               key={item.id}
               className="
@@ -125,7 +131,6 @@ const name = profile?.name || "My Love";
               "
               style={{ animationDelay: `${index * 0.02}s` }}
             >
-              {/* Decorative small heart */}
               <Heart className="w-5 h-5 text-rose absolute -top-2 -left-2 animate-pulse" />
 
               <p className="font-handwriting text-lg text-foreground leading-relaxed">
@@ -134,9 +139,64 @@ const name = profile?.name || "My Love";
               </p>
             </div>
           ))}
+
+          {/* Locked preview reasons */}
+          {DEMO_MODE &&
+            [13, 14, 15, 16, 17,18,19,20].map((num) => (
+              <div
+                key={num}
+                className="
+                p-4 rounded-xl 
+                bg-white/60 
+                backdrop-blur 
+                border border-rose/20 
+                shadow-soft 
+                relative
+                flex items-center justify-between
+                blur-[2px]
+              "
+              >
+                <p className="font-handwriting text-lg text-foreground">
+                  <span className="font-bold text-rose">{num}. </span>
+                  This love message is waiting to be unlocked ❤️
+                </p>
+
+                <Lock className="text-rose opacity-60" />
+              </div>
+            ))}
         </div>
 
-        {/* Ending ❤️ */}
+        {/* Conversion Section */}
+        {DEMO_MODE && (
+          <div className="mt-8 p-6 rounded-2xl border border-dashed border-rose-300 bg-rose-50/60 text-center">
+
+            <p className="text-rose-600 text-xl font-handwriting mb-2">
+              🔒 80 Hidden Love Messages
+            </p>
+
+            <p className="text-sm text-rose-800/70 mb-4">
+              Imagine your partner smiling while reading all 100 reasons ❤️
+              <br />
+              Create your own love website and fill it with:
+              <br />
+              • Your photos together
+              <br />
+              • Your voice notes
+              <br />
+              • Your memories
+            </p>
+
+            <a
+              href="https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website"
+              target="_blank"
+              className="inline-block px-6 py-3 rounded-xl bg-rose-500 text-white hover:bg-rose-600 transition"
+            >
+              💌 Create My Love Website
+            </a>
+          </div>
+        )}
+
+        {/* Ending */}
         <div className="text-center mt-12 mb-12 animate-fade-in-up">
           <Heart className="w-14 h-14 text-rose mx-auto mb-3 animate-pulse drop-shadow-lg" />
 
@@ -159,6 +219,28 @@ const name = profile?.name || "My Love";
           </Button>
         </div>
       </div>
+
+      {/* Floating CTA */}
+      {DEMO_MODE && (
+        <a
+          href="https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website"
+          target="_blank"
+          className="
+          fixed bottom-6 right-6
+          px-6 py-3
+          rounded-full
+          bg-rose-500
+          text-white
+          shadow-xl
+          hover:bg-rose-600
+          hover:scale-105
+          transition
+          z-[100]
+        "
+        >
+          ❤️ Create My Love Website
+        </a>
+      )}
     </div>
   );
 }

@@ -11,8 +11,10 @@ import { storage } from "@/lib/storage";
 export default function Affirmations() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [favorites, setFavorites] = useState<string[]>([]);
+  const [showPromo, setShowPromo] = useState(false);
   const [fadeDirection, setFadeDirection] = useState("fade-in");
   const profile = storage.getUserProfile();
+  const [clickCount, setClickCount] = useState(0);
   const name = profile?.name || "my love";
 
   useEffect(() => {
@@ -41,10 +43,21 @@ export default function Affirmations() {
   };
 
   const nextAffirmation = () => {
+    if (clickCount >= 1) {
+      setShowPromo(true);
+      return;
+    }
+
+    setClickCount((prev) => prev + 1);
     transition((currentIndex + 1) % affirmationsData.length);
   };
-
   const randomAffirmation = () => {
+    if (clickCount >= 1) {
+      setShowPromo(true);
+      return;
+    }
+
+    setClickCount((prev) => prev + 1);
     transition(Math.floor(Math.random() * affirmationsData.length));
   };
 
@@ -145,6 +158,23 @@ export default function Affirmations() {
           from { opacity: 1; transform: scale(1); }
           to { opacity: 0; transform: scale(0.97); }
         }
+          @keyframes zoomLove {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-zoomLove {
+  animation: zoomLove 0.45s ease;
+}
       `}</style>
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-3xl">
@@ -234,6 +264,46 @@ export default function Affirmations() {
           </p>
         </Card>
       </div>
+      {showPromo && (
+        <div className="fixed inset-0 z-[120] flex items-center justify-center p-4">
+          <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={() => setShowPromo(false)}
+          />
+
+          <div className="relative bg-white rounded-3xl p-6 max-w-md w-full text-center shadow-[0_20px_60px_rgba(255,120,150,0.35)] animate-zoomLove">
+            <button
+              onClick={() => setShowPromo(false)}
+              className="absolute top-3 right-3 text-gray-400 hover:text-gray-700"
+            >
+              ✕
+            </button>
+
+            <div className="text-4xl mb-3">✨</div>
+
+            <h2 className="text-xl font-semibold mb-2">
+              Personalized Love Website ❤️
+            </h2>
+
+            <p className="text-muted-foreground text-sm mb-5 leading-relaxed">
+              Imagine sending your partner a website filled with your love
+              story, photos, songs, messages and memories together 💖
+            </p>
+
+            <Button
+              className="rounded-full px-6"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                  "_blank",
+                )
+              }
+            >
+              Create My Love Website ❤️
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

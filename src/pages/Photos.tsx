@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Heart,
+  Sparkles,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
@@ -115,15 +116,15 @@ export default function Photos() {
       <div className="container mx-auto px-4 py-8 max-w-6xl relative z-10">
         <Link to="/home" replace>
           <Button
-    className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
-    bg-white/40 backdrop-blur-md border border-white/40 
+            className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
+    bg-white/40 backdrop-blur hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,150,170,0.4)] transition-md border border-white/40 
     text-rose-700 hover:bg-white/60 
     shadow-[0_6px_20px_rgba(255,120,150,0.25)] 
     transition-all duration-300 hover:scale-105"
-  >
-    <ArrowLeft className="w-4 h-4" />
-    Back Home
-  </Button>
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back Home
+          </Button>
         </Link>
 
         <div className="text-center mb-12">
@@ -147,6 +148,15 @@ export default function Photos() {
             )}
           </Button>
         </div>
+        <Card className="mb-8 p-6 text-center bg-white/60 backdrop-blur border border-rose-200">
+          <Sparkles className="w-6 h-6 mx-auto text-rose mb-2 animate-pulse" />
+          <p className="font-handwriting text-xl text-rose-700">
+            Imagine this gallery filled with your own memories ❤️
+          </p>
+          <p className="text-sm text-muted-foreground mt-1">
+            Upload your photos and videos when you create your own love website.
+          </p>
+        </Card>
 
         {/* GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -205,6 +215,15 @@ export default function Photos() {
               </div>
             </Card>
           ))}
+          <Card className="rounded-2xl border-dashed border-2 border-rose-300 flex flex-col items-center justify-center text-center p-6 bg-white/40 backdrop-blur hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,150,170,0.4)] transition">
+            <Heart className="w-8 h-8 text-rose animate-pulse mb-2" />
+            <p className="font-handwriting text-lg text-rose">
+              Your next memory could appear here ❤️
+            </p>
+            <p className="text-sm text-muted-foreground mt-1">
+              Add your own photos when you create your website.
+            </p>
+          </Card>
         </div>
 
         {/* SLIDESHOW VIEW */}
@@ -248,6 +267,9 @@ export default function Photos() {
               <p className="opacity-80">{photosData[slideIndex].date}</p>
               <p className="italic opacity-90 mt-1">
                 "{photosData[slideIndex].caption}"
+              </p>
+              <p className="mt-3 text-sm opacity-80">
+                Imagine your partner watching your memories here ❤️
               </p>
             </div>
 
@@ -325,6 +347,17 @@ export default function Photos() {
           <p className="italic text-foreground/90">
             "Our memories are my favorite love story 📷💗"
           </p>
+          <p className="text-sm text-muted-foreground mt-3">
+  Imagine this gallery filled with your own memories ❤️
+</p>
+
+<a
+  href="https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website"
+  target="_blank"
+  className="inline-block mt-4 px-6 py-3 rounded-xl bg-rose-500 text-white hover:bg-rose-600 transition"
+>
+  ❤️ Create My Love Website
+</a>
         </Card>
       </div>
 

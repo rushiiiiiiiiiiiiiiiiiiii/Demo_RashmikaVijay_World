@@ -8,6 +8,7 @@ import {
   ChevronRight,
   Play,
   Pause,
+  X,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import timeline from "@/data/timeline.json";
@@ -17,8 +18,9 @@ export default function Timeline() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [autoplay, setAutoplay] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
-
-  const currentMoment = timeline[currentIndex];
+  const [createModal, setCreateModal] = useState(false);
+  const isDemoCard = currentIndex === timeline.length;
+  const currentMoment = timeline[currentIndex] ?? {};
 
   /* ----------- HANDLE AUTOPLAY ----------- */
   useEffect(() => {
@@ -34,20 +36,19 @@ export default function Timeline() {
   }, [autoplay]);
 
   /* Reset autoplay when manually changed */
-  useEffect(() => {
-    if (!autoplay) return;
+  // useEffect(() => {
+  //   if (!autoplay) return;
 
-    const interval = setInterval(nextMoment, 4000);
+  //   const interval = setInterval(nextMoment, 4000);
 
-    return () => clearInterval(interval);
-  }, [autoplay, currentIndex]);
+  //   return () => clearInterval(interval);
+  // }, [autoplay, currentIndex]);
 
   const nextMoment = () => {
-    setCurrentIndex((prev) => (prev + 1) % timeline.length);
+    setCurrentIndex((prev) => (prev + 1 > timeline.length ? 0 : prev + 1));
   };
-
   const prevMoment = () => {
-    setCurrentIndex((prev) => (prev - 1 + timeline.length) % timeline.length);
+    setCurrentIndex((prev) => (prev - 1 < 0 ? timeline.length : prev - 1));
   };
 
   const toggleAutoplay = () => {
@@ -112,90 +113,156 @@ export default function Timeline() {
         {/* CARD */}
         <Card className="p-8 animate-fade-in bg-card/95 backdrop-blur shadow-[var(--shadow-romantic)]">
           <div key={currentIndex} className="space-y-6 fade-slide">
-            {/* EMOJI + TITLE */}
-            <div className="text-center">
-              <div className="text-6xl mb-4 animate-bounce-slow">
-                {currentMoment.emoji}
-              </div>
-              <div className="text-sm text-muted-foreground mb-2">
-                {currentMoment.date}
-              </div>
-              <h2 className="text-3xl font-handwriting text-foreground mb-4">
-                {currentMoment.title}
-              </h2>
-            </div>
+            {isDemoCard ? (
+              <>
+                <div className="text-center">
+                  <div className="text-6xl mb-4">✨</div>
 
-            {/* IMAGE */}
-            <div className="relative w-full max-h-[600px] rounded-lg overflow-hidden border-4 border-white shadow-lg bg-black/10 flex justify-center items-center">
-              <img
-                loading="lazy"
-                src={currentMoment.image}
-                loading="lazy"
-                alt={currentMoment.title}
-                className="h-full w-auto object-contain fade-slide will-change-transform"
-                onError={(e) => (e.currentTarget.src = "/placeholder.svg")}
-              />
+                  <h2 className="text-3xl font-handwriting text-foreground mb-2">
+                    Your Love Story Could Be Here ❤️
+                  </h2>
 
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
-                <p className="text-white text-sm font-handwriting">
-                  Moment {currentIndex + 1} of {timeline.length}
-                </p>
-              </div>
-            </div>
+                  <p className="text-muted-foreground">
+                    Add your memories, photos and journey with your partner.
+                  </p>
+                </div>
 
-            {/* DESCRIPTION */}
-            <div className="prose prose-lg max-w-none">
-              <p className="text-foreground leading-relaxed text-center fade-slide">
-                {currentMoment.description}
-              </p>
-            </div>
-
-            {/* NAVIGATION */}
-            <div className="flex items-center justify-center gap-4 pt-4">
-              <Button variant="outline" size="icon" onClick={prevMoment}>
-                <ChevronLeft className="w-5 h-5" />
-              </Button>
-
-              <div className="flex gap-2">
-                {timeline.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentIndex(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === currentIndex
-                        ? "bg-primary w-8"
-                        : "bg-muted-foreground/30"
-                    }`}
+                <div className="relative w-full max-h-[500px] rounded-lg overflow-hidden border-4 border-white shadow-lg bg-black/10 flex justify-center items-center blur-[2px]">
+                  <img
+                    src="/placeholder.svg"
+                    alt="Your story"
+                    className="h-full w-auto object-contain"
                   />
-                ))}
-              </div>
+                </div>
 
-              <Button variant="outline" size="icon" onClick={nextMoment}>
-                <ChevronRight className="w-5 h-5" />
-              </Button>
-            </div>
+                <div className="text-center">
+                  <Button
+                    onClick={() => setCreateModal(true)}
+                    className="rounded-full px-6"
+                  >
+                    Add Your Story ❤️
+                  </Button>
+                </div>
+              </>
+            ) : (
+              <>
+                <div className="text-center">
+                  <div className="text-6xl mb-4 animate-bounce-slow">
+                    {currentMoment.emoji}
+                  </div>
+                  <div className="text-sm text-muted-foreground mb-2">
+                    {currentMoment.date}
+                  </div>
+                  <h2 className="text-3xl font-handwriting text-foreground mb-4">
+                    {currentMoment.title}
+                  </h2>
+                </div>
 
-            {/* SLIDESHOW BUTTON */}
-            <div className="text-center mt-4">
-              <Button
-                variant="ghost"
-                onClick={toggleAutoplay}
-                className="text-sm"
-              >
-                {autoplay ? (
-                  <>
-                    <Pause className="w-4 h-4 mr-2" /> Stop Slideshow
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-4 h-4 mr-2" /> Play Slideshow
-                  </>
-                )}
-              </Button>
-            </div>
+                {/* IMAGE */}
+                <div className="relative w-full max-h-[600px] rounded-lg overflow-hidden border-4 border-white shadow-lg bg-black/10 flex justify-center items-center">
+                  <img
+                    loading="lazy"
+                    src={currentMoment.image}
+                    alt={currentMoment.title}
+                    className="h-full w-auto object-contain fade-slide will-change-transform"
+                    onError={(e) => (e.currentTarget.src = "/placeholder.svg")}
+                  />
+
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-4">
+                    <p className="text-white text-sm font-handwriting">
+                      Moment {currentIndex + 1} of {timeline.length}
+                    </p>
+                  </div>
+                </div>
+
+                {/* DESCRIPTION */}
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-foreground leading-relaxed text-center fade-slide">
+                    {currentMoment.description}
+                  </p>
+                </div>
+
+                {/* NAVIGATION */}
+                <div className="flex items-center justify-center gap-4 pt-4">
+                  <Button variant="outline" size="icon" onClick={prevMoment}>
+                    <ChevronLeft className="w-5 h-5" />
+                  </Button>
+
+                  <div className="flex gap-2">
+                    {[...timeline, "demo"].map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentIndex(index)}
+                        className={`w-2 h-2 rounded-full transition-all ${
+                          index === currentIndex
+                            ? "bg-primary w-8"
+                            : "bg-muted-foreground/30"
+                        }`}
+                      />
+                    ))}
+                  </div>
+
+                  <Button variant="outline" size="icon" onClick={nextMoment}>
+                    <ChevronRight className="w-5 h-5" />
+                  </Button>
+                </div>
+
+                {/* SLIDESHOW BUTTON */}
+                <div className="text-center mt-4">
+                  <Button
+                    variant="ghost"
+                    onClick={toggleAutoplay}
+                    className="text-sm"
+                  >
+                    {autoplay ? (
+                      <>
+                        <Pause className="w-4 h-4 mr-2" /> Stop Slideshow
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-4 h-4 mr-2" /> Play Slideshow
+                      </>
+                    )}
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </Card>
       </div>
+      {createModal && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="p-6 max-w-md w-full text-center relative">
+            <button
+              className="absolute top-3 right-3"
+              onClick={() => setCreateModal(false)}
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <h2 className="text-xl font-semibold mb-3">
+              Create Your Love Story Website ❤️
+            </h2>
+
+            <p className="text-muted-foreground text-sm mb-5">
+              I can create a personalized romantic website for you and your
+              partner with memories, photos, music and your full love story.
+            </p>
+
+            <Button
+              className="w-full"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                  "_blank",
+                )
+              }
+            >
+              Create Mine
+            </Button>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

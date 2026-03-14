@@ -8,26 +8,40 @@ import { useState, useEffect, useMemo } from "react";
 import shayarisData from "@/data/shayaris.json";
 import { storage } from "@/lib/storage";
 export default function Shayaris() {
+  const MAX_DEMO_SHAYARIS = 2;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showTranslation, setShowTranslation] = useState(false);
   const profile = useMemo(() => storage.getUserProfile(), []);
   const name = profile?.name || "My Love";
-
+  const [lockedShayariModal, setLockedShayariModal] = useState(false);
+  const [shayariViews, setShayariViews] = useState(1);
   // random on open
   useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * shayarisData.length);
+    const randomIndex = Math.floor(Math.random() * MAX_DEMO_SHAYARIS);
     setCurrentIndex(randomIndex);
   }, []);
 
   const nextShayari = () => {
+    if (shayariViews >= MAX_DEMO_SHAYARIS) {
+      setLockedShayariModal(true);
+      return;
+    }
+
     setCurrentIndex((prev) => (prev + 1) % shayarisData.length);
     setShowTranslation(false);
+    setShayariViews((prev) => prev + 1);
   };
 
   const randomShayari = () => {
+    if (shayariViews >= MAX_DEMO_SHAYARIS) {
+      setLockedShayariModal(true);
+      return;
+    }
+
     const randomIndex = Math.floor(Math.random() * shayarisData.length);
     setCurrentIndex(randomIndex);
     setShowTranslation(false);
+    setShayariViews((prev) => prev + 1);
   };
 
   const current = shayarisData[currentIndex] ?? {
@@ -126,7 +140,7 @@ export default function Shayaris() {
         <div className="text-center mb-10 animate-fade-in">
           <div className="text-6xl mb-3">📖</div>
           <h1 className="text-5xl font-handwriting text-foreground mb-2">
-            My Shayaris For You
+            Shayaris Vijay Wrote For Rashmika ❤️
           </h1>
           <p className="text-muted-foreground text-lg">
             Beautiful words from my heart to yours 💕
@@ -167,7 +181,7 @@ export default function Shayaris() {
           </p>
 
           <p className="text-center text-muted-foreground italic mb-6">
-            — Your Rushi ❤️
+            — Your Vijay ❤️
           </p>
 
           {/* Translation */}
@@ -188,7 +202,7 @@ export default function Shayaris() {
               {showTranslation ? "Hide" : "Show"} Translation
             </Button>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center cursor-pointer gap-3">
               <Button variant="outline" onClick={nextShayari}>
                 Next
               </Button>
@@ -201,7 +215,7 @@ export default function Shayaris() {
 
           {/* bullets */}
           <div className="flex items-center justify-center gap-2 mt-8">
-            {shayarisData.map((_, idx) => (
+            {shayarisData.slice(0, MAX_DEMO_SHAYARIS).map((_, idx) => (
               <div
                 key={idx}
                 className={`h-2 rounded-full transition-all duration-300 ${
@@ -221,6 +235,42 @@ export default function Shayaris() {
             “Every word is written only for you, {name} 💗”
           </p>
         </Card>
+
+        {lockedShayariModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              onClick={() => setLockedShayariModal(false)}
+            />
+
+            <Card className="relative z-10 p-6 max-w-md w-full text-center">
+              <BookHeart className="w-10 h-10 mx-auto text-rose mb-3 animate-pulse" />
+
+              <h3 className="text-xl font-semibold mb-2">
+                More Shayaris Are Waiting For Your Love ❤️
+              </h3>
+
+              <p className="text-muted-foreground text-sm mb-4">
+                This demo shows only a few shayaris. In your personal love
+                website you can add unlimited shayaris written specially for
+                your partner.
+              </p>
+
+              <Button
+                size="sm"
+                className="rounded-full whitespace-nowrap"
+                onClick={() =>
+                  window.open(
+                    "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                    "_blank",
+                  )
+                }
+              >
+                Create Mine
+              </Button>
+            </Card>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -20,7 +20,8 @@ export default function Moods() {
   const [selectedMood, setSelectedMood] = useState<Mood | null>(null);
   const profile = storage.getUserProfile();
   const name = profile?.name || "my love";
-
+  const [showPromo, setShowPromo] = useState(false);
+  const FREE_MOODS = 3;
   const moodColors = useMemo(
     () => ({
       rose: "from-rose-light to-rose",
@@ -79,28 +80,50 @@ export default function Moods() {
 
         {!selectedMood ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 animate-fade-in will-change-transform">
-            {moodsData.map((mood, index) => (
-              <Card
-                key={mood.id}
-                className="p-8 hover:shadow-[var(--shadow-romantic)] transition-transform duration-300 hover:scale-105 will-change-transform bg-card/95 backdrop-blur cursor-pointer group"
-                onClick={() => setSelectedMood(mood)}
-                style={{ animationDelay: `${index * 0.1}s` }}
-              >
-                <div className="text-center">
-                  <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {mood.emoji}
+            {moodsData.map((mood, index) => {
+              const locked = index >= FREE_MOODS;
+
+              return (
+                <Card
+                  key={mood.id}
+                  className={`p-8 transition-transform duration-300 bg-card/95 backdrop-blur cursor-pointer group relative overflow-hidden
+      ${locked ? "opacity-70" : "hover:shadow-[var(--shadow-romantic)] hover:scale-105"}
+      `}
+                  onClick={() => {
+                    if (locked) {
+                      setShowPromo(true);
+                    } else {
+                      setSelectedMood(mood);
+                    }
+                  }}
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  {locked && (
+                    <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-10">
+                      <div className="text-center">
+                        <Heart className="w-8 h-8 text-rose mx-auto mb-2" />
+                        <p className="text-sm font-medium">
+                          Unlock this mood ❤️
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  <div className="text-center">
+                    <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                      {mood.emoji}
+                    </div>
+                    <h3 className="text-2xl font-handwriting text-foreground mb-2">
+                      {mood.name}
+                    </h3>
+                    <div
+                      className={`h-2 rounded-full bg-gradient-to-r ${
+                        moodColors[mood.color] || "from-rose-light to-rose"
+                      } mt-4`}
+                    />
                   </div>
-                  <h3 className="text-2xl font-handwriting text-foreground mb-2">
-                    {mood.name}
-                  </h3>
-                  <div
-                    className={`h-2 rounded-full bg-gradient-to-r ${
-                      moodColors[mood.color] || "from-rose-light to-rose"
-                    } mt-4`}
-                  />
-                </div>
-              </Card>
-            ))}
+                </Card>
+              );
+            })}
           </div>
         ) : (
           <div className="animate-fade-in space-y-6">
@@ -148,20 +171,6 @@ export default function Moods() {
                   </div>
                 </div>
 
-                {/* {selectedMood.voice && (
-                    <Card className="p-6 bg-gradient-to-r from-primary/10 to-rose/10 border-primary/20">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <p className="text-sm text-muted-foreground mb-1">Voice Note</p>
-                          <p className="font-medium text-foreground">Listen to my voice</p>
-                        </div>
-                        <Button size="lg" className="rounded-full">
-                          <Play className="w-5 h-5" />
-                        </Button>
-                      </div>
-                    </Card>
-                  )} */}
-
                 <div className="bg-gradient-to-r from-peach/20 to-rose/20 rounded-lg p-6 border border-peach/30">
                   <h3 className="font-semibold text-foreground mb-2">
                     Let's Do This:
@@ -186,6 +195,41 @@ export default function Moods() {
           </div>
         )}
       </div>
+      {showPromo && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="p-6 max-w-md w-full text-center relative">
+            <button
+              className="absolute top-3 right-3"
+              onClick={() => setShowPromo(false)}
+            >
+              ✕
+            </button>
+
+            <Sparkles className="w-10 h-10 mx-auto text-rose mb-3" />
+
+            <h2 className="text-xl font-semibold mb-2">
+              Unlock All Mood Features ❤️
+            </h2>
+
+            <p className="text-muted-foreground text-sm mb-5">
+              In your own personalized love website you can add unlimited moods,
+              messages, memories and romantic surprises for your partner.
+            </p>
+
+            <Button
+              className="w-full"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                  "_blank",
+                )
+              }
+            >
+              Create My Love Website ❤️
+            </Button>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

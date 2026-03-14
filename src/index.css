@@ -397,3 +397,37 @@ All colors MUST be HSL.
   0% { transform: translateX(-100%); }
   100% { transform: translateX(300%); }
 }
+
+@keyframes demoWatermarkMove {
+  0% {
+    transform: rotate(-25deg) translateX(0px);
+  }
+  50% {
+    transform: rotate(-25deg) translateX(30px);
+  }
+  100% {
+    transform: rotate(-25deg) translateX(0px);
+  }
+}
+
+.animate-demo-watermark {
+  animation: demoWatermarkMove 12s ease-in-out infinite;
+}
+@keyframes giftReveal {
+  0% { transform: scale(.85); opacity:0 }
+  100% { transform: scale(1); opacity:1 }
+}
+
+.animate-giftReveal {
+  animation: giftReveal .45s ease-out;
+}
+
+@keyframes floatHeart {
+  0% { transform: translateY(0); opacity:.6 }
+  50% { transform: translateY(-12px); opacity:1 }
+  100% { transform: translateY(0); opacity:.6 }
+}
+
+.animate-floatHeart {
+  animation: floatHeart 3s ease-in-out infinite;
+}

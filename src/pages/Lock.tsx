@@ -6,6 +6,7 @@ import { storage } from "@/lib/storage";
 import { HeartAnimation } from "@/components/HeartAnimation";
 import { toast } from "sonner";
 import { useMemo } from "react";
+import { DEMO_MODE, DEMO_PROFILE } from "@/lib/demo";
 
 export default function LockScreen() {
   const navigate = useNavigate();
@@ -13,7 +14,8 @@ export default function LockScreen() {
   const [isUnlocking, setIsUnlocking] = useState(false);
 
   const profile = storage.getUserProfile();
-  const savedPin = storage.getPin();
+  const savedPin = DEMO_MODE ? DEMO_PROFILE.pin : storage.getPin();
+
   useEffect(() => {
     if (storage.isUnlocked()) {
       navigate("/home");
@@ -32,12 +34,15 @@ export default function LockScreen() {
     setPin((prev) => prev.slice(0, -1));
   };
 
-  // ⭐ CLEAN AUTO UNLOCK
   useEffect(() => {
     if (!savedPin) return;
 
     if (pin.length === savedPin.length && !isUnlocking) {
-      if (storage.verifyPin(pin)) {
+      const isValid = DEMO_MODE
+        ? pin === DEMO_PROFILE.pin
+        : storage.verifyPin(pin);
+
+      if (isValid) {
         setIsUnlocking(true);
 
         setTimeout(() => {
@@ -50,7 +55,6 @@ export default function LockScreen() {
       }
     }
   }, [pin, savedPin, navigate, isUnlocking]);
-
   const keypadNumbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
   const BackgroundLayer = useMemo(
     () => (
@@ -72,8 +76,10 @@ export default function LockScreen() {
           <h1 className="text-3xl font-handwriting text-rose-600">
             Welcome back, {profile?.name || "My Love"}
           </h1>
-
-          <p className="text-sm text-rose-500/80">Enter your secret PIN ❤️</p>
+          {DEMO_MODE && (
+            <p className="text-xs text-rose-400 mt-1">Demo PIN: 1111</p>
+          )}
+          <p className="text-sm text-rose-500/80">Enter Demo secret PIN ❤️</p>
 
           {/* PIN DOTS */}
           <div className="flex justify-center gap-4 my-6">

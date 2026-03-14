@@ -11,10 +11,10 @@ export const BackgroundText = () => {
     `love you ${name}`,
     `${name} forever`,
     "My sunshine",
-    "My soulmate",
-    "My princess",
-    "Pikesh ❤️",
-    `${name} ❤️`,
+    "My soulmate ❤️",
+    // "My princess",
+    // "My World ❤️",
+    // `${name} ❤️`,
     "Always yours",
   ];
 

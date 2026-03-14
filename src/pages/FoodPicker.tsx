@@ -18,13 +18,18 @@ export default function FoodPicker() {
   const [selectedFood, setSelectedFood] = useState<Food[]>([]);
   const [surprise, setSurprise] = useState<Food | null>(null);
   const [confirmOpen, setConfirmOpen] = useState(false);
-
+  const [showPromo, setShowPromo] = useState(false);
+  const FREE_FOODS = 6;
   const toggleFood = (food: Food) => {
     setSelectedFood((prev) =>
       prev.find((f) => f.id === food.id)
         ? prev.filter((f) => f.id !== food.id)
         : [...prev, food],
     );
+    if (selectedFood.length >= 3) {
+      setShowPromo(true);
+      return;
+    }
   };
 
   const surpriseMe = () => {
@@ -141,32 +146,93 @@ export default function FoodPicker() {
 
         {/* Food Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {foodData.map((food, index) => (
-            <Card
-              key={food.id}
-              className={`p-6 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 md:hover:scale-105 bg-card/95 backdrop-blur cursor-pointer animate-fade-in group ${
-                selectedIds.has(food.id)
-                  ? "border-primary shadow-[var(--shadow-romantic)]"
-                  : ""
-              }`}
-              style={{ animationDelay: `${index * 0.05}s` }}
-              onClick={() => toggleFood(food)}
-            >
-              <div className="text-center">
-                <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                  {food.emoji}
-                </div>
-                <h3 className="font-handwriting text-lg text-foreground mb-1">
-                  {food.name}
-                </h3>
-                <p className="text-xs text-muted-foreground">
-                  {food.description}
-                </p>
-              </div>
-            </Card>
-          ))}
-        </div>
+          {foodData.map((food, index) => {
+            const locked = index >= FREE_FOODS;
 
+            return (
+              <Card
+                key={food.id}
+                className={`p-6 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 md:hover:scale-105 bg-card/95 backdrop-blur cursor-pointer animate-fade-in group ${
+                  selectedIds.has(food.id)
+                    ? "border-primary shadow-[var(--shadow-romantic)]"
+                    : ""
+                }`}
+                style={{ animationDelay: `${index * 0.05}s` }}
+                onClick={() => {
+                  if (locked) {
+                    setShowPromo(true);
+                  } else {
+                    toggleFood(food);
+                  }
+                }}
+              >
+                {locked && (
+                  <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-10">
+                    <div className="text-center">
+                      <Heart className="w-7 h-7 text-rose mx-auto mb-1" />
+                      <p className="text-xs font-medium animate-pulse">
+                        Unlock more foods ❤️
+                      </p>
+                    </div>
+                  </div>
+                )}
+                <div className="text-center">
+                  <div className="text-6xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                    {food.emoji}
+                  </div>
+                  <h3 className="font-handwriting text-lg text-foreground mb-1">
+                    {food.name}
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    {food.description}
+                  </p>
+                </div>
+              </Card>
+            );
+          })}
+        </div>
+        <Card className="p-20 mt-6 hover:shadow-[var(--shadow-romantic)] bg-card/95 backdrop-blur transition-all duration-300 animate-fade-in relative overflow-hidden">
+          {/* Overlay */}
+          <div className="absolute inset-0 backdrop-blur-[0px] bg-white/40 z-10 flex flex-col items-center justify-center text-center p-6">
+            <span className="text-5xl mb-2">🍲</span>
+
+            <h3 className="font-semibold text-lg text-foreground">
+              Your Partner’s Favorite Food ❤️
+            </h3>
+
+            <Button
+              size="sm"
+              onClick={() => setShowPromo(true)}
+              className="rounded-full p-2 mt-3 bg-primary text-white hover:bg-primary/90 shadow-[0_4px_15px_rgba(255,120,150,0.25)] transition-all duration-300 hover:scale-105"
+            >
+              Add Favorite Dish ❤️
+            </Button>
+
+            <p className="text-sm text-muted-foreground max-w-sm mt-2">
+              Add your partner’s favorite food and plan romantic dinner dates
+              together.
+            </p>
+
+            <p className="text-xs italic text-muted-foreground mt-1">
+              Unlock this in your personal love website 🍽️
+            </p>
+          </div>
+
+          {/* Fake blurred layout */}
+          <div className="flex items-center gap-4 blur-[2px]">
+            <div className="text-5xl">🍲</div>
+
+            <div>
+              <h3 className="font-semibold text-lg text-foreground">
+                Favorite Dish
+              </h3>
+
+              <p className="text-sm text-muted-foreground">
+                Waiting to be added ❤️
+              </p>
+            </div>
+          </div>
+        </Card>
         {/* If food selected */}
         {selectedFood.length > 0 && (
           <Card className="mt-8 p-8 bg-card/95 backdrop-blur shadow-[var(--shadow-romantic)] animate-fade-in">
@@ -224,6 +290,41 @@ export default function FoodPicker() {
           </p>
         </Card>
       </div>
+      {showPromo && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="p-6 max-w-md w-full text-center relative">
+            <button
+              className="absolute top-3 right-3"
+              onClick={() => setShowPromo(false)}
+            >
+              ✕
+            </button>
+
+            <span className="text-4xl mb-2 block">🍽️</span>
+
+            <h2 className="text-xl font-semibold mb-2">
+              Build Your Own Love Website ❤️
+            </h2>
+
+            <p className="text-muted-foreground text-sm mb-5">
+              Create a personalized romantic website with food dates, memories,
+              songs, love messages and surprises for your partner.
+            </p>
+
+            <Button
+              className="w-full"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                  "_blank",
+                )
+              }
+            >
+              Create My Love Website ❤️
+            </Button>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

@@ -67,7 +67,8 @@ export default function OurFutureTogether() {
   const [activeTab, setActiveTab] = useState("All");
   const [selected, setSelected] = useState<Moment | null>(null);
   const [showPinnedOnly, setShowPinnedOnly] = useState(false);
-
+  const [showPromo, setShowPromo] = useState(false);
+  const FREE_MOMENTS = 5;
   // derived lists
   const filtered = momentsData.filter((m) => {
     if (showPinnedOnly && !state.pinned.includes(m.id)) return false;
@@ -146,15 +147,15 @@ export default function OurFutureTogether() {
         <div className="mb-6">
           <Link to="/home" replace>
             <Button
-    className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
+              className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
     bg-white/40 backdrop-blur-md border border-white/40 
     text-rose-700 hover:bg-white/60 
     shadow-[0_6px_20px_rgba(255,120,150,0.25)] 
     transition-all duration-300 hover:scale-105"
-  >
-    <ArrowLeft className="w-4 h-4" />
-    Back Home
-  </Button>
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Back Home
+            </Button>
           </Link>
         </div>
 
@@ -244,75 +245,100 @@ export default function OurFutureTogether() {
 
         {/* Grid */}
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((item, idx) => (
-            <Card
-              key={item.id}
-              className="overflow-hidden rounded-2xl shadow-md bg-card/60 backdrop-blur animate-fade-in transform transition md:hover:scale-[1.02]"
-              style={{ animationDelay: `${idx * 0.03}s` }}
-            >
-              <div className="h-48 w-full overflow-hidden relative">
-                <img
-                  loading="lazy"
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 animate-fade-in" />
-                <div className="absolute top-3 right-3 flex gap-2">
-                  <button
-                    onClick={() => togglePin(item.id)}
-                    className={`p-2 rounded-full backdrop-blur bg-white/10 ${isPinned(item.id) ? "ring-2 ring-rose/40" : ""}`}
-                    title={isPinned(item.id) ? "Unpin" : "Pin"}
-                  >
-                    <Pin
-                      className={`w-4 h-4 ${isPinned(item.id) ? "text-rose" : "text-white"}`}
-                    />
-                  </button>
-                  <button
-                    onClick={() => toggleComplete(item.id)}
-                    className={`p-2 rounded-full backdrop-blur bg-white/10 ${isCompleted(item.id) ? "ring-2 ring-green-300" : ""}`}
-                    title={
-                      isCompleted(item.id) ? "Mark as not done" : "Mark as done"
-                    }
-                  >
-                    <CheckCircle
-                      className={`w-4 h-4 ${isCompleted(item.id) ? "text-green-300" : "text-white"}`}
-                    />
-                  </button>
-                </div>
-              </div>
+          {filtered.map((item, idx) => {
+            const locked = idx >= FREE_MOMENTS;
 
-              <div className="p-6">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="text-2xl font-handwriting text-foreground mb-1">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mb-2">
-                      {item.description}
-                    </p>
-                    <div className="text-xs text-foreground/70 italic">
-                      {item.category}
-                    </div>
+            return (
+              <Card
+                key={item.id}
+                className={`relative overflow-hidden rounded-2xl shadow-md bg-card/60 backdrop-blur animate-fade-in transform transition md:hover:scale-[1.02] ${
+                  locked ? "opacity-70" : ""
+                }`}
+                style={{ animationDelay: `${idx * 0.03}s` }}
+                onClick={() => {
+                  if (locked) {
+                    setShowPromo(true);
+                  }
+                }}
+              >
+                <div className="h-48 w-full overflow-hidden relative">
+                  <img
+                    loading="lazy"
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 animate-fade-in" />
+                  <div className="absolute top-3 right-3 flex gap-2">
+                    <button
+                      onClick={() => togglePin(item.id)}
+                      className={`p-2 rounded-full backdrop-blur bg-white/10 ${isPinned(item.id) ? "ring-2 ring-rose/40" : ""}`}
+                      title={isPinned(item.id) ? "Unpin" : "Pin"}
+                    >
+                      <Pin
+                        className={`w-4 h-4 ${isPinned(item.id) ? "text-rose" : "text-white"}`}
+                      />
+                    </button>
+                    <button
+                      onClick={() => toggleComplete(item.id)}
+                      className={`p-2 rounded-full backdrop-blur bg-white/10 ${isCompleted(item.id) ? "ring-2 ring-green-300" : ""}`}
+                      title={
+                        isCompleted(item.id)
+                          ? "Mark as not done"
+                          : "Mark as done"
+                      }
+                    >
+                      <CheckCircle
+                        className={`w-4 h-4 ${isCompleted(item.id) ? "text-green-300" : "text-white"}`}
+                      />
+                    </button>
                   </div>
                 </div>
+                {locked && (
+                  <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-20">
+                    <div className="text-center">
+                      <Heart className="w-8 h-8 text-rose mx-auto mb-2" />
+                      <p className="text-sm font-medium">
+                        Add your own moments ❤️
+                      </p>
+                    </div>
+                  </div>
+                )}
+                <div className="p-6">
+                  <div className="flex items-start justify-between">
+                    <div>
+                      <h3 className="text-2xl font-handwriting text-foreground mb-1">
+                        {item.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground mb-2">
+                        {item.description}
+                      </p>
+                      <div className="text-xs text-foreground/70 italic">
+                        {item.category}
+                      </div>
+                    </div>
+                  </div>
 
-                <div className="mt-4 flex gap-2">
-                  <Button className="flex-1" onClick={() => setSelected(item)}>
-                    I Want This With You ❤️
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() => {
-                      togglePin(item.id);
-                    }}
-                  >
-                    {isPinned(item.id) ? "Pinned" : "Pin"}
-                  </Button>
+                  <div className="mt-4 flex gap-2">
+                    <Button
+                      className="flex-1"
+                      onClick={() => setSelected(item)}
+                    >
+                      I Want This With You ❤️
+                    </Button>
+                    <Button
+                      variant="outline"
+                      onClick={() => {
+                        togglePin(item.id);
+                      }}
+                    >
+                      {isPinned(item.id) ? "Pinned" : "Pin"}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </section>
 
         {/* Footer controls */}

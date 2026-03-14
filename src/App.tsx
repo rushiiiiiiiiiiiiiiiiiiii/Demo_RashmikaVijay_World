@@ -3,10 +3,11 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { storage } from "./lib/storage";
 import { lazy, Suspense } from "react";
-
+import DemoWatermark from "@/components/DemoWatermark";
+import DemoBadge from "@/components/DemoBadge";
 import { Heart } from "lucide-react";
 const Entry = lazy(() => import("./pages/Entry"));
 const Onboarding = lazy(() => import("./pages/Onboarding"));
@@ -29,10 +30,12 @@ const SpecialEvents = lazy(() => import("./pages/SpecialEvents"));
 const FoodPicker = lazy(() => import("./pages/FoodPicker"));
 const Proposals = lazy(() => import("./pages/Proposals"));
 const Reasons = lazy(() => import("./pages/Reasons"));
-
+import DemoCTA from "@/components/DemoCTA";
+import DemoWelcomeModal from "@/components/DemoWelcomeModal";
 // import { HeartAnimation } from "@/components/HeartAnimation";
+import DemoShare from "@/components/DemoShare";
 import { useGlobalMusic } from "@/hooks/useGlobalMusic";
-
+import DemoReminder from "@/components/DemoReminder";
 const queryClient = new QueryClient();
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -65,12 +68,84 @@ export default function App() {
     import("./pages/Home");
   }, []);
 
+  const DEMO_MODE = true;
+  // useEffect(() => {
+  //   if (!DEMO_MODE) return;
+
+  //   const disableContextMenu = (e: MouseEvent) => {
+  //     e.preventDefault();
+  //   };
+
+  //   const disableDevToolsKeys = (e: KeyboardEvent) => {
+  //     if (
+  //       e.key === "F12" ||
+  //       (e.ctrlKey && e.shiftKey && e.key === "I") ||
+  //       (e.ctrlKey && e.shiftKey && e.key === "J") ||
+  //       (e.ctrlKey && e.key === "U")
+  //     ) {
+  //       e.preventDefault();
+  //     }
+  //   };
+
+  //   document.addEventListener("contextmenu", disableContextMenu);
+  //   window.addEventListener("keydown", disableDevToolsKeys);
+
+  //   return () => {
+  //     document.removeEventListener("contextmenu", disableContextMenu);
+  //     window.removeEventListener("keydown", disableDevToolsKeys);
+  //   };
+  // }, []);
+
+  const [devToolsOpen, setDevToolsOpen] = useState(false);
+
+  // useEffect(() => {
+  //   if (!DEMO_MODE) return;
+
+  //   const detectDevTools = () => {
+  //     const threshold = 160;
+
+  //     if (
+  //       window.outerWidth - window.innerWidth > threshold ||
+  //       window.outerHeight - window.innerHeight > threshold
+  //     ) {
+  //       setDevToolsOpen(true);
+  //     } else {
+  //       setDevToolsOpen(false);
+  //     }
+  //   };
+
+  //   const interval = setInterval(detectDevTools, 1000);
+
+  //   return () => clearInterval(interval);
+  // }, []);
+
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner position="top-center" />
+        {DEMO_MODE && <DemoWatermark />}
+        {DEMO_MODE && <DemoBadge />}
+        {DEMO_MODE && <DemoCTA />}
+        {DEMO_MODE && <DemoWelcomeModal />}
+        {DEMO_MODE && <DemoReminder />}
+        {DEMO_MODE && <DemoShare />}
 
+        {DEMO_MODE && devToolsOpen && (
+          <div className="fixed inset-0 z-[20000] flex items-center justify-center bg-black/80 text-white text-center p-6">
+            <div className="max-w-md space-y-4">
+              <h2 className="text-2xl font-semibold">
+                ⚠ Developer Tools Detected
+              </h2>
+
+              <p className="text-sm opacity-80">
+                This is a protected demo version.
+                <br />
+                To get your own personalized romantic website, contact Rushi.
+              </p>
+            </div>
+          </div>
+        )}
         {/* Global floating hearts */}
         {/* <HeartAnimation /> */}
 

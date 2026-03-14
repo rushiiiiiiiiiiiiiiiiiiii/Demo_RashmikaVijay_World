@@ -64,7 +64,7 @@ type Song = {
 export default function Songs() {
   const [modalSong, setModalSong] = useState<Song | null>(null);
   const { pauseMusic, resumeMusic } = useGlobalMusic();
-
+  const [createModal, setCreateModal] = useState(false);
   const categoryColors: Record<string, string> = {
     romantic: "bg-rose/20 text-rose border-rose/30",
     classic: "bg-blue-200 text-blue-700 border-blue-300",
@@ -179,15 +179,67 @@ export default function Songs() {
               </div>
             </Card>
           ))}
-        </div>
+          <Card className="p-10 hover:shadow-[var(--shadow-romantic)] bg-card/95 backdrop-blur transition-all duration-300 animate-fade-in relative overflow-hidden">
+            {/* Fake song behind */}
+            <div className="flex items-center gap-4 blur-[px] opacity-90">
+              <div className="p-4 rounded-xl bg-gradient-to-br from-primary to-rose">
+                <Music className="w-8 h-8 text-white" />
+              </div>
 
-        {/* FOOTER */}
-        <Card className="mt-8 p-8 bg-gradient-to-r from-primary/10 to-rose/10 text-center">
-          <Heart className="w-12 h-12 mx-auto mb-4 text-rose fill-rose animate-pulse-soft" />
-          <p className="text-foreground/90 italic">
-            "Every song reminds me of you ❤️"
-          </p>
-        </Card>
+              <div className="flex-1">
+                <h3 className="font-semibold text-lg text-foreground">
+                  Your Partner Fav Song
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  Waiting to be added ❤️
+                </p>
+
+                <Button
+                  size="sm"
+                  className="rounded-full mt-2 pointer-events-none opacity-60"
+                >
+                  <Play className="w-4 h-4 mr-2" />
+                  Play
+                </Button>
+              </div>
+            </div>
+
+            {/* Overlay */}
+            <div className="absolute inset-0 backdrop-blur-[2px] bg-white/40 z-10 flex flex-col items-center justify-center text-center p-6">
+              <Music className="w-10 h-10 text-rose-500 mb-3" />
+
+              <h3 className="font-semibold text-lg text-foreground mb-1">
+                Your Partner’s Favorite Song ❤️
+              </h3>
+
+              <p className="text-sm text-muted-foreground mb-4 max-w-xs">
+                Add a special song dedicated to your partner in your personal
+                love website.
+              </p>
+
+              <Button
+                size="sm"
+                onClick={() => setCreateModal(true)}
+                className="rounded-full p-2 bg-primary text-white hover:bg-primary/90 shadow-[0_4px_15px_rgba(255,120,150,0.25)] transition-all duration-300 hover:scale-105"
+              >
+                <Music className="w-4 h-4 mr-2" />
+                Add Song ❤️
+              </Button>
+
+              <p className="text-xs italic text-muted-foreground mt-3">
+                Feature available in your own love website 🎶
+              </p>
+            </div>
+          </Card>
+
+          {/* FOOTER */}
+          <Card className="mt-8 p-8 bg-gradient-to-r from-primary/10 to-rose/10 text-center">
+            <Heart className="w-12 h-12 mx-auto mb-4 text-rose fill-rose animate-pulse-soft" />
+            <p className="text-foreground/90 italic">
+              "Every song reminds me of you ❤️"
+            </p>
+          </Card>
+        </div>
       </div>
 
       {/* FULLSCREEN VIDEO MODAL */}
@@ -225,6 +277,43 @@ export default function Songs() {
               {modalSong.dedication}
             </p>
           </div>
+        </div>
+      )}
+
+      {createModal && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="p-6 max-w-md w-full text-center relative">
+            <button
+              className="absolute top-3 right-3"
+              onClick={() => setCreateModal(false)}
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            <Music className="w-10 h-10 mx-auto text-rose mb-3" />
+
+            <h2 className="text-xl font-semibold mb-2">
+              Create Your Love Website ❤️
+            </h2>
+
+            <p className="text-muted-foreground text-sm mb-5">
+              Get your own personalized romantic website for you and your
+              partner. Include songs, love letters, memories, surprises and 50+
+              features ❤️
+            </p>
+
+            <Button
+              className="w-full"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                  "_blank",
+                )
+              }
+            >
+              Create Mine
+            </Button>
+          </Card>
         </div>
       )}
     </div>

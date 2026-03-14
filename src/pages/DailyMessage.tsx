@@ -9,12 +9,13 @@ import { toast } from "sonner";
 import messages from "@/data/messages.json";
 import { BackgroundText } from "@/components/BackgroundText";
 import { useMemo } from "react";
-
+import { X } from "lucide-react";
 export default function DailyMessage() {
   const [currentMessage, setCurrentMessage] = useState(messages[0]);
   const [revealed, setRevealed] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedEmoji, setSelectedEmoji] = useState(null);
+  const [showCreateModal, setShowCreateModal] = useState(false);
 
   const profile = storage.getUserProfile();
 
@@ -27,7 +28,19 @@ export default function DailyMessage() {
     const msgIndex = day % messages.length;
     setCurrentMessage(messages[msgIndex]);
   }, []);
+  useEffect(() => {
+    const openTimer = setTimeout(() => {
+      setShowCreateModal(true);
 
+      const closeTimer = setTimeout(() => {
+        setShowCreateModal(false);
+      }, 10000); // close after 5 sec
+
+      return () => clearTimeout(closeTimer);
+    }, 5000); // show after 10 sec
+
+    return () => clearTimeout(openTimer);
+  }, []);
   /* Check reveal + favorite */
   useEffect(() => {
     setIsFavorite(storage.isFavorite(currentMessage.id));
@@ -43,14 +56,14 @@ export default function DailyMessage() {
 
   /* Toggle favorite */
   const toggleFavorite = () => {
-    if (isFavorite) {
-      storage.removeFavorite(currentMessage.id);
-      toast("Removed from favorites 💔");
-    } else {
-      storage.addFavorite(currentMessage.id);
-      toast.success("Added to favorites ❤️💘");
-    }
-    setIsFavorite(!isFavorite);
+    // Show modal instead of saving favorite
+    setShowCreateModal(true);
+
+    toast("Favorites are locked in the demo ❤️");
+
+    setTimeout(() => {
+      setShowCreateModal(false);
+    }, 4000);
   };
 
   const risingHearts = React.useMemo(() => {
@@ -82,14 +95,14 @@ export default function DailyMessage() {
   }, []);
 
   const BackgroundLayer = useMemo(
-  () => (
-    <>
-      <HeartAnimation />
-      <BackgroundText />
-    </>
-  ),
-  []
-);
+    () => (
+      <>
+        <HeartAnimation />
+        <BackgroundText />
+      </>
+    ),
+    [],
+  );
   return (
     <div className="min-h-screen romantic-gradient relative overflow-hidden">
       {BackgroundLayer}
@@ -190,21 +203,36 @@ export default function DailyMessage() {
           box-shadow: 0 0 12px rgba(255, 140, 160, 0.5);
           transform: scale(1.3);
         }
+          @keyframes slideDown {
+  0% {
+    transform: translate(-50%, -40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.animate-slideDown {
+  animation: slideDown 0.5s ease;
+}
+
       `}</style>
 
       <div className="container mx-auto px-4 py-8 relative z-10 max-w-2xl">
         {/* Back */}
         <Link to="/home" replace>
           <Button
-    className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
+            className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
     bg-white/40 backdrop-blur-md border border-white/40 
     text-rose-700 hover:bg-white/60 
     shadow-[0_6px_20px_rgba(255,120,150,0.25)] 
     transition-all duration-300 hover:scale-105"
-  >
-    <ArrowLeft className="w-4 h-4" />
-    Back Home
-  </Button>
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back Home
+          </Button>
         </Link>
 
         {/* Header */}
@@ -304,7 +332,7 @@ export default function DailyMessage() {
                   onClick={toggleFavorite}
                   className="text-lg"
                 >
-                  {isFavorite ? "💖 Favorited" : "♡ Add to Favorites"}
+                  🔒 Add to Favorites
                 </Button>
               </div>
             </div>
@@ -313,9 +341,57 @@ export default function DailyMessage() {
 
         {/* Footer */}
         <div className="text-center mt-6 text-sm text-muted-foreground">
-          <p>New message every day ✨💌</p>
+          <p>A new love message for you every single day 💌</p>
         </div>
       </div>
+      {showCreateModal && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-[150] w-[92%] max-w-xl animate-slideDown">
+          <div
+            className="
+      bg-white/95 backdrop-blur-xl
+      border border-rose-200
+      shadow-[0_10px_40px_rgba(255,120,150,0.25)]
+      rounded-2xl
+      px-4 py-3
+      flex flex-col sm:flex-row
+      items-center sm:items-center
+      gap-3 sm:gap-4
+      text-center sm:text-left
+      "
+          >
+            {/* icon */}
+            <div className="text-2xl">💌</div>
+
+            {/* text */}
+            <div className="text-xs sm:text-sm text-foreground flex-1 leading-snug">
+              Create daily love messages for your partner in your own romantic
+              website ❤️
+            </div>
+
+            {/* button */}
+            <Button
+              size="sm"
+              className="rounded-full whitespace-nowrap"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                  "_blank",
+                )
+              }
+            >
+              Create Mine
+            </Button>
+
+            {/* close */}
+            <button
+              onClick={() => setShowCreateModal(false)}
+              className="text-gray-400 hover:text-gray-700"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

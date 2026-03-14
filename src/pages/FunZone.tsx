@@ -394,6 +394,8 @@ function QuizGame({ type, questions, onBack }) {
    MAIN FUN ZONE PAGE (keeps all games intact)
    ========================================================== */
 export default function FunZone() {
+  const [showPromo, setShowPromo] = useState(false);
+  const FREE_GAMES = 2;
   const [activeGame, setActiveGame] = useState(null);
   const [wheelSpinning, setWheelSpinning] = useState(false);
   const [wheelResult, setWheelResult] = useState(null);
@@ -534,29 +536,49 @@ export default function FunZone() {
 
         {!activeGame ? (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {games.map((game, index) => (
-              <Card
-                key={game.id}
-                className="p-8 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 md:hover:scale-105 bg-card/95 backdrop-blur cursor-pointer group animate-fade-in"
-                style={{ animationDelay: `${index * 0.1}s` }}
-                onClick={() => setActiveGame(game.id)}
-              >
-                <div className="text-center">
-                  <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                    {game.emoji}
+            {games.map((game, index) => {
+              const locked = index >= FREE_GAMES;
+
+              return (
+                <Card
+                  key={game.id}
+                  className="relative overflow-hidden p-8 hover:shadow-[var(--shadow-romantic)] transition-all duration-300 md:hover:scale-105 bg-card/95 backdrop-blur cursor-pointer group animate-fade-in"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                  onClick={() => {
+                    if (locked) {
+                      setShowPromo(true);
+                    } else {
+                      setActiveGame(game.id);
+                    }
+                  }}
+                >
+                  <div className="text-center">
+                    <div className="text-6xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                      {game.emoji}
+                    </div>
+                    <h3 className="text-2xl font-handwriting text-foreground mb-2">
+                      {game.title}
+                    </h3>
+                    <p className="text-muted-foreground mb-4">
+                      {game.description}
+                    </p>
+                    <div
+                      className={`h-2 rounded-full bg-gradient-to-r ${game.gradient}`}
+                    />
                   </div>
-                  <h3 className="text-2xl font-handwriting text-foreground mb-2">
-                    {game.title}
-                  </h3>
-                  <p className="text-muted-foreground mb-4">
-                    {game.description}
-                  </p>
-                  <div
-                    className={`h-2 rounded-full bg-gradient-to-r ${game.gradient}`}
-                  />
-                </div>
-              </Card>
-            ))}
+                  {locked && (
+                    <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-10">
+                      <div className="text-center">
+                        <Heart className="w-8 h-8 text-rose mx-auto mb-2" />
+                        <p className="text-sm font-medium">
+                          Unlock this game for Your Partner❤️
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </Card>
+              );
+            })}
           </div>
         ) : (
           <div className="animate-fade-in">
@@ -668,6 +690,41 @@ export default function FunZone() {
           </p>
         </Card>
       </div>
+      {showPromo && (
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <Card className="p-6 max-w-md w-full text-center relative">
+            <button
+              className="absolute top-3 right-3"
+              onClick={() => setShowPromo(false)}
+            >
+              ✕
+            </button>
+
+            <span className="text-4xl mb-2 block">🎮</span>
+
+            <h2 className="text-xl font-semibold mb-2">
+              Unlock All Love Games ❤️
+            </h2>
+
+            <p className="text-muted-foreground text-sm mb-5">
+              In your personal love website you can play unlimited games,
+              quizzes, compatibility tests and romantic surprises together.
+            </p>
+
+            <Button
+              className="w-full"
+              onClick={() =>
+                window.open(
+                  "https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website",
+                  "_blank",
+                )
+              }
+            >
+              Create My Love Website ❤️
+            </Button>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }
