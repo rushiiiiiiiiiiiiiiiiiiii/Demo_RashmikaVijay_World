@@ -21,16 +21,21 @@ export default function DemoShare() {
   };
 
   const whatsappShare = () => {
-    const text = encodeURIComponent(
-      "Look at this beautiful love website demo ❤️"
+    const message = encodeURIComponent(
+      `Someone made this love story website for their partner ❤️
+You should see it
+
+${shareLink}
+
+Imagine making one for your partner ✨`,
     );
-    window.open(`https://wa.me/?text=${text}%20${shareLink}`, "_blank");
+
+    window.open(`https://wa.me/?text=${message}`, "_blank");
   };
 
   return (
     <div className="fixed bottom-32 left-1/2 -translate-x-1/2 z-[15000]">
       <div className="bg-white shadow-xl border border-rose-200 rounded-2xl p-4 w-[280px] text-center space-y-3">
-
         <h3 className="text-sm font-semibold text-rose-600">
           💖 Loved this experience?
         </h3>

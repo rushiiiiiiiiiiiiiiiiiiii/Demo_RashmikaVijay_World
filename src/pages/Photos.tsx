@@ -117,7 +117,7 @@ export default function Photos() {
         <Link to="/home" replace>
           <Button
             className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
-    bg-white/40 backdrop-blur hover:scale-[1.02] hover:shadow-[0_0_20px_rgba(255,150,170,0.4)] transition-md border border-white/40 
+    bg-white/40 backdrop-blur hover:shadow-[0_0_20px_rgba(255,150,170,0.4)] transition-md border border-white/40 
     text-rose-700 hover:bg-white/60 
     shadow-[0_6px_20px_rgba(255,120,150,0.25)] 
     transition-all duration-300 hover:scale-105"

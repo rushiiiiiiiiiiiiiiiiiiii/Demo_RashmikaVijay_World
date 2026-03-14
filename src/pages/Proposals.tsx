@@ -53,6 +53,7 @@ function usePersistentState<T>(key: string, initial: T) {
 }
 
 export default function OurFutureTogether() {
+  const DEMO_LIMIT = 1;
   const categories = useMemo(() => {
     const cats = new Set(momentsData.map((m) => m.category));
     return ["All", ...Array.from(cats)];
@@ -83,19 +84,31 @@ export default function OurFutureTogether() {
     totalCount === 0 ? 0 : Math.round((completedCount / totalCount) * 100);
 
   const togglePin = (id) => {
+    if (!state.pinned.includes(id) && state.pinned.length >= DEMO_LIMIT) {
+      setShowPromo(true);
+      return;
+    }
+
     setState((prev) => {
       const pinned = prev.pinned.includes(id)
         ? prev.pinned.filter((p) => p !== id)
         : [id, ...prev.pinned];
+
       return { ...prev, pinned };
     });
   };
 
   const toggleComplete = (id) => {
+    if (!state.completed.includes(id) && state.completed.length >= DEMO_LIMIT) {
+      setShowPromo(true);
+      return;
+    }
+
     setState((prev) => {
       const completed = prev.completed.includes(id)
         ? prev.completed.filter((c) => c !== id)
         : [id, ...prev.completed];
+
       return { ...prev, completed };
     });
   };
@@ -140,298 +153,330 @@ export default function OurFutureTogether() {
   );
 
   return (
-    <div className="min-h-screen relative romantic-gradient overflow-x-hidden">
-      {BackgroundLayer}
+    <>
+      <div className="min-h-screen relative romantic-gradient overflow-x-hidden">
+        {BackgroundLayer}
 
-      <div className="container mx-auto px-4 py-8 relative z-10 max-w-6xl">
-        <div className="mb-6">
-          <Link to="/home" replace>
-            <Button
-              className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
+        <div className="container mx-auto px-4 py-8 relative z-10 max-w-6xl">
+          <div className="mb-6">
+            <Link to="/home" replace>
+              <Button
+                className="mb-6 flex items-center gap-2 rounded-full px-5 py-2 
     bg-white/40 backdrop-blur-md border border-white/40 
     text-rose-700 hover:bg-white/60 
     shadow-[0_6px_20px_rgba(255,120,150,0.25)] 
     transition-all duration-300 hover:scale-105"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Back Home
-            </Button>
-          </Link>
-        </div>
-
-        <header className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-handwriting text-foreground mb-2 drop-shadow-lg">
-            Our Future Together…
-          </h1>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Cute things, places to visit, little traditions and big dreams — all
-            the moments I want to live with you.
-          </p>
-
-          {/* Progress / Heart bar */}
-          <div className="mt-6 max-w-xl mx-auto">
-            <div className="flex items-center gap-4">
-              <div className="flex-1">
-                <div className="w-full bg-background/30 rounded-full h-3 overflow-hidden">
-                  <div
-                    className="h-3 rounded-full bg-gradient-to-r from-rose to-primary transition-all"
-                    style={{ width: `${progressPercent}%` }}
-                  />
-                </div>
-                <div className="text-xs text-muted-foreground mt-2 text-center">
-                  {completedCount} / {totalCount} completed • {progressPercent}%
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  onClick={pickRandom}
-                  title="Random Future Moment"
-                >
-                  <Shuffle className="w-5 h-5" />
-                </Button>
-                <Button
-                  variant="outline"
-                  onClick={() => setShowPinnedOnly(!showPinnedOnly)}
-                >
-                  {showPinnedOnly ? "Show All" : "Show Pinned"}
-                </Button>
-              </div>
-            </div>
-
-            {/* Small pinned row */}
-            {state.pinned.length > 0 && (
-              <div className="mt-4 flex items-center gap-3 overflow-x-auto py-2">
-                {state.pinned.map((id) => {
-                  const m = momentsData.find((x) => x.id === id);
-                  if (!m) return null;
-                  return (
-                    <button
-                      key={id}
-                      onClick={() => setSelected(m)}
-                      className="flex items-center gap-2 px-3 py-2 bg-background/60 rounded-full shadow-sm"
-                    >
-                      <span className="text-sm">{m.title}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        </header>
-
-        {/* Tabs */}
-        <nav className="mb-6 overflow-x-auto pb-2">
-          <div className="flex gap-2">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => {
-                  setActiveTab(cat);
-                  setShowPinnedOnly(false);
-                }}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-                  activeTab === cat
-                    ? "bg-gradient-to-r from-rose to-primary text-white"
-                    : "bg-background/30 text-muted-foreground"
-                }`}
               >
-                {cat}
-              </button>
-            ))}
+                <ArrowLeft className="w-4 h-4" />
+                Back Home
+              </Button>
+            </Link>
           </div>
-        </nav>
 
-        {/* Grid */}
-        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filtered.map((item, idx) => {
-            const locked = idx >= FREE_MOMENTS;
+          <header className="text-center mb-8">
+            <h1 className="text-4xl md:text-5xl font-handwriting text-foreground mb-2 drop-shadow-lg">
+              Our Future Together…
+            </h1>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Cute things, places to visit, little traditions and big dreams —
+              all the moments I want to live with you.
+            </p>
 
-            return (
-              <Card
-                key={item.id}
-                className={`relative overflow-hidden rounded-2xl shadow-md bg-card/60 backdrop-blur animate-fade-in transform transition md:hover:scale-[1.02] ${
-                  locked ? "opacity-70" : ""
-                }`}
-                style={{ animationDelay: `${idx * 0.03}s` }}
-                onClick={() => {
-                  if (locked) {
-                    setShowPromo(true);
-                  }
-                }}
-              >
-                <div className="h-48 w-full overflow-hidden relative">
-                  <img
-                    loading="lazy"
-                    src={item.image}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 animate-fade-in" />
-                  <div className="absolute top-3 right-3 flex gap-2">
-                    <button
-                      onClick={() => togglePin(item.id)}
-                      className={`p-2 rounded-full backdrop-blur bg-white/10 ${isPinned(item.id) ? "ring-2 ring-rose/40" : ""}`}
-                      title={isPinned(item.id) ? "Unpin" : "Pin"}
-                    >
-                      <Pin
-                        className={`w-4 h-4 ${isPinned(item.id) ? "text-rose" : "text-white"}`}
-                      />
-                    </button>
-                    <button
-                      onClick={() => toggleComplete(item.id)}
-                      className={`p-2 rounded-full backdrop-blur bg-white/10 ${isCompleted(item.id) ? "ring-2 ring-green-300" : ""}`}
-                      title={
-                        isCompleted(item.id)
-                          ? "Mark as not done"
-                          : "Mark as done"
-                      }
-                    >
-                      <CheckCircle
-                        className={`w-4 h-4 ${isCompleted(item.id) ? "text-green-300" : "text-white"}`}
-                      />
-                    </button>
+            {/* Progress / Heart bar */}
+            <div className="mt-6 max-w-xl mx-auto">
+              <div className="flex items-center gap-4">
+                <div className="flex-1">
+                  <div className="w-full bg-background/30 rounded-full h-3 overflow-hidden">
+                    <div
+                      className="h-3 rounded-full bg-gradient-to-r from-rose to-primary transition-all"
+                      style={{ width: `${progressPercent}%` }}
+                    />
+                  </div>
+                  <div className="text-xs text-muted-foreground mt-2 text-center">
+                    {completedCount} / {totalCount} completed •{" "}
+                    {progressPercent}%
                   </div>
                 </div>
-                {locked && (
-                  <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-20">
-                    <div className="text-center">
-                      <Heart className="w-8 h-8 text-rose mx-auto mb-2" />
-                      <p className="text-sm font-medium">
-                        Add your own moments ❤️
-                      </p>
+
+                <div className="flex items-center gap-2">
+                  <Button
+                    variant="ghost"
+                    onClick={pickRandom}
+                    title="Random Future Moment"
+                  >
+                    <Shuffle className="w-5 h-5" />
+                  </Button>
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowPinnedOnly(!showPinnedOnly)}
+                  >
+                    {showPinnedOnly ? "Show All" : "Show Pinned"}
+                  </Button>
+                </div>
+              </div>
+
+              {/* Small pinned row */}
+              {state.pinned.length > 0 && (
+                <div className="mt-4 flex items-center gap-3 overflow-x-auto py-2">
+                  {state.pinned.map((id) => {
+                    const m = momentsData.find((x) => x.id === id);
+                    if (!m) return null;
+                    return (
+                      <button
+                        key={id}
+                        onClick={() => setSelected(m)}
+                        className="flex items-center gap-2 px-3 py-2 bg-background/60 rounded-full shadow-sm"
+                      >
+                        <span className="text-sm">{m.title}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </header>
+
+          {/* Tabs */}
+          <nav className="mb-6 overflow-x-auto pb-2">
+            <div className="flex gap-2">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  onClick={() => {
+                    setActiveTab(cat);
+                    setShowPinnedOnly(false);
+                  }}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition ${
+                    activeTab === cat
+                      ? "bg-gradient-to-r from-rose to-primary text-white"
+                      : "bg-background/30 text-muted-foreground"
+                  }`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+          </nav>
+
+          {/* Grid */}
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((item, idx) => {
+              const locked = idx >= FREE_MOMENTS;
+
+              return (
+                <Card
+                  key={item.id}
+                  className={`relative overflow-hidden rounded-2xl shadow-md bg-card/60 backdrop-blur animate-fade-in transform transition md:hover:scale-[1.02] ${
+                    locked ? "opacity-70" : ""
+                  }`}
+                  style={{ animationDelay: `${idx * 0.03}s` }}
+                  onClick={() => {
+                    if (locked) {
+                      setShowPromo(true);
+                    }
+                  }}
+                >
+                  <div className="h-48 w-full overflow-hidden relative">
+                    <img
+                      loading="lazy"
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/30 animate-fade-in" />
+                    <div className="absolute top-3 right-3 flex gap-2">
+                      <button
+                        onClick={() => togglePin(item.id)}
+                        className={`p-2 rounded-full backdrop-blur bg-white/10 ${isPinned(item.id) ? "ring-2 ring-rose/40" : ""}`}
+                        title={isPinned(item.id) ? "Unpin" : "Pin"}
+                      >
+                        <Pin
+                          className={`w-4 h-4 ${isPinned(item.id) ? "text-rose" : "text-white"}`}
+                        />
+                      </button>
+                      <button
+                        onClick={() => toggleComplete(item.id)}
+                        className={`p-2 rounded-full backdrop-blur bg-white/10 ${isCompleted(item.id) ? "ring-2 ring-green-300" : ""}`}
+                        title={
+                          isCompleted(item.id)
+                            ? "Mark as not done"
+                            : "Mark as done"
+                        }
+                      >
+                        <CheckCircle
+                          className={`w-4 h-4 ${isCompleted(item.id) ? "text-green-300" : "text-white"}`}
+                        />
+                      </button>
                     </div>
                   </div>
-                )}
-                <div className="p-6">
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="text-2xl font-handwriting text-foreground mb-1">
-                        {item.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-2">
-                        {item.description}
-                      </p>
-                      <div className="text-xs text-foreground/70 italic">
-                        {item.category}
+                  {locked && (
+                    <div className="absolute inset-0 bg-white/60 backdrop-blur-sm flex items-center justify-center z-20">
+                      <div className="text-center">
+                        <Heart className="w-8 h-8 text-rose mx-auto mb-2" />
+                        <p className="text-sm font-medium">
+                          Add your own moments ❤️
+                        </p>
                       </div>
                     </div>
-                  </div>
+                  )}
+                  <div className="p-6">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <h3 className="text-2xl font-handwriting text-foreground mb-1">
+                          {item.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground mb-2">
+                          {item.description}
+                        </p>
+                        <div className="text-xs text-foreground/70 italic">
+                          {item.category}
+                        </div>
+                      </div>
+                    </div>
 
-                  <div className="mt-4 flex gap-2">
-                    <Button
-                      className="flex-1"
-                      onClick={() => setSelected(item)}
-                    >
-                      I Want This With You ❤️
-                    </Button>
-                    <Button
-                      variant="outline"
-                      onClick={() => {
-                        togglePin(item.id);
-                      }}
-                    >
-                      {isPinned(item.id) ? "Pinned" : "Pin"}
-                    </Button>
+                    <div className="mt-4 flex gap-2">
+                      <Button
+                        className="flex-1"
+                        onClick={() => setSelected(item)}
+                      >
+                        I Want This With You ❤️
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          togglePin(item.id);
+                        }}
+                      >
+                        {isPinned(item.id) ? "Pinned" : "Pin"}
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              );
+            })}
+          </section>
+
+          {/* Footer controls */}
+          <div className="mt-8 flex items-center justify-between gap-4">
+            <div className="text-sm text-muted-foreground">
+              {pinnedCount} pinned • {completedCount} completed • {totalCount}{" "}
+              total
+            </div>
+
+            <div className="flex items-center gap-3">
+              <Button
+                variant="ghost"
+                onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              >
+                <ArrowUp className="w-4 h-4 mr-2" /> Back to top
+              </Button>
+              <Button variant="outline" onClick={() => setShowPromo(true)}>
+                Reset Progress
+              </Button>
+            </div>
+          </div>
+        </div>
+
+        {/* Selected modal */}
+        {selected && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <div
+              className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+              onClick={() => setSelected(null)}
+            />
+            <div className="relative z-10 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+              <Card className="p-6">
+                <div className="flex flex-col sm:flex-row items-start gap-4">
+                  <img
+                    loading="lazy"
+                    src={selected.image}
+                    alt={selected.title}
+                    className="w-full sm:w-36 h-48 sm:h-36 object-cover rounded-2xl"
+                  />
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3">
+                      <h2 className="text-2xl font-handwriting text-foreground">
+                        {selected.title}
+                      </h2>
+                      {isPinned(selected.id) && (
+                        <div className="text-xs px-2 py-1 bg-rose/20 rounded-full">
+                          Pinned
+                        </div>
+                      )}
+                      {isCompleted(selected.id) && (
+                        <div className="text-xs px-2 py-1 bg-green-200 rounded-full">
+                          Done
+                        </div>
+                      )}
+                    </div>
+                    <p className="text-muted-foreground mt-2">
+                      {selected.description}
+                    </p>
+
+                    <div className="mt-4 flex flex-wrap gap-3">
+                      <Button
+                        onClick={() => {
+                          toggleComplete(selected.id);
+                        }}
+                      >
+                        {isCompleted(selected.id)
+                          ? "Mark as not done"
+                          : "Mark as done"}{" "}
+                        ✔
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          togglePin(selected.id);
+                        }}
+                      >
+                        {isPinned(selected.id) ? "Unpin" : "Pin"}{" "}
+                        <Pin className="w-4 h-4 ml-2" />
+                      </Button>
+                      <Button
+                        variant="outline"
+                        onClick={() => setSelected(null)}
+                      >
+                        Close
+                      </Button>
+                    </div>
+
+                    <div className="mt-3 text-sm text-muted-foreground">
+                      Try adding this to our calendar or pinning it so we
+                      remember.
+                    </div>
                   </div>
                 </div>
               </Card>
-            );
-          })}
-        </section>
-
-        {/* Footer controls */}
-        <div className="mt-8 flex items-center justify-between gap-4">
-          <div className="text-sm text-muted-foreground">
-            {pinnedCount} pinned • {completedCount} completed • {totalCount}{" "}
-            total
+            </div>
           </div>
-
-          <div className="flex items-center gap-3">
-            <Button
-              variant="ghost"
-              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            >
-              <ArrowUp className="w-4 h-4 mr-2" /> Back to top
-            </Button>
-            <Button variant="outline" onClick={clearProgress}>
-              Reset Progress
-            </Button>
-          </div>
-        </div>
+        )}
       </div>
-
-      {/* Selected modal */}
-      {selected && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      {showPromo && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
           <div
             className="absolute inset-0 bg-black/40 backdrop-blur-sm"
-            onClick={() => setSelected(null)}
+            onClick={() => setShowPromo(false)}
           />
-          <div className="relative z-10 max-w-2xl w-full">
-            <Card className="p-6">
-              <div className="flex items-start gap-4">
-                <img
-                  loading="lazy"
-                  src={selected.image}
-                  alt={selected.title}
-                  className="w-36 h-36 object-cover rounded-2xl"
-                />
-                <div className="flex-1">
-                  <div className="flex items-center gap-3">
-                    <h2 className="text-2xl font-handwriting text-foreground">
-                      {selected.title}
-                    </h2>
-                    {isPinned(selected.id) && (
-                      <div className="text-xs px-2 py-1 bg-rose/20 rounded-full">
-                        Pinned
-                      </div>
-                    )}
-                    {isCompleted(selected.id) && (
-                      <div className="text-xs px-2 py-1 bg-green-200 rounded-full">
-                        Done
-                      </div>
-                    )}
-                  </div>
-                  <p className="text-muted-foreground mt-2">
-                    {selected.description}
-                  </p>
 
-                  <div className="mt-4 flex gap-3">
-                    <Button
-                      onClick={() => {
-                        toggleComplete(selected.id);
-                      }}
-                    >
-                      {isCompleted(selected.id)
-                        ? "Mark as not done"
-                        : "Mark as done"}{" "}
-                      ✔
-                    </Button>
-                    <Button
-                      onClick={() => {
-                        togglePin(selected.id);
-                      }}
-                    >
-                      {isPinned(selected.id) ? "Unpin" : "Pin"}{" "}
-                      <Pin className="w-4 h-4 ml-2" />
-                    </Button>
-                    <Button variant="outline" onClick={() => setSelected(null)}>
-                      Close
-                    </Button>
-                  </div>
+          <Card className="relative z-10 p-6 max-w-md text-center">
+            <Heart className="w-10 h-10 mx-auto text-rose mb-4" />
 
-                  <div className="mt-3 text-sm text-muted-foreground">
-                    Try adding this to our calendar or pinning it so we
-                    remember.
-                  </div>
-                </div>
-              </div>
-            </Card>
-          </div>
+            <h3 className="text-xl font-semibold mb-2">
+              Want your own Love World?
+            </h3>
+
+            <p className="text-sm text-muted-foreground mb-4">
+              This is a demo version. Create your own personalized love website.
+            </p>
+
+            <Button
+              onClick={() => window.open("https://wa.me/YOURNUMBER", "_blank")}
+            >
+              Create My Love World ❤️
+            </Button>
+          </Card>
         </div>
       )}
-    </div>
+    </>
   );
 }

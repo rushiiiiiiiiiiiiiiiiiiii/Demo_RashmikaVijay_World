@@ -168,7 +168,7 @@ const sprinkleCount = useMemo(() => {
                 <div className="flex items-start gap-4">
                   {/* MIC ICON */}
                   <div
-                    className={`p-3 rounded-xl transition-all duration-[1200ms] ease-in-out
+                    className={`p-3 rounded-xl transition-all duration-1000ms ease-in-out
                       ${
                         isPlaying
                           ? "bg-gradient-to-br from-rose to-primary shadow-lg scale-110"

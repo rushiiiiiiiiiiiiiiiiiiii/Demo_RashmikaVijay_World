@@ -430,4 +430,26 @@ All colors MUST be HSL.
 
 .animate-floatHeart {
   animation: floatHeart 3s ease-in-out infinite;
+}@keyframes heartbeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.18); }
+  40% { transform: scale(1); }
+  60% { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  100% {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+@keyframes loading {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
 }

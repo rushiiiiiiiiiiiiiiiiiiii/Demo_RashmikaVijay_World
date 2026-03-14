@@ -356,7 +356,7 @@ export default function Home() {
 
       {/* TEXTURE OVERLAY */}
       <div
-        className="absolute inset-0 opacity-[0.08] pointer-events-none z-0 mix-blend-overlay fixed"
+        className="absolute inset-0 opacity-[0.08] pointer-events-none z-0 mix-blend-overlay "
         style={{
           backgroundImage: `url("https://www.transparenttextures.com/patterns/stardust.png")`,
         }}
@@ -365,7 +365,7 @@ export default function Home() {
       {/* SPOTLIGHT */}
       {isDesktop && (
         <div
-          className={`absolute w-[800px] h-[800px] blur-[120px] rounded-full pointer-events-none transition-opacity duration-700 z-0 fixed ${
+          className={`absolute w-[800px] h-[800px] blur-[120px] rounded-full pointer-events-none transition-opacity duration-700 z-0  ${
             theme === "light" ? "bg-rose-400/10" : "bg-rose-500/10"
           }`}
           style={{
