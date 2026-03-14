@@ -69,55 +69,55 @@ export default function App() {
   }, []);
 
   const DEMO_MODE = true;
-  // useEffect(() => {
-  //   if (!DEMO_MODE) return;
+  useEffect(() => {
+    if (!DEMO_MODE) return;
 
-  //   const disableContextMenu = (e: MouseEvent) => {
-  //     e.preventDefault();
-  //   };
+    const disableContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
 
-  //   const disableDevToolsKeys = (e: KeyboardEvent) => {
-  //     if (
-  //       e.key === "F12" ||
-  //       (e.ctrlKey && e.shiftKey && e.key === "I") ||
-  //       (e.ctrlKey && e.shiftKey && e.key === "J") ||
-  //       (e.ctrlKey && e.key === "U")
-  //     ) {
-  //       e.preventDefault();
-  //     }
-  //   };
+    const disableDevToolsKeys = (e: KeyboardEvent) => {
+      if (
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && e.key === "I") ||
+        (e.ctrlKey && e.shiftKey && e.key === "J") ||
+        (e.ctrlKey && e.key === "U")
+      ) {
+        e.preventDefault();
+      }
+    };
 
-  //   document.addEventListener("contextmenu", disableContextMenu);
-  //   window.addEventListener("keydown", disableDevToolsKeys);
+    document.addEventListener("contextmenu", disableContextMenu);
+    window.addEventListener("keydown", disableDevToolsKeys);
 
-  //   return () => {
-  //     document.removeEventListener("contextmenu", disableContextMenu);
-  //     window.removeEventListener("keydown", disableDevToolsKeys);
-  //   };
-  // }, []);
+    return () => {
+      document.removeEventListener("contextmenu", disableContextMenu);
+      window.removeEventListener("keydown", disableDevToolsKeys);
+    };
+  }, []);
 
   const [devToolsOpen, setDevToolsOpen] = useState(false);
 
-  // useEffect(() => {
-  //   if (!DEMO_MODE) return;
+  useEffect(() => {
+    if (!DEMO_MODE) return;
 
-  //   const detectDevTools = () => {
-  //     const threshold = 160;
+    const detectDevTools = () => {
+      const threshold = 160;
 
-  //     if (
-  //       window.outerWidth - window.innerWidth > threshold ||
-  //       window.outerHeight - window.innerHeight > threshold
-  //     ) {
-  //       setDevToolsOpen(true);
-  //     } else {
-  //       setDevToolsOpen(false);
-  //     }
-  //   };
+      if (
+        window.outerWidth - window.innerWidth > threshold ||
+        window.outerHeight - window.innerHeight > threshold
+      ) {
+        setDevToolsOpen(true);
+      } else {
+        setDevToolsOpen(false);
+      }
+    };
 
-  //   const interval = setInterval(detectDevTools, 1000);
+    const interval = setInterval(detectDevTools, 1000);
 
-  //   return () => clearInterval(interval);
-  // }, []);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
