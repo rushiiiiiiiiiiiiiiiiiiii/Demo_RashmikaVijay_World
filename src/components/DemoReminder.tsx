@@ -19,10 +19,10 @@ export default function DemoReminder() {
     // first appearance
     const firstTimer = setTimeout(() => {
       showModal();
-    }, 60000);
+    }, 40000);
 
     // repeat appearances
-    repeatTimer = setInterval(showModal, 60000);
+    repeatTimer = setInterval(showModal, 40000);
 
     return () => {
       clearTimeout(firstTimer);

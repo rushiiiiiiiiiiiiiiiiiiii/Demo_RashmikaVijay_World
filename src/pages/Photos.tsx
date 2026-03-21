@@ -10,6 +10,7 @@ import {
   ChevronRight,
   Heart,
   Sparkles,
+  X,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
@@ -295,6 +296,17 @@ export default function Photos() {
             className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4"
             onClick={closeFullscreen}
           >
+            {/* ❌ CLOSE BUTTON */}
+            <button
+              onClick={closeFullscreen}
+              className="absolute top-4 right-4 z-[60]
+               bg-white/20 backdrop-blur-md
+               rounded-full p-2
+               hover:bg-white/30
+               transition"
+            >
+              <X className="w-6 h-6 text-white" />
+            </button>
             <Card
               className="max-w-4xl w-full p-6 bg-white/10 backdrop-blur-2xl border border-white/20 rounded-2xl animate-fade-in"
               onClick={(e) => e.stopPropagation()}
@@ -309,7 +321,7 @@ export default function Photos() {
                     playsInline
                     preload="auto"
                     onLoadedData={() => handleLoaded(selectedMedia)}
-                    className={`w-full h-full object-cover transition-opacity duration-500 ${
+                    className={`h-screen w-screen object-contain transition-opacity duration-500 ${
                       loadingStates[selectedMedia]
                         ? "blur-md opacity-40"
                         : "blur-0 opacity-100"
@@ -320,7 +332,7 @@ export default function Photos() {
                     loading="lazy"
                     src={photosData[selectedMedia].file}
                     onLoad={() => handleLoaded(selectedMedia)}
-                    className={`w-full h-full object-cover transition-transform duration-500 ${
+                    className={`h-screen w-screen object-contain transition-transform duration-500 ${
                       loadingStates[selectedMedia]
                         ? "blur-md opacity-40"
                         : "blur-0 opacity-100"
@@ -348,16 +360,16 @@ export default function Photos() {
             "Our memories are my favorite love story 📷💗"
           </p>
           <p className="text-sm text-muted-foreground mt-3">
-  Imagine this gallery filled with your own memories ❤️
-</p>
+            Imagine this gallery filled with your own memories ❤️
+          </p>
 
-<a
-  href="https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website"
-  target="_blank"
-  className="inline-block mt-4 px-6 py-3 rounded-xl bg-rose-500 text-white hover:bg-rose-600 transition"
->
-  ❤️ Create My Love Website
-</a>
+          <a
+            href="https://wa.me/9324004785?text=Hi%20I%20want%20a%20love%20website"
+            target="_blank"
+            className="inline-block mt-4 px-6 py-3 rounded-xl bg-rose-500 text-white hover:bg-rose-600 transition"
+          >
+            ❤️ Create My Love Website
+          </a>
         </Card>
       </div>
 

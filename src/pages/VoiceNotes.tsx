@@ -48,23 +48,26 @@ export default function VoiceNotes() {
   }, [playingId]);
 
   /* ===== Play Note ===== */
+  // const playNote = (note: any) => {
+  //   pauseMusic();
+  //   if (audioRef.current) audioRef.current.pause();
+
+  //   const audio = new Audio(note.file);
+  //   audioRef.current = audio;
+
+  //   audio.play();
+  //   setPlayingId(note.id);
+
+  //   audio.onended = () => {
+  //     setPlayingId(null);
+  //     setProgress(0);
+  //     resumeMusic();
+  //   };
+  // };
   const playNote = (note: any) => {
-    pauseMusic();
-    if (audioRef.current) audioRef.current.pause();
-
-    const audio = new Audio(note.file);
-    audioRef.current = audio;
-
-    audio.play();
-    setPlayingId(note.id);
-
-    audio.onended = () => {
-      setPlayingId(null);
-      setProgress(0);
-      resumeMusic();
-    };
+    // 🚫 Stop actual audio in demo
+    setCreateModal(true);
   };
-
   /* ===== Pause ===== */
   const pauseNote = () => {
     if (audioRef.current) audioRef.current.pause();
@@ -81,12 +84,12 @@ export default function VoiceNotes() {
   };
 
   /* ===== Sprinkle Count Based on Screen Width ===== */
-const sprinkleCount = useMemo(() => {
-  if (typeof window === "undefined") return 30;
-  if (window.innerWidth < 640) return 18;
-  if (window.innerWidth < 1024) return 30;
-  return 40;
-}, []);
+  const sprinkleCount = useMemo(() => {
+    if (typeof window === "undefined") return 30;
+    if (window.innerWidth < 640) return 18;
+    if (window.innerWidth < 1024) return 30;
+    return 40;
+  }, []);
   const sprinkles = useMemo(() => {
     return Array.from({ length: sprinkleCount }).map(() => ({
       size: 4 + Math.random() * 6,
@@ -214,18 +217,28 @@ const sprinkleCount = useMemo(() => {
 
                     {/* CONTROLS */}
                     <div className="flex items-center gap-3 flex-wrap w-full">
-                      {isPlaying ? (
+                      {/* {isPlaying ? (
                         <Button onClick={pauseNote} className="rounded-full">
                           <Pause className="w-4 h-4 mr-2" /> Pause
                         </Button>
-                      ) : (
+                      )
+                       : (
                         <Button
                           onClick={() => playNote(note)}
                           className="rounded-full"
                         >
                           <Play className="w-4 h-4 mr-2" /> Play
                         </Button>
-                      )}
+                      )} */}
+                      <div className="flex items-center gap-3 flex-wrap w-full">
+                        <Button
+                          onClick={() => setCreateModal(true)}
+                          className="rounded-full"
+                        >
+                          <Play className="w-4 h-4 mr-2" />
+                          Play
+                        </Button>
+                      </div>
 
                       {isPlaying && (
                         <input
@@ -263,7 +276,8 @@ const sprinkleCount = useMemo(() => {
             </Button>
 
             <p className="text-sm text-muted-foreground max-w-sm">
-              Imagine your partner listening to your voice anytime they miss you.
+              Imagine your partner listening to your voice anytime they miss
+              you.
             </p>
 
             <p className="text-xs italic text-muted-foreground mt-2">
