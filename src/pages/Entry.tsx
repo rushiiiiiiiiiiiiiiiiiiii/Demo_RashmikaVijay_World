@@ -32,35 +32,51 @@ function Entry() {
   useEffect(() => {
     setTimeout(() => setCurtainOpen(true), 500);
     setTimeout(() => setStart(true), 1800);
+    let ticking = false;
+
     const handleMouseMove = (e: MouseEvent) => {
-      const x = (e.clientX / window.innerWidth) * 2 - 1;
-      const y = (e.clientY / window.innerHeight) * 2 - 1;
+      if (ticking) return;
+      ticking = true;
 
-      cloud1Ref.current?.style.setProperty(
-        "transform",
-        `translate(${x * 20}px, ${y * 10}px)`,
-      );
+      requestAnimationFrame(() => {
+        const x = (e.clientX / window.innerWidth) * 2 - 1;
+        const y = (e.clientY / window.innerHeight) * 2 - 1;
 
-      cloud2Ref.current?.style.setProperty(
-        "transform",
-        `translate(${x * -30}px, ${y * -15}px)`,
-      );
+        cloud1Ref.current?.style.setProperty(
+          "transform",
+          `translate3d(${x * 20}px, ${y * 10}px, 0)`,
+        );
 
-      rose1Ref.current?.style.setProperty(
-        "transform",
-        `translate(${x * -15}px, ${y * -15}px)`,
-      );
+        cloud2Ref.current?.style.setProperty(
+          "transform",
+          `translate3d(${x * -30}px, ${y * -15}px, 0)`,
+        );
 
-      rose2Ref.current?.style.setProperty(
-        "transform",
-        `translate(${x * 25}px, ${y * 10}px)`,
-      );
+        rose1Ref.current?.style.setProperty(
+          "transform",
+          `translate3d(${x * -15}px, ${y * -15}px, 0)`,
+        );
 
-      rose3Ref.current?.style.setProperty(
-        "transform",
-        `translate(${x * -40}px, ${y * 20}px)`,
-      );
+        rose2Ref.current?.style.setProperty(
+          "transform",
+          `translate3d(${x * 25}px, ${y * 10}px, 0)`,
+        );
+
+        rose3Ref.current?.style.setProperty(
+          "transform",
+          `translate3d(${x * -40}px, ${y * 20}px, 0)`,
+        );
+
+        ticking = false;
+      });
     };
+    const img1 = new Image();
+    img1.src =
+      "https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png";
+
+    const img2 = new Image();
+    img2.src =
+      "https://png.pngtree.com/png-vector/20231019/ourmid/pngtree-white-rose-bud-png-image_10216329.png";
 
     if (window.innerWidth > 768) {
       window.addEventListener("mousemove", handleMouseMove);
@@ -252,7 +268,7 @@ function Entry() {
         .curtain.left { transform-origin: left top; }
         .curtain.right { transform-origin: right top; }
         
-        .curtain.open.left { transform: translateX(-100%) skewX(5deg); }
+        .curtain.open.left { transform: translateX(-100%); skewX(5deg); }
         .curtain.open.right { transform: translateX(100%) skewX(-5deg); }
 
         /* === ANIMATIONS === */
@@ -287,9 +303,9 @@ function Entry() {
 }
 
         @keyframes falling {
-          0% { transform: translate(0, -10vh) rotate(0deg) scale(0.8); opacity: 0; }
-          20% { opacity: 1; transform: translate(20px, 20vh) rotate(45deg) scale(1); }
-          100% { transform: translate(-20px, 110vh) rotate(360deg) scale(0.8); opacity: 0; }
+          0% { transform: translate3d(0, -10vh) rotate(0deg) scale(0.8); opacity: 0; }
+          20% { opacity: 1; transform: translate3d(20px, 20vh) rotate(45deg) scale(1); }
+          100% { transform: translate3d(-20px, 110vh) rotate(360deg) scale(0.8); opacity: 0; }
         }
 
         /* Heartbeat with Glow */
@@ -310,7 +326,7 @@ function Entry() {
         .ripple {
           position: absolute;
           border-radius: 50%;
-          transform: translate(-50%, -50%);
+          transform: translate3d(-50%, -50%);
           width: 10px;
           height: 10px;
           background: rgba(255, 255, 255, 0.6);
@@ -327,6 +343,7 @@ function Entry() {
         /* CLOUDS */
         .cloud {
           position: absolute;
+  will-change: transform;
           background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
           width: 400px;
           height: 200px;

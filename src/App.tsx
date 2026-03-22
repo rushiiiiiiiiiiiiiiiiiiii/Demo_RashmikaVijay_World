@@ -146,8 +146,7 @@ export default function App() {
             </div>
           </div>
         )}
-        {/* Global floating hearts */}
-        {/* <HeartAnimation /> */}
+
 
         {/* All routes */}
         <Suspense
